@@ -79,10 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Henault & Cie — Escaliers sur mesure" },
-      { name: "description", content: "Fabricant d’escaliers sur mesure à Binas en région Centre." },
-      { property: "og:title", content: "Henault & Cie — Escaliers sur mesure" },
-      { property: "og:description", content: "Un savoir-faire artisanal depuis 1931." },
+      { title: "Hénault & Cie - Fabricant d'escaliers sur mesure depuis 1931 à Binas" },
+      {
+        name: "description",
+        content:
+          "Hénault & Cie conçoit, fabrique et pose vos escaliers sur mesure en bois, métal et verre à Binas, Blois, Orléans, Tours, Chartres, Dreux et Versailles sans sous-traitance.",
+      },
+      { property: "og:title", content: "Hénault & Cie - Fabricant d'escaliers sur mesure depuis 1931" },
+      {
+        property: "og:description",
+        content:
+          "Atelier de fabrication à Binas et pose sans sous-traitance dans le Centre-Val de Loire et en Île-de-France.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

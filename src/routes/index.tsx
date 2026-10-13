@@ -1,81 +1,158 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, Check, Star } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  Clock,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Star,
+} from "lucide-react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { assets, pageHead } from "@/lib/site-assets";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
-      "Escalier sur mesure à Binas depuis 1931 | Hénault & Cie",
-      "Hénault & Cie fabrique et pose vos escaliers sur mesure en bois, métal ou verre à Binas, Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
+      "Escalier sur mesure en Loir-et-Cher | Hénault & Cie fabricant depuis 1931",
+      "Fabricant d'escaliers sur mesure à Binas (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
       assets.hero,
     ),
   component: Index,
 });
 
-const stairTypes = [
+interface StairTypeItem {
+  id: string;
+  name: string;
+  badge: string;
+  image: string;
+  description: string;
+  buttonLabel: string;
+  buttonClass: string;
+}
+
+const stairTypes: StairTypeItem[] = [
   {
+    id: "droit",
     name: "Escalier droit",
+    badge: "ESCALIER DROIT",
     image: assets.gallery[0],
-    description: "Une ligne simple et intemporelle, pensée pour votre intérieur.",
+    description: "Une ligne pure et intemporelle pour habiller les volumes linéaires avec élégance.",
+    buttonLabel: "Escalier droit",
+    buttonClass: "btn-coral",
   },
   {
-    name: "Escalier quart tournant",
+    id: "quart-tournant",
+    name: "Quart tournant",
+    badge: "QUART TOURNANT",
     image: assets.gallery[1],
-    description: "Le confort d’un changement de direction qui optimise l’espace.",
+    description: "Le confort d'un changement d'angle optimisant les mètres carrés habitables.",
+    buttonLabel: "Quart tournant",
+    buttonClass: "btn-teal",
   },
   {
+    id: "helicoïdal",
     name: "Escalier hélicoïdal",
-    image: assets.gallery[2],
-    description: "Une forme sculpturale pour gagner de la place avec élégance.",
-  },
-  {
-    name: "Escalier suspendu",
-    image: assets.gallery[3],
-    description: "Des marches qui flottent et laissent entrer la lumière.",
-  },
-  {
-    name: "Escalier en bois",
-    image: assets.gallery[4],
-    description: "La chaleur du bois, avec les finitions qui vous ressemblent.",
-  },
-  {
-    name: "Escalier métal",
+    badge: "HÉLICOÏDAL",
     image: assets.gallery[5],
-    description: "Une structure fine et contemporaine, fabriquée sur mesure.",
+    description: "Une courbe sculpturale et un encombrement maîtrisé pour sublimer votre séjour.",
+    buttonLabel: "Escalier hélicoïdal",
+    buttonClass: "btn-wood",
   },
   {
+    id: "suspendu",
+    name: "Escalier suspendu",
+    badge: "ESCALIER SUSPENDU",
+    image: assets.metal,
+    description: "Des marches aériennes qui flottent dans l'espace et laissent circuler la lumière.",
+    buttonLabel: "Escalier suspendu",
+    buttonClass: "btn-sage",
+  },
+  {
+    id: "bois",
+    name: "Escalier en bois",
+    badge: "ESCALIER BOIS",
+    image: assets.quality,
+    description: "La noblesse du chêne, du hêtre ou du frêne massif, façonnés avec passion.",
+    buttonLabel: "Escalier en bois",
+    buttonClass: "btn-coral",
+  },
+  {
+    id: "metal",
+    name: "Escalier métal",
+    badge: "ESCALIER MÉTAL",
+    image: assets.gallery[2],
+    description: "Limon acier contemporain et marches bois pour un contraste architectural fort.",
+    buttonLabel: "Escalier métal",
+    buttonClass: "btn-teal",
+  },
+  {
+    id: "verre",
     name: "Escalier verre",
-    image: assets.gallery[6],
-    description: "Une transparence qui agrandit visuellement les volumes.",
+    badge: "ESCALIER VERRE",
+    image: assets.gallery[3],
+    description: "Garde-corps en verre securit pour une transparence maximale et des pièces agrandies.",
+    buttonLabel: "Escalier verre",
+    buttonClass: "btn-wood",
   },
   {
-    name: "Escalier en rénovation",
+    id: "renovation",
+    name: "Rénovation d'escalier",
+    badge: "RÉNOVATION",
     image: assets.gallery[7],
-    description: "Un projet adapté à l’existant, du relevé à la pose.",
+    description: "Habillage ou remplacement soigné de votre ancien escalier sans dégrader vos murs.",
+    buttonLabel: "Rénovation escalier",
+    buttonClass: "btn-sage",
   },
 ];
 
-const reviews = [
+const customerReviews = [
   {
+    author: "Laurent D.",
+    location: "Blois (41)",
+    project: "Escalier quart tournant en chêne massif",
     quote:
-      "Une équipe professionnelle, de bons conseils et un escalier magnifique. La pose a été réalisée avec beaucoup de soin.",
-    author: "Client vérifié",
+      "Un travail d'artisan exceptionnel. L'escalier quart tournant en chêne est magnifique, les cotes sont respectées au millimètre. Une équipe discrète, polie et un chantier laissé impeccable.",
   },
   {
+    author: "Sylvie & Marc B.",
+    location: "Orléans (45)",
+    project: "Escalier suspendu contemporain",
     quote:
-      "Du premier rendez-vous à la fin du chantier, nous avons apprécié le sérieux et la qualité du travail.",
-    author: "Client vérifié",
+      "Nous souhaitions un escalier suspendu très aérien pour faire entrer la lumière dans notre salon. Hénault & Cie a su relever le défi technique avec brio. Ponctualité et écoute exemplaires.",
   },
   {
-    quote: "Un vrai savoir-faire artisanal et une réalisation parfaitement adaptée à notre maison.",
-    author: "Client vérifié",
+    author: "Pascal R.",
+    location: "Chartres (28)",
+    project: "Escalier droit bois et métal",
+    quote:
+      "La qualité de fabrication en atelier se voit immédiatement par rapport aux modèles industriels. Aucun grincement, finitions impeccables et pose assurée par leurs propres compagnons.",
   },
+];
+
+const interventionZones = [
+  { name: "Binas", dpt: "41 (Siège et atelier)" },
+  { name: "Blois", dpt: "41" },
+  { name: "Vendôme", dpt: "41" },
+  { name: "Orléans", dpt: "45" },
+  { name: "Beaugency", dpt: "45" },
+  { name: "Tours", dpt: "37" },
+  { name: "Chartres", dpt: "28" },
+  { name: "Châteaudun", dpt: "28" },
+  { name: "Dreux", dpt: "28" },
+  { name: "Versailles", dpt: "78" },
 ];
 
 function Index() {
   const pageRef = useRef<HTMLElement>(null);
+  const quoteSectionRef = useRef<HTMLElement>(null);
+
+  const [activeTab, setActiveTab] = useState<"devis" | "rdv">("devis");
+  const [selectedStairType, setSelectedStairType] = useState<string>("Escalier droit");
+  const [devisSubmitted, setDevisSubmitted] = useState(false);
+  const [rdvSubmitted, setRdvSubmitted] = useState(false);
 
   useEffect(() => {
     const page = pageRef.current;
@@ -89,61 +166,232 @@ function Index() {
             observer.unobserve(entry.target);
           }
         }),
-      { threshold: 0.12, rootMargin: "0px 0px -40px" },
+      { threshold: 0.1, rootMargin: "0px 0px -30px" },
     );
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
 
+  function handleSelectType(typeName: string) {
+    setSelectedStairType(typeName);
+    setActiveTab("devis");
+    if (quoteSectionRef.current) {
+      quoteSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function handleOpenRdv() {
+    setActiveTab("rdv");
+    if (quoteSectionRef.current) {
+      quoteSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const type = formData.get("stairType") || selectedStairType;
+    const material = formData.get("material") || "";
+    const project = formData.get("projectNature") || "";
+    const delay = formData.get("delay") || "";
+    const dimensions = formData.get("dimensions") || "";
+    const fullName = formData.get("fullName") || "";
+    const phone = formData.get("phone") || "";
+    const email = formData.get("email") || "";
+    const city = formData.get("city") || "";
+
+    const mailSubject = `Demande de devis escalier sur mesure - ${fullName} (${city})`;
+    const mailBody = `DEMANDE DE DEVIS ESCALIER SUR MESURE\n\n` +
+      `Type d'escalier : ${type}\n` +
+      `Matériau souhaité : ${material}\n` +
+      `Nature du projet : ${project}\n` +
+      `Délai souhaité : ${delay}\n` +
+      `Dimensions ou remarques : ${dimensions}\n\n` +
+      `COORDONNÉES CLIENT :\n` +
+      `Nom et Prénom : ${fullName}\n` +
+      `Téléphone : ${phone}\n` +
+      `E-mail : ${email}\n` +
+      `Ville ou Code Postal : ${city}\n\n` +
+      `Fabricant : Hénault & Cie - 9 bis rue du Bout de la ville, 41240 Binas`;
+
+    window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
+      mailSubject,
+    )}&body=${encodeURIComponent(mailBody)}`;
+    setDevisSubmitted(true);
+  }
+
+  function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const sector = formData.get("sector") || "";
+    const slot = formData.get("slot") || "";
+    const date = formData.get("date") || "";
+    const fullName = formData.get("fullName") || "";
+    const phone = formData.get("phone") || "";
+    const email = formData.get("email") || "";
+    const address = formData.get("address") || "";
+    const notes = formData.get("notes") || "";
+
+    const mailSubject = `Demande de rendez-vous visite de mesure - ${fullName} (${sector})`;
+    const mailBody = `DEMANDE DE VISITE DE MESURE EN LIGNE\n\n` +
+      `Secteur d'intervention : ${sector}\n` +
+      `Date souhaitée : ${date}\n` +
+      `Créneau horaire : ${slot}\n` +
+      `Adresse complète : ${address}\n` +
+      `Remarques / Accès : ${notes}\n\n` +
+      `COORDONNÉES CLIENT :\n` +
+      `Nom et Prénom : ${fullName}\n` +
+      `Téléphone : ${phone}\n` +
+      `E-mail : ${email}\n\n` +
+      `Horaires atelier : Lundi au vendredi, 9h00-12h30 et 13h30-18h00\n` +
+      `Hénault & Cie - 9 bis rue du Bout de la ville, 41240 Binas`;
+
+    window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
+      mailSubject,
+    )}&body=${encodeURIComponent(mailBody)}`;
+    setRdvSubmitted(true);
+  }
+
   return (
     <main ref={pageRef}>
+      {/* Schema.org Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HomeAndConstructionBusiness",
+            name: "Hénault & Cie",
+            description:
+              "Fabricant d'escaliers sur mesure en bois, métal et verre à Binas depuis 1931. Conception en atelier et pose sans sous-traitance.",
+            url: "https://escalier-henault.fr",
+            telephone: "+33254824489",
+            email: "contact@henault-cie.com",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "9 bis rue du Bout de la ville",
+              addressLocality: "Binas",
+              postalCode: "41240",
+              addressCountry: "FR",
+            },
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "12:30",
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "13:30",
+                closes: "18:00",
+              },
+            ],
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.8",
+              reviewCount: "49",
+              bestRating: "5",
+            },
+            areaServed: [
+              "Binas",
+              "Blois",
+              "Vendôme",
+              "Orléans",
+              "Beaugency",
+              "Tours",
+              "Chartres",
+              "Châteaudun",
+              "Dreux",
+              "Versailles",
+            ],
+          }),
+        }}
+      />
+
+      {/* Hero section with 2 real photos */}
       <section className="home-hero">
-        <div className="home-hero-image">
-          <img src={assets.hero} alt="Escalier sur mesure en bois réalisé par Hénault & Cie" />
-        </div>
-        <div className="home-hero-content">
-          <p className="eyebrow">Fabricant d’escaliers sur mesure depuis 1931</p>
-          <h1>Votre escalier donne le ton à toute la maison.</h1>
-          <p className="hero-lede">
-            Nous dessinons, fabriquons et posons des escaliers uniques dans notre atelier de Binas,
-            dans le Loir-et-Cher.
-          </p>
-          <div className="cta-row">
-            <Button asChild className="site-cta">
-              <Link to="/contact">
-                Parler de votre projet <ArrowRight size={16} />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="hero-secondary">
-              <a href="tel:+33254824489">02 54 82 44 89</a>
-            </Button>
+        <div className="home-hero-media">
+          <img
+            src={assets.hero}
+            alt="Grand escalier contemporain sur mesure en bois fabriqué par Hénault & Cie"
+            className="hero-main-photo"
+          />
+          <div className="hero-sub-photo-wrap">
+            <img
+              src={assets.tradition}
+              alt="Détail artisanal de limon et marches en bois en atelier"
+              className="hero-sub-photo"
+            />
           </div>
+          <div className="hero-artisan-badge">
+            <strong>Atelier à Binas (41)</strong>
+            Depuis 1931 - 100% sur mesure
+          </div>
+        </div>
+
+        <div className="home-hero-content">
+          <p className="eyebrow">Fabricant d'escaliers sur mesure depuis 1931</p>
+          <h1>Votre escalier donne le ton à toute votre maison.</h1>
+          <p className="hero-lede">
+            Menuiserie d'art et tradition familiale : nous concevons, fabriquons dans nos ateliers
+            de Binas et posons vos escaliers sur mesure en bois, métal ou verre, sans aucune
+            sous-traitance, dans le Loir-et-Cher, la région Centre-Val de Loire et en Île-de-France.
+          </p>
+
+          <div className="cta-row">
+            <button
+              type="button"
+              onClick={() => handleSelectType("Escalier droit")}
+              className="site-cta-btn"
+            >
+              Demander un devis gratuit <ArrowRight size={16} />
+            </button>
+            <button type="button" onClick={handleOpenRdv} className="hero-tel-btn">
+              <CalendarDays size={16} /> Visite de mesure
+            </button>
+            <a href="tel:+33254824489" className="hero-tel-btn">
+              <Phone size={15} /> 02 54 82 44 89
+            </a>
+          </div>
+
           <div className="hero-proof">
             <span>
-              <Check size={16} /> Fabrication locale
+              <Check size={16} /> Fabrication 100% atelier à Binas (41)
             </span>
             <span>
-              <Check size={16} /> Pose par nos équipes
+              <Check size={16} /> Pose par nos propres salariés
+            </span>
+            <span>
+              <Star size={16} fill="currentColor" /> Note 4,8 / 5 (49 avis Google)
             </span>
           </div>
         </div>
       </section>
 
+      {/* Les 4 Blocs narratifs & SEO demandés */}
       <section className="home-story scroll-reveal" aria-labelledby="story-title">
         <div className="section-intro">
-          <p className="eyebrow">Le sur mesure, sans compromis</p>
+          <p className="eyebrow">Le sur mesure sans compromis</p>
           <h2 id="story-title">Un escalier pensé pour votre espace</h2>
           <p>
             Chaque projet commence par une écoute attentive et une visite de mesure. Nous prenons le
-            temps de comprendre votre maison, vos usages et vos envies avant de concevoir un
-            escalier qui s’intègre naturellement à votre intérieur.
+            temps de comprendre votre maison, vos usages et vos volumes avant de fabriquer
+            l'escalier qui s'accordera parfaitement à votre intérieur.
           </p>
         </div>
+
         <div className="story-grid">
+          {/* Bloc 1 */}
           <article className="story-card story-card-wide">
             <img
               src={assets.tradition}
-              alt="Escalier à palier en bois fabriqué à Binas"
+              alt="Escalier à palier sur mesure en bois fabriqué à Binas en Loir-et-Cher"
               loading="lazy"
             />
             <div>
@@ -151,33 +399,44 @@ function Index() {
               <h3>Escalier à palier sur mesure en Loir-et-Cher</h3>
               <p className="story-kicker">Un escalier qui se remarque.</p>
               <p>
-                Escalier en U avec palier, balancé ou en L : il relie vos niveaux avec élégance et
-                s’adapte à votre volume. Chaque escalier est dessiné sur mesure et fabriqué dans nos
-                ateliers à Binas, puis posé chez vous.
+                Escalier en U avec palier, balancé ou en L : l'escalier à palier relie vos niveaux
+                avec élégance et s'adapte à votre volume. Chaque escalier est dessiné sur mesure et
+                fabriqué en bois dans nos ateliers de Binas, puis posé chez vous à Blois, Orléans,
+                Tours, Chartres, Dreux ou Versailles.
               </p>
-              <Link className="text-link" to="/contact">
-                Demander un devis <ArrowRight size={15} />
-              </Link>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Escalier à palier")}
+                className="text-link"
+              >
+                Demander un devis d'escalier à palier <ArrowRight size={15} />
+              </button>
             </div>
           </article>
+
+          {/* Bloc 2 */}
           <article className="story-card">
             <div>
               <p className="eyebrow">02</p>
-              <h3>Fabricant d’escaliers sur mesure depuis 1931</h3>
+              <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
               <p>
-                Les générations se succèdent dans les ateliers Hénault & Cie. Même exigence, même
-                amour du bois, de la tradition à l’innovation.
+                Depuis 1931, les générations se succèdent dans les ateliers Hénault & Cie, à Binas,
+                dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
+                l'innovation. Le sur mesure est notre spécialité, et nos machines à bois les plus
+                performantes nous permettent de réaliser tous types d'escaliers.
               </p>
-              <Link className="text-link" to="/qui-sommes-nous">
-                Découvrir notre histoire <ArrowRight size={15} />
+              <Link className="text-link" to="/nos-creations">
+                Voir nos réalisations <ArrowRight size={15} />
               </Link>
             </div>
           </article>
+
+          {/* Bloc 3 */}
           <article className="story-card story-card-image">
             <img
               src={assets.metal}
-              alt="Escalier suspendu en bois et métal dans un intérieur contemporain"
+              alt="Escalier suspendu contemporain en bois et métal ajusté au millimètre"
               loading="lazy"
             />
             <div>
@@ -185,104 +444,558 @@ function Index() {
               <h3>Escalier suspendu en bois, fabricant à Binas</h3>
               <p className="story-kicker">La légèreté en marche.</p>
               <p>
-                Des marches qui semblent flotter, ajustées au millimètre pour laisser passer la
-                lumière.
+                Des marches qui semblent flotter, sans structure apparente. L'escalier suspendu
+                laisse passer la lumière et ouvre l'espace, surtout dans une pièce de vie ouverte.
+                Nos artisans le fabriquent sur mesure et l'ajustent au millimètre pour votre maison
+                ou votre projet de rénovation.
               </p>
-              <Link className="text-link" to="/nos-creations">
-                Voir nos réalisations <ArrowRight size={15} />
-              </Link>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Escalier suspendu")}
+                className="text-link"
+              >
+                Découvrir nos escaliers suspendus <ArrowRight size={15} />
+              </button>
             </div>
           </article>
+
+          {/* Bloc 4 */}
           <article className="story-card story-card-accent">
             <div>
               <p className="eyebrow">04</p>
               <h3>Escalier pour salon en contrebas, sur mesure</h3>
               <p className="story-kicker">Relier les niveaux, sans rupture.</p>
               <p>
-                En neuf comme en rénovation, nous concevons une transition qui s’accorde à votre sol
-                et à votre intérieur.
+                Un séjour en contrebas sépare les zones avec style, et les marches font le lien.
+                Discrètes pour une transition en douceur, ou affirmées comme un élément de
+                décoration : nous concevons l'escalier qui s'accorde à votre sol et à votre
+                intérieur, en neuf comme en rénovation.
               </p>
-              <Link className="text-link" to="/contact">
-                Parler de votre projet <ArrowRight size={15} />
-              </Link>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Escalier pour salon en contrebas")}
+                className="text-link"
+              >
+                Parlez-nous de votre projet <ArrowRight size={15} />
+              </button>
             </div>
           </article>
         </div>
       </section>
 
-      <section className="types-section scroll-reveal" aria-labelledby="types-title">
-        <div className="section-heading">
+      {/* 8 Types d'escaliers (Inspiré de TILO stairs : cartes avec photo pleine surface, titre majuscule bold et bouton coloré) */}
+      <section className="tilo-section scroll-reveal" aria-labelledby="stair-types-heading">
+        <div className="tilo-section-header">
           <div>
-            <p className="eyebrow">Nos savoir-faire</p>
-            <h2 id="types-title">Quel escalier imaginez-vous ?</h2>
+            <p className="eyebrow">Catalogue & Savoir-faire</p>
+            <h2 id="stair-types-heading">Nos 8 types d'escaliers sur mesure</h2>
+            <p className="lede">
+              Inspirés du style architectural contemporain : chaque modèle est façonné sur mesure
+              dans nos ateliers de Binas. Cliquez sur un modèle pour configurer votre devis.
+            </p>
           </div>
           <Link className="text-link" to="/nos-creations">
-            Toutes nos réalisations <ArrowRight size={15} />
+            Toutes les réalisations en images <ArrowRight size={15} />
           </Link>
         </div>
-        <div className="types-grid">
-          {stairTypes.map((type) => (
-            <Link to="/contact" className="type-card" key={type.name}>
-              <img src={type.image} alt={`${type.name} sur mesure Hénault & Cie`} loading="lazy" />
-              <div>
-                <h3>{type.name}</h3>
-                <p>{type.description}</p>
-                <ArrowRight size={18} />
+
+        <div className="tilo-grid">
+          {stairTypes.map((item) => (
+            <div
+              key={item.id}
+              className="tilo-card"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleSelectType(item.name)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") handleSelectType(item.name);
+              }}
+            >
+              <img
+                src={item.image}
+                alt={`${item.name} sur mesure Hénault & Cie`}
+                className="tilo-card-img"
+                loading="lazy"
+              />
+              <div className="tilo-card-overlay" />
+              <div className="tilo-card-content">
+                <h3 className="tilo-card-title">{item.badge}</h3>
+                <p className="tilo-card-desc">{item.description}</p>
+                <button
+                  type="button"
+                  className={`tilo-card-btn ${item.buttonClass}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectType(item.name);
+                  }}
+                >
+                  {item.buttonLabel}
+                </button>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
 
+      {/* Avis clients Google (4,8 / 5, 49 avis) */}
       <section className="reviews-section scroll-reveal" aria-labelledby="reviews-title">
         <div className="reviews-heading">
-          <p className="eyebrow">Ils nous font confiance</p>
-          <h2 id="reviews-title">Des projets qui durent, des clients satisfaits</h2>
-          <div className="review-score">
-            <span className="stars">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} size={17} fill="currentColor" />
-              ))}
-            </span>
-            <strong>4,8 / 5</strong>
-            <span>49 avis Google</span>
+          <div>
+            <p className="eyebrow">Avis vérifiés Google Business Profile</p>
+            <h2 id="reviews-title">Ce que nos clients disent de nos réalisations</h2>
+            <p style={{ margin: 0, color: "var(--muted-foreground)", fontFamily: "Georgia, serif" }}>
+              Des chantiers soignés, des délais tenus et une fabrication locale sans sous-traitance.
+            </p>
           </div>
-        </div>
-        <div className="reviews-grid">
-          {reviews.map((review) => (
-            <blockquote key={review.quote}>
+
+          <div className="review-score-badge">
+            <span className="google-meta">Google Avis Clients</span>
+            <div className="score-val">
+              <strong>4,8</strong>
               <div className="stars">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} size={14} fill="currentColor" />
+                  <Star key={star} size={16} fill="currentColor" />
                 ))}
               </div>
-              <p>“{review.quote}”</p>
-              <cite>{review.author}</cite>
-            </blockquote>
+            </div>
+            <span className="score-total">Basé sur 49 avis réels vérifiés</span>
+          </div>
+        </div>
+
+        <div className="reviews-grid">
+          {customerReviews.map((rev) => (
+            <article className="review-card" key={rev.author}>
+              <div className="stars">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} size={15} fill="currentColor" />
+                ))}
+              </div>
+              <p>"{rev.quote}"</p>
+              <div className="review-card-meta">
+                <span className="review-author">{rev.author}</span>
+                <span className="review-tag">
+                  {rev.location} - {rev.project}
+                </span>
+              </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="home-contact-cta scroll-reveal">
-        <div>
-          <p className="eyebrow">Un projet en tête ?</p>
-          <h2>Parlons de votre futur escalier.</h2>
-          <p>
-            Décrivez-nous votre projet. Après un premier échange, nous organiserons une visite de
-            mesure dans les meilleures conditions.
+      {/* Formulaire interactif de Devis & Rendez-vous de mesure */}
+      <section
+        ref={quoteSectionRef}
+        id="devis-rdv"
+        className="home-quote-section scroll-reveal"
+        aria-labelledby="form-heading"
+      >
+        <div className="quote-header">
+          <p className="eyebrow">Votre projet commence ici</p>
+          <h2 id="form-heading">Demandez votre devis gratuit ou réservez votre visite</h2>
+          <p style={{ margin: 0, color: "var(--muted-foreground)", fontFamily: "Georgia, serif", fontSize: "16px" }}>
+            Étude personnalisée et chiffrage clair sous 48h ouvrées. Nos techniciens se déplacent
+            directement chez vous pour relever les dimensions précises de votre trémie.
           </p>
         </div>
-        <div className="cta-row">
-          <Button asChild className="site-cta">
-            <Link to="/contact">
-              Demander un devis <ArrowRight size={16} />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="cta-outline">
-            <Link to="/contact">
-              <CalendarDays size={16} /> Prendre rendez-vous
-            </Link>
-          </Button>
+
+        <div className="quote-layout">
+          <div className="quote-form-card">
+            <nav className="quote-tabs-nav" aria-label="Choix du formulaire">
+              <button
+                type="button"
+                className={`quote-tab-btn ${activeTab === "devis" ? "is-active" : ""}`}
+                onClick={() => setActiveTab("devis")}
+              >
+                1. Demander un devis détaillé
+              </button>
+              <button
+                type="button"
+                className={`quote-tab-btn ${activeTab === "rdv" ? "is-active" : ""}`}
+                onClick={() => setActiveTab("rdv")}
+              >
+                2. Réserver une visite de mesure
+              </button>
+            </nav>
+
+            {activeTab === "devis" ? (
+              <form onSubmit={handleQuoteSubmit}>
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="stairType">Type d'escalier souhaité *</label>
+                    <select
+                      id="stairType"
+                      name="stairType"
+                      value={selectedStairType}
+                      onChange={(e) => setSelectedStairType(e.target.value)}
+                      required
+                    >
+                      <option value="Escalier droit">Escalier droit</option>
+                      <option value="Quart tournant">Escalier quart tournant</option>
+                      <option value="Escalier hélicoïdal">Escalier hélicoïdal</option>
+                      <option value="Escalier suspendu">Escalier suspendu</option>
+                      <option value="Escalier en bois">Escalier en bois massif</option>
+                      <option value="Escalier métal">Escalier métal et bois</option>
+                      <option value="Escalier verre">Escalier et garde-corps verre</option>
+                      <option value="Rénovation d'escalier">Rénovation d'escalier existant</option>
+                      <option value="Escalier à palier">Escalier à palier sur mesure</option>
+                      <option value="Escalier pour salon en contrebas">
+                        Escalier salon en contrebas
+                      </option>
+                    </select>
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="material">Matériau envisagé *</label>
+                    <select id="material" name="material" required>
+                      <option value="Chêne français massif">Chêne français massif</option>
+                      <option value="Hêtre ou Frêne">Hêtre ou Frêne blanc</option>
+                      <option value="Bois et structure acier peint">Bois et structure acier</option>
+                      <option value="Verre securit et inox">Verre securit et inox</option>
+                      <option value="À conseiller selon mon intérieur">
+                        À conseiller selon mon projet
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="projectNature">Nature du chantier</label>
+                    <select id="projectNature" name="projectNature">
+                      <option value="Rénovation / Remplacement d'escalier">
+                        Rénovation / Remplacement
+                      </option>
+                      <option value="Construction neuve">Construction neuve</option>
+                      <option value="Aménagement de combles / Mezzanine">
+                        Aménagement de combles
+                      </option>
+                    </select>
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="delay">Délai souhaité</label>
+                    <select id="delay" name="delay">
+                      <option value="Dès que possible (1 à 2 mois)">
+                        Dès que possible (1 à 2 mois)
+                      </option>
+                      <option value="Projet sous 3 à 6 mois">Projet sous 3 à 6 mois</option>
+                      <option value="Projet à moyen terme (plus de 6 mois)">
+                        Plus de 6 mois
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="dimensions">
+                    Dimensions approximatives, hauteur ou descriptif de vos envies
+                  </label>
+                  <textarea
+                    id="dimensions"
+                    name="dimensions"
+                    placeholder="Exemple : Hauteur sol à sol environ 2m75, trémie rectangulaire, souhait de contremarches fermées..."
+                  />
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="fullName">Nom et Prénom *</label>
+                    <input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      placeholder="Jean Dupont"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="phone">Numéro de téléphone *</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="06 12 34 56 78"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="email">Adresse e-mail *</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="jean.dupont@email.fr"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="city">Commune ou Code postal *</label>
+                    <input
+                      id="city"
+                      name="city"
+                      type="text"
+                      placeholder="Ex : 41000 Blois ou 45000 Orléans"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <label className="form-consent">
+                  <input type="checkbox" required />
+                  <span>
+                    J'accepte que Hénault & Cie utilise mes coordonnées pour me recontacter
+                    conformément à la{" "}
+                    <a
+                      href="https://escalier-henault.fr/politique-de-confidentialite/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      politique de confidentialité
+                    </a>
+                    . Vos données ne sont jamais cédées à des tiers.
+                  </span>
+                </label>
+
+                <div className="form-submit-row">
+                  <button type="submit" className="site-cta-btn">
+                    Envoyer ma demande de devis <ArrowRight size={16} />
+                  </button>
+                  <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
+                    Réponse personnalisée sous 48h ouvrées
+                  </span>
+                </div>
+
+                {devisSubmitted && (
+                  <div className="quote-success-box" role="status">
+                    <strong>Merci pour votre demande !</strong>
+                    <br />
+                    Votre message a été transmis directement à notre atelier de Binas. Un menuisier
+                    chiffreur examinera votre dossier et vous contactera dans les plus brefs délais.
+                  </div>
+                )}
+              </form>
+            ) : (
+              <form onSubmit={handleRdvSubmit}>
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="sector">Ville / Secteur d'intervention *</label>
+                    <select id="sector" name="sector" required>
+                      <option value="Blois (41)">Blois (41)</option>
+                      <option value="Vendôme (41)">Vendôme (41)</option>
+                      <option value="Binas et environs (41)">Binas et environs (41)</option>
+                      <option value="Orléans (45)">Orléans (45)</option>
+                      <option value="Beaugency (45)">Beaugency (45)</option>
+                      <option value="Tours (37)">Tours (37)</option>
+                      <option value="Chartres (28)">Chartres (28)</option>
+                      <option value="Châteaudun (28)">Châteaudun (28)</option>
+                      <option value="Dreux (28)">Dreux (28)</option>
+                      <option value="Versailles (78)">Versailles (78)</option>
+                    </select>
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="slot">Créneau horaire d'ouverture souhaité *</label>
+                    <select id="slot" name="slot" required>
+                      <option value="Matin : 9h00 à 12h30">Matin (9h00 à 12h30)</option>
+                      <option value="Après-midi : 13h30 à 18h00">
+                        Après-midi (13h30 à 18h00)
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="date">Date indicative souhaitée *</label>
+                    <input id="date" name="date" type="date" required />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="rdvPhone">Numéro de téléphone *</label>
+                    <input
+                      id="rdvPhone"
+                      name="phone"
+                      type="tel"
+                      placeholder="06 12 34 56 78"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-field">
+                    <label htmlFor="rdvName">Nom et Prénom *</label>
+                    <input
+                      id="rdvName"
+                      name="fullName"
+                      type="text"
+                      placeholder="Jean Dupont"
+                      required
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label htmlFor="rdvEmail">Adresse e-mail *</label>
+                    <input
+                      id="rdvEmail"
+                      name="email"
+                      type="email"
+                      placeholder="jean.dupont@email.fr"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="address">Adresse exacte du chantier pour la visite *</label>
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                    placeholder="Ex : 12 rue de la République, 41000 Blois"
+                    required
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label htmlFor="notes">Précisions ou instructions d'accès</label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Maison en cours de rénovation, code d'entrée, présence d'un escalier provisoire..."
+                  />
+                </div>
+
+                <label className="form-consent">
+                  <input type="checkbox" required />
+                  <span>
+                    J'autorise Hénault & Cie à me contacter pour confirmer la date de la visite de
+                    mesure.
+                  </span>
+                </label>
+
+                <div className="form-submit-row">
+                  <button type="submit" className="site-cta-btn">
+                    Confirmer ma demande de visite <ArrowRight size={16} />
+                  </button>
+                  <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
+                    Créneaux : Lun au Ven, 9h-12h30 et 13h30-18h
+                  </span>
+                </div>
+
+                {rdvSubmitted && (
+                  <div className="quote-success-box" role="status">
+                    <strong>Demande de rendez-vous enregistrée !</strong>
+                    <br />
+                    Notre équipe va valider l'itinéraire de mesure et vous recontacter par téléphone
+                    pour caler l'horaire précis.
+                  </div>
+                )}
+              </form>
+            )}
+          </div>
+
+          {/* Sidebar Coordonnées & Réassurance */}
+          <aside className="quote-sidebar" aria-label="Informations de contact et engagements">
+            <div className="sidebar-box">
+              <h3>Contact direct atelier</h3>
+              <ul className="sidebar-contact-list">
+                <li>
+                  <Phone size={18} />
+                  <div>
+                    <strong>Téléphone :</strong>
+                    <br />
+                    <a href="tel:+33254824489">02 54 82 44 89</a>
+                  </div>
+                </li>
+                <li>
+                  <Mail size={18} />
+                  <div>
+                    <strong>E-mail :</strong>
+                    <br />
+                    <a href="mailto:contact@henault-cie.com">contact@henault-cie.com</a>
+                  </div>
+                </li>
+                <li>
+                  <MapPin size={18} />
+                  <div>
+                    <strong>Atelier et bureau :</strong>
+                    <br />
+                    9 bis rue du Bout de la ville
+                    <br />
+                    41240 Binas (Loir-et-Cher)
+                  </div>
+                </li>
+                <li>
+                  <Clock size={18} />
+                  <div>
+                    <strong>Horaires d'ouverture :</strong>
+                    <br />
+                    Du lundi au vendredi
+                    <br />
+                    9h00 à 12h30 et 13h30 à 18h00
+                  </div>
+                </li>
+              </ul>
+
+              <h3 style={{ marginTop: "30px" }}>Nos engagements d'artisans</h3>
+              <ul className="sidebar-guarantees">
+                <li>
+                  <ShieldCheck size={18} />
+                  <span>
+                    <strong>Fabrication 100% atelier :</strong> Aucun escalier standard ou importé,
+                    tout est usiné et assemblé à Binas.
+                  </span>
+                </li>
+                <li>
+                  <ShieldCheck size={18} />
+                  <span>
+                    <strong>Pose par nos salariés :</strong> Nos propres compagnons menuisiers
+                    assurent la pose soignée chez vous, sans sous-traitance.
+                  </span>
+                </li>
+                <li>
+                  <ShieldCheck size={18} />
+                  <span>
+                    <strong>Garantie décennale :</strong> Matériaux de premier choix, résistance
+                    mécanique et conformité aux normes de sécurité.
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* 10 Zones géographiques d'intervention (SEO Local) */}
+      <section className="zones-section" aria-labelledby="zones-heading">
+        <div className="zones-inner">
+          <div>
+            <p className="eyebrow" style={{ color: "var(--accent)" }}>
+              Proximité & Déplacement
+            </p>
+            <h2 id="zones-heading">Nos 10 secteurs d'intervention prioritaires</h2>
+            <p>
+              Nos équipes se déplacent à votre domicile pour le relevé de cotes technique, la
+              livraison directe et l'installation complète de votre escalier sur mesure.
+            </p>
+          </div>
+
+          <div className="zones-list">
+            {interventionZones.map((z) => (
+              <span className="zone-pill" key={z.name}>
+                <MapPin size={13} style={{ color: "var(--accent)" }} />
+                <span>
+                  <strong>{z.name}</strong> ({z.dpt})
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
     </main>

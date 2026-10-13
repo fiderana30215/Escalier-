@@ -18,8 +18,8 @@ export function SiteHeader() {
   }, [pathname]);
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      <Link to="/" className="brand" aria-label="Henault & Cie — Accueil">
-        <img src={assets.logo} alt="HENAULT & Cie" />
+      <Link to="/" className="brand" aria-label="Hénault & Cie - Accueil">
+        <img src={assets.logo} alt="HÉNAULT & Cie" />
       </Link>
       <Button
         variant="ghost"
@@ -46,7 +46,7 @@ export function SiteHeader() {
         </Link>
         <Button asChild className="site-cta">
           <Link to="/contact" className="contact-link">
-            CONTACT
+            CONTACT & DEVIS
           </Link>
         </Button>
       </nav>
@@ -66,25 +66,34 @@ export function SiteFooter() {
       </aside>
       <footer className="site-footer">
         <div className="footer-inner">
-          <Link to="/" className="brand">
-            <img src={assets.whiteLogo} alt="HENAULT & Cie" />
+          <Link to="/" className="brand" aria-label="Hénault & Cie">
+            <img src={assets.whiteLogo} alt="HÉNAULT & Cie" />
           </Link>
           <div>
-            9 bis rue de bout de la ville – 41240 Binas
+            <strong>Hénault & Cie</strong>
+            <br />
+            9 bis rue du Bout de la ville - 41240 Binas
             <br />
             Tél. : <a href="tel:+33254824489">02 54 82 44 89</a>
             <br />
             Mail : <a href="mailto:contact@henault-cie.com">contact@henault-cie.com</a>
+            <br />
+            <small style={{ display: "block", marginTop: "6px", opacity: 0.85 }}>
+              Atelier ouvert du lundi au vendredi : 9h00 à 12h30 et 13h30 à 18h00
+            </small>
           </div>
           <div>
             <div className="footer-social">
-              <a href={facebookUrl} aria-label="Facebook">
+              <a href={facebookUrl} aria-label="Facebook" target="_blank" rel="noreferrer">
                 <Facebook size={17} />
               </a>
-              <a href={instagramUrl} aria-label="Instagram">
+              <a href={instagramUrl} aria-label="Instagram" target="_blank" rel="noreferrer">
                 <Instagram size={17} />
               </a>
             </div>
+            <p style={{ margin: "0 0 8px", fontSize: "11px", opacity: 0.85 }}>
+              Intervention : Blois, Orléans, Tours, Chartres, Dreux, Versailles, Vendôme, Châteaudun, Beaugency
+            </p>
             <a
               href="https://escalier-henault.fr/politique-de-confidentialite/"
               target="_blank"
