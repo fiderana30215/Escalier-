@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="154" height="123.749" viewBox="0 0 154 123.749">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.077" y1="0.078" x2="0.922" y2="1.078" gradientUnits="objectBoundingBox">
+      <stop offset="0.08" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.52" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <g id="logo-blanc" transform="translate(-146.9 -163.9)">
+    <rect id="Rectangle_366" data-name="Rectangle 366" width="8.378" height="65.619" transform="translate(219.859 164.197)" fill="#fff"/>
+    <circle id="Ellipse_12" data-name="Ellipse 12" cx="8.453" cy="8.453" r="8.453" transform="translate(240.249 163.9)" fill="#fff"/>
+    <path id="Tracé_2731" data-name="Tracé 2731" d="M184.9,164.4l32.921,32.921L185.2,229.945h11.789l32.624-32.624L196.763,164.4Z" transform="translate(-9.825 -0.129)" fill="#fff"/>
+    <g id="Groupe_1233" data-name="Groupe 1233" transform="translate(146.9 251.836)">
+      <g id="Groupe_1232" data-name="Groupe 1232">
+        <path id="Tracé_2732" data-name="Tracé 2732" d="M146.9,318.312h5.042V283.241H146.9Zm24.69-35.071h-6.228l-13.2,16.386,14.607,18.685H173l-14.532-18.685Zm8.378,35.071h5.042V283.241h-5.042Zm79.929,0h5.042V283.241H259.9Zm26.544-18.685,13.124-16.386h-6.228l-13.272,16.386,14.607,18.685H300.9Zm-11.567,18.685h5.042V283.241h-5.042Zm-40.78-10.974L222.38,282.5l-11.715,24.839-11.641-24.171h-5.635l17.276,35.071,11.715-24.69,11.715,24.69,17.276-35.071h-5.635Z" transform="translate(-146.9 -282.5)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="Groupe_1234" data-name="Groupe 1234" transform="translate(234.836 191.927)">
+      <path id="Tracé_2733" data-name="Tracé 2733" d="M265.5,201.7v11.863l26.1,26.025h11.789Z" transform="translate(-265.5 -201.7)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>
