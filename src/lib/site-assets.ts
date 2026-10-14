@@ -1,59 +1,133 @@
-import logo from '@/assets/henault-cie-logo-full.svg';
-import whiteLogo from '@/assets/henault-cie-logo-wh.svg';
-import agency from '@/assets/kiwik-logo-bc.svg';
-import hero from '@/assets/hero-home-banner.jpg';
-import tradition from '@/assets/escalier-tradition-henault-et-cie.jpg';
-import metal from '@/assets/escalier-metal-lisse-peint-25.jpg';
-import about from '@/assets/pose-escalier-particulier-et-professionnels.jpg';
-import quality from '@/assets/escalier-sur-mesure-personnalisable.jpg';
-import insta1 from '@/assets/275353130_1077555282804984_6839497903847973230_n.webplow.jpg';
-import insta2 from '@/assets/274563305_2750273705279714_1555854750053080353_n.webplow.jpg';
-import insta3 from '@/assets/271520987_889648415057869_4903450884706547128_nfull.jpg';
-import g1 from '@/assets/01-escalier-lisse-peint.jpg';
-import g2 from '@/assets/02-escalier-tradition.jpg';
-import g3 from '@/assets/03-escalier-lisse-metal-peint.jpg';
-import g4 from '@/assets/04-escalier-lisse-metal-peint.jpg';
-import g5 from '@/assets/05-escalier-double-cremaillere.jpg';
-import g6 from '@/assets/06-escalier-simple-cremaillere.jpg';
-import g7 from '@/assets/07-escalier-bois-metal.jpg';
-import g8 from '@/assets/08-escalier-metal-lisse-peint.jpg';
-import galleryHero from '@/assets/hero-home-banner.jpg';
-import galleryTradition from '@/assets/escalier-tradition-henault-et-cie.jpg';
-import galleryMetal from '@/assets/escalier-metal-lisse-peint-25.jpg';
-import galleryAbout from '@/assets/pose-escalier-particulier-et-professionnels.jpg';
-import galleryQuality from '@/assets/escalier-sur-mesure-personnalisable.jpg';
-import galleryInsta1 from '@/assets/275353130_1077555282804984_6839497903847973230_n.webplow.jpg';
-import galleryInsta2 from '@/assets/274563305_2750273705279714_1555854750053080353_n.webplow.jpg';
-import galleryInsta3 from '@/assets/271520987_889648415057869_4903450884706547128_nfull.jpg';
+import logoColor from "@/assets/brand/brand-logo-color.png";
+import logoWhite from "@/assets/brand/brand-logo-white.png";
+import logoBlue from "@/assets/brand/brand-logo-blue.png";
+import logoSvg from "@/assets/brand/brand-logo.svg";
+import pictoColor from "@/assets/brand/brand-picto-color.png";
+import agency from "@/assets/kiwik-logo-bc.svg";
+
+// Real staircase photos from Hénault's atelier and completed client jobs
+import hero1 from "@/assets/photos/stairs/hero-escalier.jpg";
+import hero2 from "@/assets/photos/stairs/hero-escalier-2.jpg";
+import stairDroit from "@/assets/photos/stairs/droit.jpg";
+import stairQuart from "@/assets/photos/stairs/quart-tournant.jpg";
+import stairDeuxQuart from "@/assets/photos/stairs/deux-quart-tournant.jpg";
+import stairHelicoidal from "@/assets/photos/stairs/helicoidal-limon.jpg";
+import stairLimonNoir from "@/assets/photos/stairs/limon-central-noir.jpg";
+import stairSuspendu from "@/assets/photos/stairs/suspendu.jpg";
+import stairBois from "@/assets/photos/stairs/bois-massif.jpg";
+import stairMetal from "@/assets/photos/stairs/metal-bois.jpg";
+import stairVerre from "@/assets/photos/stairs/verre.jpg";
+import stairRenovation from "@/assets/photos/stairs/renovation.jpg";
+import stairGrandeMarche from "@/assets/photos/stairs/grande-marche.jpg";
+import stairDescente from "@/assets/photos/stairs/descente.jpg";
+import stairBalustre from "@/assets/photos/stairs/balustre-metal.jpg";
+
+// Real atelier photos
+import atelierChene from "@/assets/photos/atelier/chene-brut.jpg";
+import atelierDecoupe from "@/assets/photos/atelier/decoupe.jpg";
+import atelierEnmarchement from "@/assets/photos/atelier/enmarchement.jpg";
+import atelierFabrication from "@/assets/photos/atelier/fabrication.jpg";
+import atelierAssemblage from "@/assets/photos/atelier/assemblage.jpg";
+import atelierMarche from "@/assets/photos/atelier/marche.jpg";
+
+// Real custom furniture and verrières photos
+import mobilierSousEscalier from "@/assets/photos/mobilier/sous-escalier.jpg";
+import mobilierBibliotheque from "@/assets/photos/mobilier/bibliotheque.jpg";
+import mobilierClaustra from "@/assets/photos/mobilier/claustra.jpg";
+import verriereBois from "@/assets/photos/verriere/verriere-bois.jpg";
+import verriereBlanche from "@/assets/photos/verriere/verriere-blanche.jpg";
+
+// Legacy assets fallback
+import legacyHero from "@/assets/hero-home-banner.jpg";
+import legacyTradition from "@/assets/escalier-tradition-henault-et-cie.jpg";
+
 export const assets = {
-  logo,
-  whiteLogo,
+  logo: logoColor,
+  whiteLogo: logoWhite,
+  blueLogo: logoBlue,
+  logoSvg,
+  picto: pictoColor,
   agency,
-  hero,
-  tradition,
-  metal,
-  about,
-  quality,
-  instagram: [insta1, insta2, insta3],
+  hero: hero1,
+  heroSecondary: hero2,
+  tradition: stairDeuxQuart,
+  metal: stairMetal,
+  about: atelierFabrication,
+  quality: stairBois,
+  stairs: {
+    hero1,
+    hero2,
+    droit: stairDroit,
+    quartTournant: stairQuart,
+    deuxQuartTournant: stairDeuxQuart,
+    helicoidal: stairHelicoidal,
+    limonNoir: stairLimonNoir,
+    suspendu: stairSuspendu,
+    bois: stairBois,
+    metal: stairMetal,
+    verre: stairVerre,
+    renovation: stairRenovation,
+    grandeMarche: stairGrandeMarche,
+    descente: stairDescente,
+    balustre: stairBalustre,
+  },
+  atelier: {
+    chene: atelierChene,
+    decoupe: atelierDecoupe,
+    enmarchement: atelierEnmarchement,
+    fabrication: atelierFabrication,
+    assemblage: atelierAssemblage,
+    marche: atelierMarche,
+  },
+  complementary: {
+    sousEscalier: mobilierSousEscalier,
+    bibliotheque: mobilierBibliotheque,
+    claustra: mobilierClaustra,
+    verriereBois,
+    verriereBlanche,
+  },
   gallery: [
-    g1,
-    g2,
-    g3,
-    g4,
-    g5,
-    g6,
-    g7,
-    g8,
-    galleryHero,
-    galleryTradition,
-    galleryMetal,
-    galleryAbout,
-    galleryQuality,
-    galleryInsta1,
-    galleryInsta2,
-    galleryInsta3,
+    stairDroit,
+    stairQuart,
+    stairHelicoidal,
+    stairSuspendu,
+    stairBois,
+    stairMetal,
+    stairVerre,
+    stairRenovation,
+    stairGrandeMarche,
+    stairDeuxQuart,
+    stairLimonNoir,
+    stairDescente,
+    atelierFabrication,
+    atelierDecoupe,
+    mobilierSousEscalier,
+    mobilierBibliotheque,
+    verriereBois,
+    verriereBlanche,
+    legacyHero,
+    legacyTradition,
   ],
 };
-export const facebookUrl = 'https://www.facebook.com/henaultcie/';
-export const instagramUrl = 'https://www.instagram.com/menuiseriehenault/';
-export function pageHead(title:string,description:string,image?:string){return {meta:[{title},{name:'description',content:description},{property:'og:title',content:title},{property:'og:description',content:description},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'},...(image?.startsWith("https://")?[{property:'og:image',content:image},{name:'twitter:image',content:image}]:[])]};}
+
+export const facebookUrl = "https://www.facebook.com/henaultcie/";
+export const instagramUrl = "https://www.instagram.com/menuiseriehenault/";
+
+export function pageHead(title: string, description: string, image?: string) {
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      ...(image?.startsWith("https://")
+        ? [
+            { property: "og:image", content: image },
+            { name: "twitter:image", content: image },
+          ]
+        : []),
+    ],
+  };
+}

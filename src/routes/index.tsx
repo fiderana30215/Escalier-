@@ -38,7 +38,7 @@ const stairTypes: StairTypeItem[] = [
     id: "droit",
     name: "Escalier droit",
     badge: "ESCALIER DROIT",
-    image: assets.gallery[0],
+    image: assets.stairs.droit,
     description: "Une ligne pure et intemporelle pour habiller les volumes linéaires avec élégance.",
     buttonLabel: "Escalier droit",
     buttonClass: "btn-coral",
@@ -47,7 +47,7 @@ const stairTypes: StairTypeItem[] = [
     id: "quart-tournant",
     name: "Quart tournant",
     badge: "QUART TOURNANT",
-    image: assets.gallery[1],
+    image: assets.stairs.quartTournant,
     description: "Le confort d'un changement d'angle optimisant les mètres carrés habitables.",
     buttonLabel: "Quart tournant",
     buttonClass: "btn-teal",
@@ -56,7 +56,7 @@ const stairTypes: StairTypeItem[] = [
     id: "helicoïdal",
     name: "Escalier hélicoïdal",
     badge: "HÉLICOÏDAL",
-    image: assets.gallery[5],
+    image: assets.stairs.helicoidal,
     description: "Une courbe sculpturale et un encombrement maîtrisé pour sublimer votre séjour.",
     buttonLabel: "Escalier hélicoïdal",
     buttonClass: "btn-wood",
@@ -65,7 +65,7 @@ const stairTypes: StairTypeItem[] = [
     id: "suspendu",
     name: "Escalier suspendu",
     badge: "ESCALIER SUSPENDU",
-    image: assets.metal,
+    image: assets.stairs.suspendu,
     description: "Des marches aériennes qui flottent dans l'espace et laissent circuler la lumière.",
     buttonLabel: "Escalier suspendu",
     buttonClass: "btn-sage",
@@ -74,7 +74,7 @@ const stairTypes: StairTypeItem[] = [
     id: "bois",
     name: "Escalier en bois",
     badge: "ESCALIER BOIS",
-    image: assets.quality,
+    image: assets.stairs.bois,
     description: "La noblesse du chêne, du hêtre ou du frêne massif, façonnés avec passion.",
     buttonLabel: "Escalier en bois",
     buttonClass: "btn-coral",
@@ -83,7 +83,7 @@ const stairTypes: StairTypeItem[] = [
     id: "metal",
     name: "Escalier métal",
     badge: "ESCALIER MÉTAL",
-    image: assets.gallery[2],
+    image: assets.stairs.metal,
     description: "Limon acier contemporain et marches bois pour un contraste architectural fort.",
     buttonLabel: "Escalier métal",
     buttonClass: "btn-teal",
@@ -92,7 +92,7 @@ const stairTypes: StairTypeItem[] = [
     id: "verre",
     name: "Escalier verre",
     badge: "ESCALIER VERRE",
-    image: assets.gallery[3],
+    image: assets.stairs.verre,
     description: "Garde-corps en verre securit pour une transparence maximale et des pièces agrandies.",
     buttonLabel: "Escalier verre",
     buttonClass: "btn-wood",
@@ -101,7 +101,7 @@ const stairTypes: StairTypeItem[] = [
     id: "renovation",
     name: "Rénovation d'escalier",
     badge: "RÉNOVATION",
-    image: assets.gallery[7],
+    image: assets.stairs.renovation,
     description: "Habillage ou remplacement soigné de votre ancien escalier sans dégrader vos murs.",
     buttonLabel: "Rénovation escalier",
     buttonClass: "btn-sage",
@@ -318,14 +318,14 @@ function Index() {
       <section className="home-hero">
         <div className="home-hero-media">
           <img
-            src={assets.hero}
+            src={assets.stairs.hero1}
             alt="Grand escalier contemporain sur mesure en bois fabriqué par Hénault & Cie"
             className="hero-main-photo"
           />
           <div className="hero-sub-photo-wrap">
             <img
-              src={assets.tradition}
-              alt="Détail artisanal de limon et marches en bois en atelier"
+              src={assets.atelier.fabrication}
+              alt="Fabrication artisanale d'escalier en atelier à Binas"
               className="hero-sub-photo"
             />
           </div>
@@ -390,7 +390,7 @@ function Index() {
           {/* Bloc 1 */}
           <article className="story-card story-card-wide">
             <img
-              src={assets.tradition}
+              src={assets.stairs.deuxQuartTournant}
               alt="Escalier à palier sur mesure en bois fabriqué à Binas en Loir-et-Cher"
               loading="lazy"
             />
@@ -435,7 +435,7 @@ function Index() {
           {/* Bloc 3 */}
           <article className="story-card story-card-image">
             <img
-              src={assets.metal}
+              src={assets.stairs.suspendu}
               alt="Escalier suspendu contemporain en bois et métal ajusté au millimètre"
               loading="lazy"
             />
@@ -534,6 +534,86 @@ function Index() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Savoir-faire complémentaire : Mobilier sous escalier & Verrières */}
+      <section className="home-complementary scroll-reveal" aria-labelledby="complementary-heading">
+        <div className="section-intro">
+          <p className="eyebrow">Agencements & Verrières d'atelier</p>
+          <h2 id="complementary-heading">Aménagements sous escalier et verrières d'atelier</h2>
+          <p>
+            Prolongez l'harmonie de votre intérieur avec des rangements sur mesure intégrés sous vos
+            marches ou une verrière artisanale en bois et métal conçue dans nos ateliers.
+          </p>
+        </div>
+
+        <div className="complementary-grid">
+          <article className="complementary-card">
+            <img
+              src={assets.complementary.sousEscalier}
+              alt="Aménagement sous escalier sur mesure en bois et noir"
+              loading="lazy"
+            />
+            <div className="complementary-card-body">
+              <h3>Rangements & Placards sous escalier</h3>
+              <p>
+                Tiroirs coulissants sur mesure, dressings intégrés, vestiaires et niches optimisant chaque
+                centimètre sous vos marches.
+              </p>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Aménagement sous escalier")}
+                className="text-link"
+              >
+                Demander une étude sous escalier <ArrowRight size={15} />
+              </button>
+            </div>
+          </article>
+
+          <article className="complementary-card">
+            <img
+              src={assets.complementary.bibliotheque}
+              alt="Bibliothèque et claustra en bois sur mesure intégrés à l'escalier"
+              loading="lazy"
+            />
+            <div className="complementary-card-body">
+              <h3>Bibliothèques & Claustras sur mesure</h3>
+              <p>
+                Claustras ajourés en bois massif, étagères et bibliothèques architecturales faisant le
+                lien entre vos pièces de vie.
+              </p>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Bibliothèque / Claustra")}
+                className="text-link"
+              >
+                Imaginer votre claustra <ArrowRight size={15} />
+              </button>
+            </div>
+          </article>
+
+          <article className="complementary-card">
+            <img
+              src={assets.complementary.verriereBois}
+              alt="Verrière d'atelier en bois massif sur mesure"
+              loading="lazy"
+            />
+            <div className="complementary-card-body">
+              <h3>Verrières d'atelier en bois</h3>
+              <p>
+                Cloisonnements vitrés laissant circuler la lumière tout en délimitant votre entrée,
+                séjour ou cage d'escalier avec élégance.
+              </p>
+              <button
+                type="button"
+                onClick={() => handleSelectType("Verrière d'atelier")}
+                className="text-link"
+              >
+                Parler de votre verrière <ArrowRight size={15} />
+              </button>
+            </div>
+          </article>
         </div>
       </section>
 
