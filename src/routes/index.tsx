@@ -145,6 +145,21 @@ const interventionZones = [
   { name: "Versailles", dpt: "78" },
 ];
 
+const heroSlides = [
+  {
+    id: "01",
+    image: assets.client.heroSlide1,
+    alt: "Escalier contemporain sur mesure en bois et métal Hénault & Cie",
+    title: "Escalier contemporain",
+  },
+  {
+    id: "02",
+    image: assets.client.heroSlide2,
+    alt: "Escalier limon central avec lumière intégrée Hénault & Cie",
+    title: "Limon central avec lumière",
+  },
+];
+
 function Index() {
   const pageRef = useRef<HTMLElement>(null);
   const quoteSectionRef = useRef<HTMLElement>(null);
@@ -153,6 +168,27 @@ function Index() {
   const [selectedStairType, setSelectedStairType] = useState<string>("Escalier droit");
   const [devisSubmitted, setDevisSubmitted] = useState(false);
   const [rdvSubmitted, setRdvSubmitted] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isSliderPaused, setIsSliderPaused] = useState(false);
+
+  useEffect(() => {
+    if (isSliderPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isSliderPaused]);
+
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== "undefined" && window.location.hash === "#rdv") {
+        setActiveTab("rdv");
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
 
   useEffect(() => {
     const page = pageRef.current;
@@ -314,30 +350,13 @@ function Index() {
         }}
       />
 
-      {/* Hero section with 2 real photos */}
-      <section className="home-hero">
-        <div className="home-hero-media">
-          <img
-            src={assets.stairs.hero1}
-            alt="Grand escalier contemporain sur mesure en bois fabriqué par Hénault & Cie"
-            className="hero-main-photo"
-          />
-          <div className="hero-sub-photo-wrap">
-            <img
-              src={assets.atelier.fabrication}
-              alt="Fabrication artisanale d'escalier en atelier à Binas"
-              className="hero-sub-photo"
-            />
-          </div>
-          <div className="hero-artisan-badge">
-            <strong>Atelier à Binas (41)</strong>
-            Depuis 1931 - 100% sur mesure
-          </div>
-        </div>
-
-        <div className="home-hero-content">
+      {/* Hero section (Tilo style with 2-photo sliding carousel) */}
+      <section className="tilo-hero">
+        <div className="tilo-hero-content">
           <p className="eyebrow">Fabricant d'escaliers sur mesure depuis 1931</p>
-          <h1>Votre escalier donne le ton à toute votre maison.</h1>
+          <h1 className="tilo-hero-title">
+            Votre escalier <span className="highlight-band">donne le ton</span> à toute votre maison.
+          </h1>
           <p className="hero-lede">
             Menuiserie d'art et tradition familiale : nous concevons, fabriquons dans nos ateliers
             de Binas et posons vos escaliers sur mesure en bois, métal ou verre, sans aucune
@@ -372,119 +391,208 @@ function Index() {
             </span>
           </div>
         </div>
+
+        <div
+          className="tilo-hero-slider"
+          onMouseEnter={() => setIsSliderPaused(true)}
+          onMouseLeave={() => setIsSliderPaused(false)}
+          aria-label="Carrousel de réalisations d'escaliers Hénault & Cie"
+        >
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`tilo-slide ${index === currentSlide ? "is-active" : ""}`}
+              aria-hidden={index !== currentSlide}
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="tilo-slide-img"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <div className="tilo-slide-overlay" />
+            </div>
+          ))}
+
+          <div
+            className="tilo-hero-controls"
+            role="tablist"
+            aria-label="Sélectionner une photo de l'escalier"
+          >
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.id}
+                type="button"
+                role="tab"
+                aria-selected={index === currentSlide}
+                className={`tilo-hero-btn ${index === currentSlide ? "is-active" : ""}`}
+                onClick={() => setCurrentSlide(index)}
+              >
+                <span className="slide-num">{slide.id}</span>
+                <span className="slide-label">{slide.title}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="tilo-hero-badge">
+            <strong>Atelier à Binas (41)</strong>
+            Depuis 1931 - 100% sur mesure
+          </div>
+        </div>
       </section>
 
-      {/* Les 4 Blocs narratifs & SEO demandés */}
+      {/* Centered Intro Section (Matching TILO "The perfect covering" layout) */}
       <section className="home-story scroll-reveal" aria-labelledby="story-title">
-        <div className="section-intro">
+        <div className="section-intro-centered">
           <p className="eyebrow">Le sur mesure sans compromis</p>
           <h2 id="story-title">Un escalier pensé pour votre espace</h2>
-          <p>
+          <div className="rule-centered" />
+          <p className="intro-text">
             Chaque projet commence par une écoute attentive et une visite de mesure. Nous prenons le
             temps de comprendre votre maison, vos usages et vos volumes avant de fabriquer
             l'escalier qui s'accordera parfaitement à votre intérieur.
           </p>
         </div>
 
-        <div className="story-grid">
-          {/* Bloc 1 */}
-          <article className="story-card story-card-wide">
-            <img
-              src={assets.stairs.deuxQuartTournant}
-              alt="Escalier à palier sur mesure en bois fabriqué à Binas en Loir-et-Cher"
-              loading="lazy"
-            />
-            <div>
-              <p className="eyebrow">01</p>
+        {/* 4 Alternating Story Rows (Text / Photo alternating with client photos from Drive) */}
+        <div className="story-rows">
+          {/* Bloc 1 : Escalier bois avec contremarche */}
+          <article className="story-row">
+            <div className="story-row-content">
+              <div className="story-meta-tag">
+                <span className="story-num">01</span>
+                <span className="story-tag-label">Escalier à palier sur mesure</span>
+              </div>
               <h3>Escalier à palier sur mesure en Loir-et-Cher</h3>
               <p className="story-kicker">Un escalier qui se remarque.</p>
-              <p>
+              <p className="story-desc">
                 Escalier en U avec palier, balancé ou en L : l'escalier à palier relie vos niveaux
                 avec élégance et s'adapte à votre volume. Chaque escalier est dessiné sur mesure et
                 fabriqué en bois dans nos ateliers de Binas, puis posé chez vous à Blois, Orléans,
                 Tours, Chartres, Dreux ou Versailles.
               </p>
-              <button
-                type="button"
-                onClick={() => handleSelectType("Escalier à palier")}
-                className="text-link"
-              >
-                Demander un devis d'escalier à palier <ArrowRight size={15} />
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleSelectType("Escalier à palier")}
+                  className="text-link"
+                >
+                  Demander un devis d'escalier à palier <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+            <div className="story-row-media">
+              <img
+                src={assets.client.block1}
+                alt="Escalier bois avec contremarche sur mesure conçu par Hénault & Cie"
+                loading="lazy"
+              />
             </div>
           </article>
 
-          {/* Bloc 2 */}
-          <article className="story-card">
-            <div>
-              <p className="eyebrow">02</p>
+          {/* Bloc 2 : Fabrication en atelier (Plafond/placo recadré) */}
+          <article className="story-row is-reversed">
+            <div className="story-row-media">
+              <img
+                src={assets.client.block2}
+                alt="Fabrication artisanale d'escalier avec contremarche en atelier à Binas"
+                className="crop-top-ceiling"
+                loading="lazy"
+              />
+            </div>
+            <div className="story-row-content">
+              <div className="story-meta-tag">
+                <span className="story-num">02</span>
+                <span className="story-tag-label">Menuiserie & Atelier d'art</span>
+              </div>
               <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
-              <p>
+              <p className="story-desc">
                 Depuis 1931, les générations se succèdent dans les ateliers Hénault & Cie, à Binas,
                 dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
                 l'innovation. Le sur mesure est notre spécialité, et nos machines à bois les plus
                 performantes nous permettent de réaliser tous types d'escaliers.
               </p>
-              <Link className="text-link" to="/nos-creations">
-                Voir nos réalisations <ArrowRight size={15} />
-              </Link>
+              <div>
+                <Link className="text-link" to="/qui-sommes-nous">
+                  Découvrir notre histoire & nos ateliers <ArrowRight size={15} />
+                </Link>
+              </div>
             </div>
           </article>
 
-          {/* Bloc 3 */}
-          <article className="story-card story-card-image">
-            <img
-              src={assets.stairs.suspendu}
-              alt="Escalier suspendu contemporain en bois et métal ajusté au millimètre"
-              loading="lazy"
-            />
-            <div>
-              <p className="eyebrow">03</p>
+          {/* Bloc 3 : Escalier 1/4 tournant bois sans contremarche */}
+          <article className="story-row">
+            <div className="story-row-content">
+              <div className="story-meta-tag">
+                <span className="story-num">03</span>
+                <span className="story-tag-label">Lignes aériennes</span>
+              </div>
               <h3>Escalier suspendu en bois, fabricant à Binas</h3>
               <p className="story-kicker">La légèreté en marche.</p>
-              <p>
+              <p className="story-desc">
                 Des marches qui semblent flotter, sans structure apparente. L'escalier suspendu
                 laisse passer la lumière et ouvre l'espace, surtout dans une pièce de vie ouverte.
                 Nos artisans le fabriquent sur mesure et l'ajustent au millimètre pour votre maison
                 ou votre projet de rénovation.
               </p>
-              <button
-                type="button"
-                onClick={() => handleSelectType("Escalier suspendu")}
-                className="text-link"
-              >
-                Découvrir nos escaliers suspendus <ArrowRight size={15} />
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleSelectType("Escalier suspendu")}
+                  className="text-link"
+                >
+                  Découvrir nos escaliers suspendus <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+            <div className="story-row-media">
+              <img
+                src={assets.client.block3}
+                alt="Escalier tournant bois sans contremarche Hénault & Cie"
+                loading="lazy"
+              />
             </div>
           </article>
 
-          {/* Bloc 4 */}
-          <article className="story-card story-card-accent">
-            <div>
-              <p className="eyebrow">04</p>
+          {/* Bloc 4 : Escalier pour salon contemporain */}
+          <article className="story-row is-reversed">
+            <div className="story-row-media">
+              <img
+                src={assets.client.block4}
+                alt="Escalier sur mesure pour salon contemporain Hénault & Cie"
+                loading="lazy"
+              />
+            </div>
+            <div className="story-row-content">
+              <div className="story-meta-tag">
+                <span className="story-num">04</span>
+                <span className="story-tag-label">Harmonie architecturale</span>
+              </div>
               <h3>Escalier pour salon en contrebas, sur mesure</h3>
               <p className="story-kicker">Relier les niveaux, sans rupture.</p>
-              <p>
+              <p className="story-desc">
                 Un séjour en contrebas sépare les zones avec style, et les marches font le lien.
                 Discrètes pour une transition en douceur, ou affirmées comme un élément de
                 décoration : nous concevons l'escalier qui s'accorde à votre sol et à votre
                 intérieur, en neuf comme en rénovation.
               </p>
-              <button
-                type="button"
-                onClick={() => handleSelectType("Escalier pour salon en contrebas")}
-                className="text-link"
-              >
-                Parlez-nous de votre projet <ArrowRight size={15} />
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleSelectType("Escalier pour salon en contrebas")}
+                  className="text-link"
+                >
+                  Parlez-nous de votre projet <ArrowRight size={15} />
+                </button>
+              </div>
             </div>
           </article>
         </div>
       </section>
 
       {/* 8 Types d'escaliers (Inspiré de TILO stairs : cartes avec photo pleine surface, titre majuscule bold et bouton coloré) */}
-      <section className="tilo-section scroll-reveal" aria-labelledby="stair-types-heading">
+      <section id="nos-escaliers" className="tilo-section scroll-reveal" aria-labelledby="stair-types-heading">
         <div className="tilo-section-header">
           <div>
             <p className="eyebrow">Catalogue & Savoir-faire</p>
@@ -1053,7 +1161,7 @@ function Index() {
       </section>
 
       {/* 10 Zones géographiques d'intervention (SEO Local) */}
-      <section className="zones-section" aria-labelledby="zones-heading">
+      <section id="zones" className="zones-section" aria-labelledby="zones-heading">
         <div className="zones-inner">
           <div>
             <p className="eyebrow" style={{ color: "var(--accent)" }}>

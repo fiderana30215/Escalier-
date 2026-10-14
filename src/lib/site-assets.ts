@@ -37,6 +37,14 @@ import mobilierClaustra from "@/assets/photos/mobilier/claustra.jpg";
 import verriereBois from "@/assets/photos/verriere/verriere-bois.jpg";
 import verriereBlanche from "@/assets/photos/verriere/verriere-blanche.jpg";
 
+// Client requested photos from Google Drive
+import heroSlide1 from "@/assets/photos/client/hero-slide-1.jpg";
+import heroSlide2 from "@/assets/photos/client/hero-slide-2.jpg";
+import block1BoisContremarche from "@/assets/photos/client/block1-bois-contremarche.jpg";
+import block2FabricationContremarche from "@/assets/photos/client/block2-fabrication-contremarche.jpg";
+import block3SansContremarche from "@/assets/photos/client/block3-sans-contremarche.jpg";
+import block4Escalier2 from "@/assets/photos/client/block4-escalier-2.jpg";
+
 // Legacy assets fallback
 import legacyHero from "@/assets/hero-home-banner.jpg";
 import legacyTradition from "@/assets/escalier-tradition-henault-et-cie.jpg";
@@ -48,6 +56,14 @@ export const assets = {
   logoSvg,
   picto: pictoColor,
   agency,
+  client: {
+    heroSlide1,
+    heroSlide2,
+    block1: block1BoisContremarche,
+    block2: block2FabricationContremarche,
+    block3: block3SansContremarche,
+    block4: block4Escalier2,
+  },
   hero: hero1,
   heroSecondary: hero2,
   tradition: stairDeuxQuart,

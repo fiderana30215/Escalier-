@@ -39,16 +39,26 @@ export function SiteHeader() {
           to="/qui-sommes-nous"
           className={pathname.startsWith("/qui-sommes-nous") ? "active" : ""}
         >
-          Qui sommes-nous ?
+          Qui sommes-nous
         </Link>
         <Link to="/nos-creations" className={pathname.startsWith("/nos-creations") ? "active" : ""}>
-          Nos créations
+          Nos réalisations
         </Link>
-        <Button asChild className="site-cta">
-          <Link to="/contact" className="contact-link">
-            CONTACT & DEVIS
-          </Link>
-        </Button>
+        <a href="/#nos-escaliers">
+          Nos escaliers
+        </a>
+        <a href="/#zones">
+          Zones d'intervention
+        </a>
+        <a href="/#devis-rdv" className="site-cta-small">
+          Demander un devis
+        </a>
+        <a href="/#devis-rdv" className="site-cta-outline">
+          Prendre rendez-vous
+        </a>
+        <Link to="/contact" className={pathname.startsWith("/contact") ? "active" : ""}>
+          Contact
+        </Link>
       </nav>
     </header>
   );
