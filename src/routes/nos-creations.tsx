@@ -1,10 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Check, X } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/nos-creations")({
+  beforeLoad: () => {
+    throw redirect({ to: "/" });
+  },
   head: () =>
     pageHead(
       "Nos Créations - Galerie de réalisations Hénault & Cie",

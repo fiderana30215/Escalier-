@@ -1,9 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { ArrowRight, Check, Hammer, HeartHandshake, ShieldCheck, Trophy } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/qui-sommes-nous")({
+  beforeLoad: () => {
+    throw redirect({ to: "/" });
+  },
   head: () =>
     pageHead(
       "Qui sommes-nous ? - Hénault & Cie fabricant depuis 1931 à Binas",

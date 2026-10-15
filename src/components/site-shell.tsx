@@ -35,15 +35,24 @@ export function SiteHeader() {
         <Link to="/" className={pathname === "/" ? "active" : ""}>
           Accueil
         </Link>
-        <Link
-          to="/qui-sommes-nous"
-          className={pathname.startsWith("/qui-sommes-nous") ? "active" : ""}
+        <span
+          className="nav-static-item"
+          data-tooltip="En cours de construction"
+          tabIndex={0}
+          role="button"
+          aria-label="Qui sommes-nous (En cours de construction)"
         >
           Qui sommes-nous
-        </Link>
-        <Link to="/nos-creations" className={pathname.startsWith("/nos-creations") ? "active" : ""}>
+        </span>
+        <span
+          className="nav-static-item"
+          data-tooltip="En cours de construction"
+          tabIndex={0}
+          role="button"
+          aria-label="Nos réalisations (En cours de construction)"
+        >
           Nos réalisations
-        </Link>
+        </span>
         <a href="/#nos-escaliers">
           Nos escaliers
         </a>
@@ -56,9 +65,15 @@ export function SiteHeader() {
         <a href="/#devis-rdv" className="site-cta-outline">
           Prendre rendez-vous
         </a>
-        <Link to="/contact" className={pathname.startsWith("/contact") ? "active" : ""}>
+        <span
+          className="nav-static-item"
+          data-tooltip="En cours de construction"
+          tabIndex={0}
+          role="button"
+          aria-label="Contact (En cours de construction)"
+        >
           Contact
-        </Link>
+        </span>
       </nav>
     </header>
   );

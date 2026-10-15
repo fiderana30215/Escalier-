@@ -1,11 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useState, type FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { assets, pageHead } from '@/lib/site-assets';
-export const Route=createFileRoute('/contact')({head:()=>pageHead('Contact - Hénault & Cie','Contactez Hénault & Cie à Binas pour votre projet d’escalier sur mesure en région Centre et Île-de-France.'),component:Contact});
+export const Route=createFileRoute('/contact')({beforeLoad:()=>{throw redirect({to:'/'})},head:()=>pageHead('Contact - Hénault & Cie','Contactez Hénault & Cie à Binas pour votre projet d’escalier sur mesure en région Centre et Île-de-France.'),component:Contact});
 function Contact(){
  const [prepared,setPrepared]=useState(false);
  function submit(event:FormEvent<HTMLFormElement>){

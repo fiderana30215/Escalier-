@@ -514,9 +514,9 @@ function Index() {
                 performantes nous permettent de réaliser tous types d'escaliers.
               </p>
               <div>
-                <Link className="text-link" to="/qui-sommes-nous">
-                  Découvrir notre histoire & nos ateliers <ArrowRight size={15} />
-                </Link>
+                <a href="#devis-rdv" className="text-link">
+                  Prendre contact avec notre atelier <ArrowRight size={15} />
+                </a>
               </div>
             </div>
           </article>
@@ -604,9 +604,9 @@ function Index() {
               dans nos ateliers de Binas. Cliquez sur un modèle pour configurer votre devis.
             </p>
           </div>
-          <Link className="text-link" to="/nos-creations">
-            Toutes les réalisations en images <ArrowRight size={15} />
-          </Link>
+          <a href="#devis-rdv" className="text-link">
+            Demander une étude personnalisée <ArrowRight size={15} />
+          </a>
         </div>
 
         <div className="tilo-grid">
