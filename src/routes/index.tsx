@@ -460,8 +460,7 @@ function Index() {
           <article className="story-row">
             <div className="story-row-content">
               <div className="story-meta-tag">
-                <span className="story-num">01</span>
-                <span className="story-tag-label">Escalier à palier sur mesure</span>
+                <span className="story-tag-label">01 - Escalier à palier sur mesure</span>
               </div>
               <h3>Escalier à palier sur mesure en Loir-et-Cher</h3>
               <p className="story-kicker">Un escalier qui se remarque.</p>
@@ -490,6 +489,8 @@ function Index() {
             </div>
           </article>
 
+          <div className="story-divider" />
+
           {/* Bloc 2 : Fabrication en atelier (Plafond/placo recadré) */}
           <article className="story-row is-reversed">
             <div className="story-row-media">
@@ -502,8 +503,7 @@ function Index() {
             </div>
             <div className="story-row-content">
               <div className="story-meta-tag">
-                <span className="story-num">02</span>
-                <span className="story-tag-label">Menuiserie & Atelier d'art</span>
+                <span className="story-tag-label">02 - Menuiserie & Atelier d'art</span>
               </div>
               <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
@@ -521,12 +521,13 @@ function Index() {
             </div>
           </article>
 
+          <div className="story-divider" />
+
           {/* Bloc 3 : Escalier 1/4 tournant bois sans contremarche */}
           <article className="story-row">
             <div className="story-row-content">
               <div className="story-meta-tag">
-                <span className="story-num">03</span>
-                <span className="story-tag-label">Lignes aériennes</span>
+                <span className="story-tag-label">03 - Lignes aériennes</span>
               </div>
               <h3>Escalier suspendu en bois, fabricant à Binas</h3>
               <p className="story-kicker">La légèreté en marche.</p>
@@ -555,6 +556,8 @@ function Index() {
             </div>
           </article>
 
+          <div className="story-divider" />
+
           {/* Bloc 4 : Escalier pour salon contemporain */}
           <article className="story-row is-reversed">
             <div className="story-row-media">
@@ -566,8 +569,7 @@ function Index() {
             </div>
             <div className="story-row-content">
               <div className="story-meta-tag">
-                <span className="story-num">04</span>
-                <span className="story-tag-label">Harmonie architecturale</span>
+                <span className="story-tag-label">04 - Harmonie architecturale</span>
               </div>
               <h3>Escalier pour salon en contrebas, sur mesure</h3>
               <p className="story-kicker">Relier les niveaux, sans rupture.</p>
