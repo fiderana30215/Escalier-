@@ -18,8 +18,8 @@ export function SiteHeader() {
   }, [pathname]);
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      <Link to="/" className="brand" aria-label="Hénault & Cie - Accueil">
-        <img src={assets.logo} alt="HÉNAULT & Cie" />
+      <Link to="/" className="brand" aria-label="Hénault Escalier - Accueil">
+        <img src={assets.logo} alt="HÉNAULT ESCALIER" />
       </Link>
       <Button
         variant="ghost"
@@ -35,24 +35,18 @@ export function SiteHeader() {
         <Link to="/" className={pathname === "/" ? "active" : ""}>
           Accueil
         </Link>
-        <span
-          className="nav-static-item"
-          data-tooltip="En cours de construction"
-          tabIndex={0}
-          role="button"
-          aria-label="Qui sommes-nous (En cours de construction)"
+        <Link
+          to="/qui-sommes-nous"
+          className={pathname.startsWith("/qui-sommes-nous") ? "active" : ""}
         >
           Qui sommes-nous
-        </span>
-        <span
-          className="nav-static-item"
-          data-tooltip="En cours de construction"
-          tabIndex={0}
-          role="button"
-          aria-label="Nos réalisations (En cours de construction)"
+        </Link>
+        <Link
+          to="/nos-creations"
+          className={pathname.startsWith("/nos-creations") ? "active" : ""}
         >
           Nos réalisations
-        </span>
+        </Link>
         <a href="/#nos-escaliers">
           Nos escaliers
         </a>
@@ -65,15 +59,12 @@ export function SiteHeader() {
         <a href="/#devis-rdv" className="site-cta-outline">
           Prendre rendez-vous
         </a>
-        <span
-          className="nav-static-item"
-          data-tooltip="En cours de construction"
-          tabIndex={0}
-          role="button"
-          aria-label="Contact (En cours de construction)"
+        <Link
+          to="/contact"
+          className={pathname.startsWith("/contact") ? "active" : ""}
         >
           Contact
-        </span>
+        </Link>
       </nav>
     </header>
   );
@@ -91,11 +82,11 @@ export function SiteFooter() {
       </aside>
       <footer className="site-footer">
         <div className="footer-inner">
-          <Link to="/" className="brand" aria-label="Hénault & Cie">
-            <img src={assets.whiteLogo} alt="HÉNAULT & Cie" />
+          <Link to="/" className="brand" aria-label="Hénault Escalier">
+            <img src={assets.whiteLogo} alt="HÉNAULT ESCALIER" />
           </Link>
           <div>
-            <strong>Hénault & Cie</strong>
+            <strong>Hénault Escalier</strong>
             <br />
             9 bis rue du Bout de la ville - 41240 Binas
             <br />

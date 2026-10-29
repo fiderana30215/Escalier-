@@ -1,16 +1,13 @@
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Check, X } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/nos-creations")({
-  beforeLoad: () => {
-    throw redirect({ to: "/" });
-  },
   head: () =>
     pageHead(
-      "Nos Créations - Galerie de réalisations Hénault & Cie",
+      "Nos Créations - Galerie de réalisations Hénault Escalier",
       "Découvrez plus de 90 ans de savoir-faire en images : escaliers sur mesure posés, usinage en atelier à Binas, aménagements sous escalier et verrières.",
       assets.stairs.hero1,
     ),

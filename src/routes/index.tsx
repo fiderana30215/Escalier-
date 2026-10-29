@@ -12,11 +12,12 @@ import {
 } from "lucide-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { assets, pageHead } from "@/lib/site-assets";
+import { FinancingPopup } from "@/components/financing-popup";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
-      "Escalier sur mesure en Loir-et-Cher | Hénault & Cie fabricant depuis 1931",
+      "Escalier sur mesure en Loir-et-Cher | Hénault Escalier fabricant depuis 1931",
       "Fabricant d'escaliers sur mesure à Binas (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
       assets.hero,
     ),
@@ -121,7 +122,7 @@ const customerReviews = [
     location: "Orléans (45)",
     project: "Escalier suspendu contemporain",
     quote:
-      "Nous souhaitions un escalier suspendu très aérien pour faire entrer la lumière dans notre salon. Hénault & Cie a su relever le défi technique avec brio. Ponctualité et écoute exemplaires.",
+      "Nous souhaitions un escalier suspendu très aérien pour faire entrer la lumière dans notre salon. Hénault Escalier a su relever le défi technique avec brio. Ponctualité et écoute exemplaires.",
   },
   {
     author: "Pascal R.",
@@ -149,13 +150,13 @@ const heroSlides = [
   {
     id: "01",
     image: assets.client.heroSlide1,
-    alt: "Escalier contemporain sur mesure en bois et métal Hénault & Cie",
+    alt: "Escalier contemporain sur mesure en bois et métal Hénault Escalier",
     title: "Escalier contemporain",
   },
   {
     id: "02",
     image: assets.client.heroSlide2,
-    alt: "Escalier limon central avec lumière intégrée Hénault & Cie",
+    alt: "Escalier limon central avec lumière intégrée Hénault Escalier",
     title: "Limon central avec lumière",
   },
 ];
@@ -166,6 +167,7 @@ function Index() {
 
   const [activeTab, setActiveTab] = useState<"devis" | "rdv">("devis");
   const [selectedStairType, setSelectedStairType] = useState<string>("Escalier droit");
+  const [wantsFinancing, setWantsFinancing] = useState(false);
   const [devisSubmitted, setDevisSubmitted] = useState(false);
   const [rdvSubmitted, setRdvSubmitted] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -237,12 +239,14 @@ function Index() {
     const phone = formData.get("phone") || "";
     const email = formData.get("email") || "";
     const city = formData.get("city") || "";
+    const financingChoice = formData.get("financingTauxZero") ? "Oui (Offre Taux 0%)" : (wantsFinancing ? "Oui (Offre Taux 0%)" : "Non");
 
     const mailSubject = `Demande de devis escalier sur mesure - ${fullName} (${city})`;
     const mailBody = `DEMANDE DE DEVIS ESCALIER SUR MESURE\n\n` +
       `Type d'escalier : ${type}\n` +
       `Matériau souhaité : ${material}\n` +
       `Nature du projet : ${project}\n` +
+      `Option Financement : ${financingChoice}\n` +
       `Délai souhaité : ${delay}\n` +
       `Dimensions ou remarques : ${dimensions}\n\n` +
       `COORDONNÉES CLIENT :\n` +
@@ -250,7 +254,7 @@ function Index() {
       `Téléphone : ${phone}\n` +
       `E-mail : ${email}\n` +
       `Ville ou Code Postal : ${city}\n\n` +
-      `Fabricant : Hénault & Cie - 9 bis rue du Bout de la ville, 41240 Binas`;
+      `Fabricant : Hénault Escalier - 9 bis rue du Bout de la ville, 41240 Binas`;
 
     window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
       mailSubject,
@@ -284,7 +288,7 @@ function Index() {
       `Téléphone : ${phone}\n` +
       `E-mail : ${email}\n\n` +
       `Horaires atelier : Lundi au vendredi, 9h00-12h30 et 13h30-18h00\n` +
-      `Hénault & Cie - 9 bis rue du Bout de la ville, 41240 Binas`;
+      `Hénault Escalier - 9 bis rue du Bout de la ville, 41240 Binas`;
 
     window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
       mailSubject,
@@ -294,6 +298,14 @@ function Index() {
 
   return (
     <main ref={pageRef}>
+      {/* Pop-up Financement Taux 0% */}
+      <FinancingPopup
+        onSelectFinancing={() => {
+          setActiveTab("devis");
+          setWantsFinancing(true);
+        }}
+      />
+
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -301,7 +313,7 @@ function Index() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "HomeAndConstructionBusiness",
-            name: "Hénault & Cie",
+            name: "Hénault Escalier",
             description:
               "Fabricant d'escaliers sur mesure en bois, métal et verre à Binas depuis 1931. Conception en atelier et pose sans sous-traitance.",
             url: "https://escalier-henault.fr",
@@ -396,7 +408,7 @@ function Index() {
           className="tilo-hero-slider"
           onMouseEnter={() => setIsSliderPaused(true)}
           onMouseLeave={() => setIsSliderPaused(false)}
-          aria-label="Carrousel de réalisations d'escaliers Hénault & Cie"
+          aria-label="Carrousel de réalisations d'escaliers Hénault Escalier"
         >
           {heroSlides.map((slide, index) => (
             <div
@@ -483,7 +495,7 @@ function Index() {
             <div className="story-row-media">
               <img
                 src={assets.client.block1}
-                alt="Escalier bois avec contremarche sur mesure conçu par Hénault & Cie"
+                alt="Escalier bois avec contremarche sur mesure conçu par Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -508,15 +520,15 @@ function Index() {
               <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
               <p className="story-desc">
-                Depuis 1931, les générations se succèdent dans les ateliers Hénault & Cie, à Binas,
+                Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Binas,
                 dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
                 l'innovation. Le sur mesure est notre spécialité, et nos machines à bois les plus
                 performantes nous permettent de réaliser tous types d'escaliers.
               </p>
               <div>
-                <a href="#devis-rdv" className="text-link">
-                  Prendre contact avec notre atelier <ArrowRight size={15} />
-                </a>
+                <Link className="text-link" to="/qui-sommes-nous">
+                  Découvrir notre histoire & nos ateliers <ArrowRight size={15} />
+                </Link>
               </div>
             </div>
           </article>
@@ -550,7 +562,7 @@ function Index() {
             <div className="story-row-media">
               <img
                 src={assets.client.block3}
-                alt="Escalier tournant bois sans contremarche Hénault & Cie"
+                alt="Escalier tournant bois sans contremarche Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -563,7 +575,7 @@ function Index() {
             <div className="story-row-media">
               <img
                 src={assets.client.block4}
-                alt="Escalier sur mesure pour salon contemporain Hénault & Cie"
+                alt="Escalier sur mesure pour salon contemporain Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -604,9 +616,9 @@ function Index() {
               dans nos ateliers de Binas. Cliquez sur un modèle pour configurer votre devis.
             </p>
           </div>
-          <a href="#devis-rdv" className="text-link">
-            Demander une étude personnalisée <ArrowRight size={15} />
-          </a>
+          <Link className="text-link" to="/nos-creations">
+            Toutes les réalisations en images <ArrowRight size={15} />
+          </Link>
         </div>
 
         <div className="tilo-grid">
@@ -623,7 +635,7 @@ function Index() {
             >
               <img
                 src={item.image}
-                alt={`${item.name} sur mesure Hénault & Cie`}
+                alt={`${item.name} sur mesure Hénault Escalier`}
                 className="tilo-card-img"
                 loading="lazy"
               />
@@ -935,10 +947,35 @@ function Index() {
                   </div>
                 </div>
 
+                <label
+                  className="form-consent"
+                  style={{
+                    marginTop: "12px",
+                    marginBottom: "12px",
+                    background: "rgba(121, 202, 223, 0.12)",
+                    padding: "10px 14px",
+                    border: "1px solid var(--accent)",
+                    borderRadius: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    name="financingTauxZero"
+                    checked={wantsFinancing}
+                    onChange={(e) => setWantsFinancing(e.target.checked)}
+                  />
+                  <span style={{ fontWeight: 600, color: "var(--primary)", fontSize: "13px" }}>
+                    Je souhaite profiter de l'offre de financement à taux 0% pour mon escalier
+                  </span>
+                </label>
+
                 <label className="form-consent">
                   <input type="checkbox" required />
                   <span>
-                    J'accepte que Hénault & Cie utilise mes coordonnées pour me recontacter
+                    J'accepte que Hénault Escalier utilise mes coordonnées pour me recontacter
                     conformément à la{" "}
                     <a
                       href="https://escalier-henault.fr/politique-de-confidentialite/"
@@ -1064,7 +1101,7 @@ function Index() {
                 <label className="form-consent">
                   <input type="checkbox" required />
                   <span>
-                    J'autorise Hénault & Cie à me contacter pour confirmer la date de la visite de
+                    J'autorise Hénault Escalier à me contacter pour confirmer la date de la visite de
                     mesure.
                   </span>
                 </label>

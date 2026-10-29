@@ -1,16 +1,13 @@
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Hammer, HeartHandshake, ShieldCheck, Trophy } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/qui-sommes-nous")({
-  beforeLoad: () => {
-    throw redirect({ to: "/" });
-  },
   head: () =>
     pageHead(
-      "Qui sommes-nous ? - Hénault & Cie fabricant depuis 1931 à Binas",
-      "Découvrez l'histoire de Hénault & Cie, fabricant artisanal d'escaliers sur mesure à Binas (Loir-et-Cher) depuis 1931. Atelier sur place et pose sans sous-traitance.",
+      "Qui sommes-nous ? - Hénault Escalier fabricant depuis 1931 à Binas",
+      "Découvrez l'histoire de Hénault Escalier, fabricant artisanal d'escaliers sur mesure à Binas (Loir-et-Cher) depuis 1931. Atelier sur place et pose sans sous-traitance.",
       assets.atelier.fabrication,
     ),
   component: About,
@@ -29,7 +26,7 @@ function About() {
             <div className="copy-text">
               <p>
                 Depuis 1931, les générations se succèdent dans les ateliers de l'entreprise{" "}
-                <strong>Hénault & Cie</strong> et perpétuent l'art noble de travailler le bois{" "}
+                <strong>Hénault Escalier</strong> et perpétuent l'art noble de travailler le bois{" "}
                 <strong>à Binas, dans le Loir-et-Cher.</strong>
               </p>
               <p>
@@ -48,7 +45,7 @@ function About() {
           </div>
           <img
             src={assets.atelier.fabrication}
-            alt="Artisan menuisier au travail dans l'atelier Hénault & Cie à Binas"
+            alt="Artisan menuisier au travail dans l'atelier Hénault Escalier à Binas"
           />
         </div>
       </section>

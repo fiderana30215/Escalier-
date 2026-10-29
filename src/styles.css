@@ -182,7 +182,7 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 @media(max-width:800px){.contact-layout{gap:40px;}.contact-band{padding:55px 5% 75px;}.contact-address{grid-template-columns:1fr;}.contact-address > img{width:210px;}.contact-introduction h1,.contact-form-column h2{font-size:27px;}.contact-name-fields{gap:14px;}}
 @media(max-width:600px){.contact-layout{grid-template-columns:1fr;gap:50px;}.contact-band{padding:45px 25px 60px;}.contact-introduction h1,.contact-form-column h2{margin-bottom:28px;}.contact-address{grid-template-columns:40% minmax(0,1fr);gap:16px;}.contact-address > img{width:100%;height:150px;}.contact-address address{font-size:13px;padding-top:0;}.contact-form{gap:20px;}.contact-map{height:280px;}}
 
-/* Homepage redesign (TILO inspired with Hénault & Cie charter) */
+/* Homepage redesign (TILO inspired with Hénault Escalier charter) */
 .tilo-hero {display:grid;grid-template-columns:1fr 1.05fr;min-height:640px;background:var(--secondary);position:relative;overflow:hidden;}
 .tilo-hero-content {display:flex;flex-direction:column;justify-content:center;padding:55px 7% 55px 9%;background:var(--secondary);z-index:2;}
 .eyebrow {margin:0 0 14px;color:var(--accent);font-family:"Open Sans",Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;line-height:1.4;text-transform:uppercase;}
@@ -393,3 +393,278 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 .scroll-reveal.is-visible .story-card:nth-child(3),.scroll-reveal.is-visible .type-card:nth-child(3),.scroll-reveal.is-visible blockquote:nth-child(3) {transition-delay:.16s;}
 .scroll-reveal.is-visible .story-card:nth-child(4),.scroll-reveal.is-visible .type-card:nth-child(4) {transition-delay:.24s;}
 @media(prefers-reduced-motion:reduce){.scroll-reveal,.scroll-reveal .story-card,.scroll-reveal .type-card,.scroll-reveal blockquote{opacity:1;transform:none;transition:none;}}
+
+/* ============================================================
+   Popup Financement Taux 0% (Hénault Escalier)
+   ============================================================ */
+.taux-zero-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(18, 24, 52, 0.68);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: tzFadeIn .25s ease-out forwards;
+}
+
+@keyframes tzFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.taux-zero-modal {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 36px 36px 30px;
+  box-shadow: 0 24px 60px rgba(18, 24, 52, 0.35);
+  border: 1px solid rgba(121, 202, 223, 0.3);
+  animation: tzScaleIn .3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+@keyframes tzScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.taux-zero-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--muted-foreground);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.taux-zero-close:hover {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.taux-zero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  background: rgba(121, 202, 223, 0.16);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--primary);
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.taux-zero-tag-icon {
+  color: var(--primary);
+}
+
+.taux-zero-title {
+  margin: 0 0 14px;
+  font-size: clamp(24px, 2.5vw, 32px);
+  line-height: 1.2;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.taux-zero-highlight {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary);
+  padding: 0 8px;
+  border-radius: 2px;
+}
+
+.taux-zero-intro {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  margin: 0 0 24px;
+}
+
+.taux-zero-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 26px;
+  padding: 18px;
+  background: var(--secondary);
+  border-radius: 6px;
+}
+
+.taux-zero-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.taux-zero-benefit-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+}
+
+.taux-zero-benefit-item strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 3px;
+}
+
+.taux-zero-benefit-item p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+
+.taux-zero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.taux-zero-cta-btn {
+  background: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: 14px 24px;
+  min-height: 48px;
+  border-radius: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all .2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.taux-zero-cta-btn:hover {
+  background: color-mix(in oklch, var(--primary) 85%, black) !important;
+  transform: translateY(-1px);
+}
+
+.taux-zero-dismiss-btn {
+  background: transparent;
+  border: none;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .2s ease;
+}
+
+.taux-zero-dismiss-btn:hover {
+  color: var(--primary);
+}
+
+.taux-zero-legal {
+  margin: 18px 0 0;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: #88909f;
+  text-align: center;
+}
+
+/* Floating pill when modal is dismissed */
+.taux-zero-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 12px;
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(18, 24, 52, 0.28);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: "Open Sans", Arial, sans-serif;
+  animation: tzFadeIn .4s ease forwards;
+}
+
+.taux-zero-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(18, 24, 52, 0.38);
+  background: color-mix(in oklch, var(--primary) 85%, black);
+}
+
+.taux-zero-pill-badge {
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: var(--primary);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.taux-zero-pill-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+@media(max-width: 600px) {
+  .taux-zero-modal {
+    padding: 28px 20px 22px;
+  }
+  .taux-zero-benefits {
+    padding: 14px;
+  }
+  .taux-zero-pill {
+    bottom: 16px;
+    left: 16px;
+    padding: 8px 12px;
+  }
+  .taux-zero-pill-text {
+    font-size: 11.5px;
+  }
+}
+
