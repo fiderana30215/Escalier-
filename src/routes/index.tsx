@@ -40,7 +40,8 @@ const stairTypes: StairTypeItem[] = [
     name: "Escalier droit",
     badge: "ESCALIER DROIT",
     image: assets.stairs.droit,
-    description: "Une ligne pure et intemporelle pour habiller les volumes linéaires avec élégance.",
+    description:
+      "Une ligne pure et intemporelle pour habiller les volumes linéaires avec élégance.",
     buttonLabel: "Escalier droit",
     buttonClass: "btn-coral",
   },
@@ -239,7 +240,11 @@ function Index() {
     const phone = formData.get("phone") || "";
     const email = formData.get("email") || "";
     const city = formData.get("city") || "";
-    const financingChoice = formData.get("financingTauxZero") ? "Oui (Offre Taux 0%)" : (wantsFinancing ? "Oui (Offre Taux 0%)" : "Non");
+    const financingChoice = formData.get("financingArkea")
+      ? "Oui (Financement avec notre partenaire ARKEA)"
+      : wantsFinancing
+        ? "Oui (Financement avec notre partenaire ARKEA)"
+        : "Non";
 
     const mailSubject = `Demande de devis escalier sur mesure - ${fullName} (${city})`;
     const mailBody = `DEMANDE DE DEVIS ESCALIER SUR MESURE\n\n` +
@@ -276,8 +281,8 @@ function Index() {
     const address = formData.get("address") || "";
     const notes = formData.get("notes") || "";
 
-    const mailSubject = `Demande de rendez-vous visite de mesure - ${fullName} (${sector})`;
-    const mailBody = `DEMANDE DE VISITE DE MESURE EN LIGNE\n\n` +
+    const mailSubject = `Demande de rendez-vous conseil - ${fullName} (${sector})`;
+    const mailBody = `DEMANDE DE RENDEZ-VOUS CONSEIL EN LIGNE\n\n` +
       `Secteur d'intervention : ${sector}\n` +
       `Date souhaitée : ${date}\n` +
       `Créneau horaire : ${slot}\n` +
@@ -298,7 +303,7 @@ function Index() {
 
   return (
     <main ref={pageRef}>
-      {/* Pop-up Financement Taux 0% */}
+      {/* Pop-up financement avec ARKEA */}
       <FinancingPopup
         onSelectFinancing={() => {
           setActiveTab("devis");
@@ -370,9 +375,9 @@ function Index() {
             Votre escalier <span className="highlight-band">donne le ton</span> à toute votre maison.
           </h1>
           <p className="hero-lede">
-            Menuiserie d'art et tradition familiale : nous concevons, fabriquons dans nos ateliers
-            de Binas et posons vos escaliers sur mesure en bois, métal ou verre, sans aucune
-            sous-traitance, dans le Loir-et-Cher, la région Centre-Val de Loire et en Île-de-France.
+            Atelier menuiserie traditionnel et tradition familiale : nous concevons et fabriquons
+            dans nos ateliers de Binas des escaliers sur mesure en bois, métal ou verre, dans le
+            Loir-et-Cher, la région Centre-Val de Loire et en Île-de-France.
           </p>
 
           <div className="cta-row">
@@ -384,7 +389,7 @@ function Index() {
               Demander un devis gratuit <ArrowRight size={16} />
             </button>
             <button type="button" onClick={handleOpenRdv} className="hero-tel-btn">
-              <CalendarDays size={16} /> Visite de mesure
+              <CalendarDays size={16} /> Prendre rendez-vous
             </button>
             <a href="tel:+33254824489" className="hero-tel-btn">
               <Phone size={15} /> 02 54 82 44 89
@@ -426,24 +431,8 @@ function Index() {
             </div>
           ))}
 
-          <div
-            className="tilo-hero-controls"
-            role="tablist"
-            aria-label="Sélectionner une photo de l'escalier"
-          >
-            {heroSlides.map((slide, index) => (
-              <button
-                key={slide.id}
-                type="button"
-                role="tab"
-                aria-selected={index === currentSlide}
-                className={`tilo-hero-btn ${index === currentSlide ? "is-active" : ""}`}
-                onClick={() => setCurrentSlide(index)}
-              >
-                <span className="slide-num">{slide.id}</span>
-                <span className="slide-label">{slide.title}</span>
-              </button>
-            ))}
+          <div className="tilo-hero-caption" aria-live="polite">
+            {heroSlides[currentSlide].title}
           </div>
 
           <div className="tilo-hero-badge">
@@ -460,7 +449,7 @@ function Index() {
           <h2 id="story-title">Un escalier pensé pour votre espace</h2>
           <div className="rule-centered" />
           <p className="intro-text">
-            Chaque projet commence par une écoute attentive et une visite de mesure. Nous prenons le
+            Chaque projet commence par une écoute attentive et un rendez-vous conseil. Nous prenons le
             temps de comprendre votre maison, vos usages et vos volumes avant de fabriquer
             l'escalier qui s'accordera parfaitement à votre intérieur.
           </p>
@@ -815,7 +804,7 @@ function Index() {
                 className={`quote-tab-btn ${activeTab === "rdv" ? "is-active" : ""}`}
                 onClick={() => setActiveTab("rdv")}
               >
-                2. Réserver une visite de mesure
+                2. Prendre rendez-vous
               </button>
             </nav>
 
@@ -963,12 +952,12 @@ function Index() {
                 >
                   <input
                     type="checkbox"
-                    name="financingTauxZero"
+                    name="financingArkea"
                     checked={wantsFinancing}
                     onChange={(e) => setWantsFinancing(e.target.checked)}
                   />
                   <span style={{ fontWeight: 600, color: "var(--primary)", fontSize: "13px" }}>
-                    Je souhaite profiter de l'offre de financement à taux 0% pour mon escalier
+                    Je souhaite être accompagné par notre partenaire ARKEA pour le financement de mon escalier
                   </span>
                 </label>
 
