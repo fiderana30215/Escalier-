@@ -77,7 +77,7 @@ const stairTypes: StairTypeItem[] = [
     name: "Escalier en bois",
     badge: "ESCALIER BOIS",
     image: assets.stairs.bois,
-    description: "La noblesse du chêne, du hêtre ou du frêne massif, façonnés avec passion.",
+    description: "La noblesse du chêne, du hêtre ou de l'hévéa massif, façonnés avec passion.",
     buttonLabel: "Escalier en bois",
     buttonClass: "btn-coral",
   },
@@ -128,7 +128,7 @@ const customerReviews = [
   {
     author: "Pascal R.",
     location: "Chartres (28)",
-    project: "Escalier droit bois et métal",
+    project: "Escalier droit métal et bois",
     quote:
       "La qualité de fabrication en atelier se voit immédiatement par rapport aux modèles industriels. Aucun grincement, finitions impeccables et pose assurée par leurs propres compagnons.",
   },
@@ -151,7 +151,7 @@ const heroSlides = [
   {
     id: "01",
     image: assets.client.heroSlide1,
-    alt: "Escalier contemporain sur mesure en bois et métal Hénault Escalier",
+    alt: "Escalier contemporain sur mesure en métal et bois Hénault Escalier",
     title: "Escalier contemporain",
   },
   {
@@ -511,8 +511,8 @@ function Index() {
               <p className="story-desc">
                 Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Binas,
                 dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
-                l'innovation. Le sur mesure est notre spécialité, et nos machines à bois les plus
-                performantes nous permettent de réaliser tous types d'escaliers.
+                l'innovation. Le sur mesure est notre spécialité, et notre savoir-faire de menuiserie
+                traditionnelle nous permet de réaliser tous types d'escaliers.
               </p>
               <div>
                 <Link className="text-link" to="/qui-sommes-nous">
@@ -655,7 +655,7 @@ function Index() {
           <h2 id="complementary-heading">Aménagements sous escalier et verrières d'atelier</h2>
           <p>
             Prolongez l'harmonie de votre intérieur avec des rangements sur mesure intégrés sous vos
-            marches ou une verrière artisanale en bois et métal conçue dans nos ateliers.
+            marches ou une verrière artisanale en métal et bois conçue dans nos ateliers.
           </p>
         </div>
 
@@ -823,15 +823,10 @@ function Index() {
                       <option value="Escalier droit">Escalier droit</option>
                       <option value="Quart tournant">Escalier quart tournant</option>
                       <option value="Escalier hélicoïdal">Escalier hélicoïdal</option>
-                      <option value="Escalier suspendu">Escalier suspendu</option>
                       <option value="Escalier en bois">Escalier en bois massif</option>
                       <option value="Escalier métal">Escalier métal et bois</option>
                       <option value="Escalier verre">Escalier et garde-corps verre</option>
                       <option value="Rénovation d'escalier">Rénovation d'escalier existant</option>
-                      <option value="Escalier à palier">Escalier à palier sur mesure</option>
-                      <option value="Escalier pour salon en contrebas">
-                        Escalier salon en contrebas
-                      </option>
                     </select>
                   </div>
 
@@ -839,9 +834,9 @@ function Index() {
                     <label htmlFor="material">Matériau envisagé *</label>
                     <select id="material" name="material" required>
                       <option value="Chêne français massif">Chêne français massif</option>
-                      <option value="Hêtre ou Frêne">Hêtre ou Frêne blanc</option>
+                      <option value="Hêtre">Hêtre blanc</option>
+                      <option value="Hévéa">Hévéa massif</option>
                       <option value="Bois et structure acier peint">Bois et structure acier</option>
-                      <option value="Verre securit et inox">Verre securit et inox</option>
                       <option value="À conseiller selon mon intérieur">
                         À conseiller selon mon projet
                       </option>

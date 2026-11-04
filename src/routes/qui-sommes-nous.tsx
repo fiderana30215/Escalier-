@@ -60,14 +60,14 @@ function About() {
           />
           <div className="about-copy">
             <p className="eyebrow">Amour du bois & Haute technicité</p>
-            <h2>Nos ateliers à Binas : fabrication 100% interne</h2>
+            <h2>Notre atelier de menuiserie traditionnel</h2>
             <span className="rule" />
             <div className="copy-text">
               <p>
-                Notre atelier de Binas rassemble un parc machines de pointe et le tour de main
-                éprouvé de compagnons expérimentés. Nous travaillons principalement des essences
-                nobles locales : chêne français, hêtre, frêne ou bois exotiques certifiés, ainsi que
-                le métal thermolaqué et le verre securit.
+                Dans notre atelier de Binas, le travail est réalisé selon les méthodes de la menuiserie
+                traditionnelle, avec le tour de main éprouvé de compagnons expérimentés. Nous travaillons
+                principalement le chêne français, le hêtre et l'hévéa, ainsi que le métal thermolaqué et
+                le verre securit.
               </p>
               <p>
                 Ici, aucun escalier n'est standard ni préfabriqué à la chaîne. Chaque limon, marche,
@@ -121,6 +121,14 @@ function About() {
               Chaque escalier est conçu dans le respect strict des normes de sécurité et de confort de passage.
             </p>
           </div>
+
+          <div style={{ background: "var(--secondary)", padding: "30px 24px", borderTop: "3px solid var(--accent)" }}>
+            <Trophy size={28} style={{ color: "var(--primary)", marginBottom: "16px" }} />
+            <h3 style={{ fontSize: "18px", margin: "0 0 10px" }}>Une centaine par an</h3>
+            <p style={{ fontFamily: "Georgia, serif", fontSize: "13px", color: "var(--muted-foreground)", margin: 0 }}>
+              Nous fabriquons et posons environ une centaine d'escaliers chaque année.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -142,7 +150,7 @@ function About() {
             />
             <img
               src={assets.stairs.hero1}
-              alt="Escalier posé chez le client après installation complète"
+              alt="Projet achevé chez le client après installation complète"
               style={{ width: "100%", height: "240px", objectFit: "cover" }}
               loading="lazy"
             />

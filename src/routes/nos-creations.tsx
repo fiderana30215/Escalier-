@@ -29,7 +29,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.hero1,
     title: "Escalier contemporain double quart tournant",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Chêne massif de pays, limon central et rampe acier thermolaqué noir.",
   },
   {
@@ -37,7 +37,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.quartTournant,
     title: "Escalier quart tournant en bois traditionnel",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Finitions naturelles soignées et intégration fluide dans l'habitat.",
   },
   {
@@ -45,7 +45,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.helicoidal,
     title: "Escalier limon central avec rétroéclairage LED",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Design contemporain avec éclairage intégré sous les marches.",
   },
   {
@@ -53,7 +53,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.suspendu,
     title: "Escalier suspendu sans contremarche",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Structure légère laissant passer la lumière naturelle.",
   },
   {
@@ -61,15 +61,15 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.bois,
     title: "Escalier en bois massif sur mesure",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Savoir-faire artisanal Hénault et teintes chaleureuses.",
   },
   {
     id: 6,
     src: assets.stairs.metal,
-    title: "Escalier contemporain bois et métal",
+    title: "Escalier contemporain métal et bois",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Alliance moderne de marches en chêne et garde-corps vitré avec main courante acier.",
   },
   {
@@ -77,7 +77,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.verre,
     title: "Escalier avec garde-corps en verre securit",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Transparence et sécurité maximale pour un volume ouvert.",
   },
   {
@@ -93,7 +93,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.grandeMarche,
     title: "Escalier pour salon en contrebas avec marche élargie",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Transition fluide entre niveaux avec marches d'accueil spacieuses.",
   },
   {
@@ -101,7 +101,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.deuxQuartTournant,
     title: "Escalier deux quarts tournants avec palier",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Confort de montée optimal pour cage d'escalier haute.",
   },
   {
@@ -181,7 +181,7 @@ const galleryItems: GalleryItem[] = [
     src: assets.stairs.hero2,
     title: "Escalier d'architecte contemporain",
     category: "escalier",
-    badge: "Escalier posé",
+    badge: "Nos projets achevés",
     desc: "Réalisation d'envergure posée par nos propres compagnons menuisiers.",
   },
 ];
@@ -269,7 +269,7 @@ function Gallery() {
               transition: "all .2s ease",
             }}
           >
-            Escaliers posés
+            Nos projets achevés
           </button>
           <button
             type="button"
