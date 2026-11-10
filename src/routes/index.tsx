@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
       "Escalier sur mesure en Loir-et-Cher | Hénault Escalier fabricant depuis 1931",
-      "Fabricant d'escaliers sur mesure à Binas (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
+      "Fabricant d'escaliers sur mesure à Romorantin (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
       assets.hero,
     ),
   component: Index,
@@ -56,20 +56,20 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "helicoïdal",
-    name: "Escalier hélicoïdal",
-    badge: "HÉLICOÏDAL",
+    name: "Escalier Limon Centrale",
+    badge: "LIMON CENTRALE",
     image: assets.stairs.helicoidal,
     description: "Une courbe sculpturale et un encombrement maîtrisé pour sublimer votre séjour.",
-    buttonLabel: "Escalier hélicoïdal",
+    buttonLabel: "Escalier Limon Centrale",
     buttonClass: "btn-wood",
   },
   {
-    id: "suspendu",
-    name: "Escalier suspendu",
-    badge: "ESCALIER SUSPENDU",
-    image: assets.stairs.suspendu,
-    description: "Des marches aériennes qui flottent dans l'espace et laissent circuler la lumière.",
-    buttonLabel: "Escalier suspendu",
+    id: "double-quart-tournant",
+    name: "Double quart tournant",
+    badge: "DOUBLE QUART TOURNANT",
+    image: assets.stairs.deuxQuartTournant,
+    description: "Deux changements de direction pour un escalier compact et élégant.",
+    buttonLabel: "Double quart tournant",
     buttonClass: "btn-sage",
   },
   {
@@ -135,7 +135,7 @@ const customerReviews = [
 ];
 
 const interventionZones = [
-  { name: "Binas", dpt: "41 (Siège et atelier)" },
+  { name: "Romorantin", dpt: "41 (Siège et atelier)" },
   { name: "Blois", dpt: "41" },
   { name: "Vendôme", dpt: "41" },
   { name: "Orléans", dpt: "45" },
@@ -259,9 +259,9 @@ function Index() {
       `Téléphone : ${phone}\n` +
       `E-mail : ${email}\n` +
       `Ville ou Code Postal : ${city}\n\n` +
-      `Fabricant : Hénault Escalier - 9 bis rue du Bout de la ville, 41240 Binas`;
+      `Fabricant : Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
 
-    window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
       mailSubject,
     )}&body=${encodeURIComponent(mailBody)}`;
     setDevisSubmitted(true);
@@ -293,9 +293,9 @@ function Index() {
       `Téléphone : ${phone}\n` +
       `E-mail : ${email}\n\n` +
       `Horaires atelier : Lundi au vendredi, 9h00-12h30 et 13h30-18h00\n` +
-      `Hénault Escalier - 9 bis rue du Bout de la ville, 41240 Binas`;
+      `Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
 
-    window.location.href = `mailto:contact@henault-cie.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
       mailSubject,
     )}&body=${encodeURIComponent(mailBody)}`;
     setRdvSubmitted(true);
@@ -320,15 +320,15 @@ function Index() {
             "@type": "HomeAndConstructionBusiness",
             name: "Hénault Escalier",
             description:
-              "Fabricant d'escaliers sur mesure en bois, métal et verre à Binas depuis 1931. Conception en atelier et pose sans sous-traitance.",
+              "Fabricant d'escaliers sur mesure en bois, métal et verre à Romorantin depuis 1931. Conception en atelier et pose sans sous-traitance.",
             url: "https://escalier-henault.fr",
             telephone: "+33254824489",
-            email: "contact@henault-cie.com",
+            email: "secretariat.henaultescalier@gmail.com",
             address: {
               "@type": "PostalAddress",
               streetAddress: "9 bis rue du Bout de la ville",
-              addressLocality: "Binas",
-              postalCode: "41240",
+              addressLocality: "Romorantin",
+              postalCode: "41200",
               addressCountry: "FR",
             },
             openingHoursSpecification: [
@@ -352,7 +352,7 @@ function Index() {
               bestRating: "5",
             },
             areaServed: [
-              "Binas",
+              "Romorantin",
               "Blois",
               "Vendôme",
               "Orléans",
@@ -376,7 +376,7 @@ function Index() {
           </h1>
           <p className="hero-lede">
             Atelier menuiserie traditionnel et tradition familiale : nous concevons et fabriquons
-            dans nos ateliers de Binas des escaliers sur mesure en bois, métal ou verre, dans le
+            dans nos ateliers de Romorantin des escaliers sur mesure en bois, métal ou verre, dans le
             Loir-et-Cher, la région Centre-Val de Loire et en Île-de-France.
           </p>
 
@@ -398,7 +398,7 @@ function Index() {
 
           <div className="hero-proof">
             <span>
-              <Check size={16} /> Fabrication 100% atelier à Binas (41)
+              <Check size={16} /> Fabrication 100% atelier à Romorantin (41)
             </span>
             <span>
               <Check size={16} /> Pose par nos propres salariés
@@ -436,7 +436,7 @@ function Index() {
           </div>
 
           <div className="tilo-hero-badge">
-            <strong>Atelier à Binas (41)</strong>
+            <strong>Atelier à Romorantin (41)</strong>
             Depuis 1931 - 100% sur mesure
           </div>
         </div>
@@ -468,7 +468,7 @@ function Index() {
               <p className="story-desc">
                 Escalier en U avec palier, balancé ou en L : l'escalier à palier relie vos niveaux
                 avec élégance et s'adapte à votre volume. Chaque escalier est dessiné sur mesure et
-                fabriqué en bois dans nos ateliers de Binas, puis posé chez vous à Blois, Orléans,
+                fabriqué en bois dans nos ateliers de Romorantin, puis posé chez vous à Blois, Orléans,
                 Tours, Chartres, Dreux ou Versailles.
               </p>
               <div>
@@ -497,7 +497,7 @@ function Index() {
             <div className="story-row-media">
               <img
                 src={assets.client.block2}
-                alt="Fabrication artisanale d'escalier avec contremarche en atelier à Binas"
+                alt="Fabrication artisanale d'escalier avec contremarche en atelier à Romorantin"
                 className="crop-top-ceiling"
                 loading="lazy"
               />
@@ -509,7 +509,7 @@ function Index() {
               <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
               <p className="story-desc">
-                Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Binas,
+                Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Romorantin,
                 dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
                 l'innovation. Le sur mesure est notre spécialité, et notre savoir-faire de menuiserie
                 traditionnelle nous permet de réaliser tous types d'escaliers.
@@ -528,30 +528,29 @@ function Index() {
           <article className="story-row">
             <div className="story-row-content">
               <div className="story-meta-tag">
-                <span className="story-tag-label">03 - Lignes aériennes</span>
+                <span className="story-tag-label">03 - Changements d'angle</span>
               </div>
-              <h3>Escalier suspendu en bois, fabricant à Binas</h3>
-              <p className="story-kicker">La légèreté en marche.</p>
+              <h3>Escalier double quart tournant en bois, fabricant à Romorantin</h3>
+              <p className="story-kicker">Deux angles, un seul escalier.</p>
               <p className="story-desc">
-                Des marches qui semblent flotter, sans structure apparente. L'escalier suspendu
-                laisse passer la lumière et ouvre l'espace, surtout dans une pièce de vie ouverte.
+                Deux changements de direction qui optimisent l'espace et animent la circulation.
                 Nos artisans le fabriquent sur mesure et l'ajustent au millimètre pour votre maison
                 ou votre projet de rénovation.
               </p>
               <div>
                 <button
                   type="button"
-                  onClick={() => handleSelectType("Escalier suspendu")}
+                  onClick={() => handleSelectType("Double quart tournant")}
                   className="text-link"
                 >
-                  Découvrir nos escaliers suspendus <ArrowRight size={15} />
+                  Découvrir nos escaliers double quart tournant <ArrowRight size={15} />
                 </button>
               </div>
             </div>
             <div className="story-row-media">
               <img
-                src={assets.client.block3}
-                alt="Escalier tournant bois sans contremarche Hénault Escalier"
+                src={assets.stairs.deuxQuartTournant}
+                alt="Escalier double quart tournant Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -602,7 +601,7 @@ function Index() {
             <h2 id="stair-types-heading">Nos 8 types d'escaliers sur mesure</h2>
             <p className="lede">
               Inspirés du style architectural contemporain : chaque modèle est façonné sur mesure
-              dans nos ateliers de Binas. Cliquez sur un modèle pour configurer votre devis.
+              dans nos ateliers de Romorantin. Cliquez sur un modèle pour configurer votre devis.
             </p>
           </div>
           <Link className="text-link" to="/nos-creations">
@@ -822,7 +821,8 @@ function Index() {
                     >
                       <option value="Escalier droit">Escalier droit</option>
                       <option value="Quart tournant">Escalier quart tournant</option>
-                      <option value="Escalier hélicoïdal">Escalier hélicoïdal</option>
+                      <option value="Double quart tournant">Escalier double quart tournant</option>
+                      <option value="Escalier Limon Centrale">Escalier Limon Centrale</option>
                       <option value="Escalier en bois">Escalier en bois massif</option>
                       <option value="Escalier métal">Escalier métal et bois</option>
                       <option value="Escalier verre">Escalier et garde-corps verre</option>
@@ -985,7 +985,7 @@ function Index() {
                   <div className="quote-success-box" role="status">
                     <strong>Merci pour votre demande !</strong>
                     <br />
-                    Votre message a été transmis directement à notre atelier de Binas. Un menuisier
+                    Votre message a été transmis directement à notre atelier de Romorantin. Un menuisier
                     chiffreur examinera votre dossier et vous contactera dans les plus brefs délais.
                   </div>
                 )}
@@ -998,7 +998,7 @@ function Index() {
                     <select id="sector" name="sector" required>
                       <option value="Blois (41)">Blois (41)</option>
                       <option value="Vendôme (41)">Vendôme (41)</option>
-                      <option value="Binas et environs (41)">Binas et environs (41)</option>
+                      <option value="Romorantin et environs (41)">Romorantin et environs (41)</option>
                       <option value="Orléans (45)">Orléans (45)</option>
                       <option value="Beaugency (45)">Beaugency (45)</option>
                       <option value="Tours (37)">Tours (37)</option>
@@ -1129,7 +1129,7 @@ function Index() {
                   <div>
                     <strong>E-mail :</strong>
                     <br />
-                    <a href="mailto:contact@henault-cie.com">contact@henault-cie.com</a>
+                    <a href="mailto:secretariat.henaultescalier@gmail.com">secretariat.henaultescalier@gmail.com</a>
                   </div>
                 </li>
                 <li>
@@ -1139,7 +1139,7 @@ function Index() {
                     <br />
                     9 bis rue du Bout de la ville
                     <br />
-                    41240 Binas (Loir-et-Cher)
+                    41200 Romorantin (Loir-et-Cher)
                   </div>
                 </li>
                 <li>
@@ -1160,14 +1160,14 @@ function Index() {
                   <ShieldCheck size={18} />
                   <span>
                     <strong>Fabrication 100% atelier :</strong> Aucun escalier standard ou importé,
-                    tout est usiné et assemblé à Binas.
+                    tout est usiné et assemblé à Romorantin.
                   </span>
                 </li>
                 <li>
                   <ShieldCheck size={18} />
                   <span>
                     <strong>Pose par nos salariés :</strong> Nos propres compagnons menuisiers
-                    assurent la pose soignée chez vous, sans sous-traitance.
+                    assurent la pose soignée chez vous.
                   </span>
                 </li>
                 <li>
@@ -1190,7 +1190,7 @@ function Index() {
             <p className="eyebrow" style={{ color: "var(--accent)" }}>
               Proximité & Déplacement
             </p>
-            <h2 id="zones-heading">Nos 10 secteurs d'intervention prioritaires</h2>
+            <h2 id="zones-heading">Nos 10 secteurs d'intervention</h2>
             <p>
               Nos équipes se déplacent à votre domicile pour le relevé de cotes technique, la
               livraison directe et l'installation complète de votre escalier sur mesure.

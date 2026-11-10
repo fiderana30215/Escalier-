@@ -13,7 +13,7 @@ import stairQuart from "@/assets/photos/stairs/quart-tournant.jpg";
 import stairDeuxQuart from "@/assets/photos/stairs/deux-quart-tournant.jpg";
 import stairHelicoidal from "@/assets/photos/stairs/helicoidal-limon.jpg";
 import stairLimonNoir from "@/assets/photos/stairs/limon-central-noir.jpg";
-import stairSuspendu from "@/assets/photos/stairs/suspendu.jpg";
+
 import stairBois from "@/assets/photos/stairs/bois-massif.jpg";
 import stairMetal from "@/assets/photos/stairs/metal-bois.jpg";
 import stairVerre from "@/assets/photos/stairs/verre.jpg";
@@ -29,6 +29,11 @@ import atelierEnmarchement from "@/assets/photos/atelier/enmarchement.jpg";
 import atelierFabrication from "@/assets/photos/atelier/fabrication.jpg";
 import atelierAssemblage from "@/assets/photos/atelier/assemblage.jpg";
 import atelierMarche from "@/assets/photos/atelier/marche.jpg";
+
+// Team photos
+import equipe1 from "@/assets/Notresequipes/1005217579343615911.jfif";
+import equipe2 from "@/assets/Notresequipes/289497082297314460.jfif";
+import equipe3 from "@/assets/Notresequipes/759419555948233286.jfif";
 
 // Real custom furniture and verrières photos
 import mobilierSousEscalier from "@/assets/photos/mobilier/sous-escalier.jpg";
@@ -78,7 +83,7 @@ export const assets = {
     deuxQuartTournant: stairDeuxQuart,
     helicoidal: stairHelicoidal,
     limonNoir: stairLimonNoir,
-    suspendu: stairSuspendu,
+
     bois: stairBois,
     metal: stairMetal,
     verre: stairVerre,
@@ -95,6 +100,7 @@ export const assets = {
     assemblage: atelierAssemblage,
     marche: atelierMarche,
   },
+  team: [equipe1, equipe2, equipe3],
   complementary: {
     sousEscalier: mobilierSousEscalier,
     bibliotheque: mobilierBibliotheque,
@@ -106,7 +112,6 @@ export const assets = {
     stairDroit,
     stairQuart,
     stairHelicoidal,
-    stairSuspendu,
     stairBois,
     stairMetal,
     stairVerre,

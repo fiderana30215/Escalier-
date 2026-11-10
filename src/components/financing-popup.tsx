@@ -138,7 +138,7 @@ export function FinancingPopup({ onSelectFinancing }: FinancingPopupProps) {
                 </div>
                 <div>
                   <strong>Pour tous vos projets d'escalier</strong>
-                  <p>Bois massif, suspendu, limon central, métal contemporain ou rénovation.</p>
+                  <p>Bois massif, double quart tournant, limon central, métal contemporain ou rénovation.</p>
                 </div>
               </div>
             </div>

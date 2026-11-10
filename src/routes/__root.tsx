@@ -79,17 +79,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hénault Escalier - Fabricant d'escaliers sur mesure depuis 1931 à Binas" },
+      { title: "Hénault Escalier - Fabricant d'escaliers sur mesure depuis 1931 à Romorantin" },
       {
         name: "description",
         content:
-          "Hénault Escalier conçoit, fabrique et pose vos escaliers sur mesure en bois, métal et verre à Binas, Blois, Orléans, Tours, Chartres, Dreux et Versailles sans sous-traitance.",
+          "Hénault Escalier conçoit, fabrique et pose vos escaliers sur mesure en bois, métal et verre à Romorantin, Blois, Orléans, Tours, Chartres, Dreux et Versailles sans sous-traitance.",
       },
       { property: "og:title", content: "Hénault Escalier - Fabricant d'escaliers sur mesure depuis 1931" },
       {
         property: "og:description",
         content:
-          "Atelier de fabrication à Binas et pose sans sous-traitance dans le Centre-Val de Loire et en Île-de-France.",
+          "Atelier de fabrication à Romorantin et pose sans sous-traitance dans le Centre-Val de Loire et en Île-de-France.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
