@@ -88,11 +88,11 @@ export function SiteFooter() {
           <div>
             <strong>Hénault Escalier</strong>
             <br />
-            9 bis rue du Bout de la ville - 41240 Binas
+            9 bis rue du Bout de la ville - 41200 Romorantin
             <br />
             Tél. : <a href="tel:+33254824489">02 54 82 44 89</a>
             <br />
-            Mail : <a href="mailto:contact@henault-cie.com">contact@henault-cie.com</a>
+            Mail : <a href="mailto:secretariat.henaultescalier@gmail.com">secretariat.henaultescalier@gmail.com</a>
             <br />
             <small style={{ display: "block", marginTop: "6px", opacity: 0.85 }}>
               Atelier ouvert du lundi au vendredi : 9h00 à 12h30 et 13h30 à 18h00

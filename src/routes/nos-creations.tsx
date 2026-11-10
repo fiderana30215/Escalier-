@@ -8,7 +8,7 @@ export const Route = createFileRoute("/nos-creations")({
   head: () =>
     pageHead(
       "Nos Créations - Galerie de réalisations Hénault Escalier",
-      "Découvrez plus de 90 ans de savoir-faire en images : escaliers sur mesure posés, usinage en atelier à Binas, aménagements sous escalier et verrières.",
+      "Découvrez plus de 90 ans de savoir-faire en images : escaliers sur mesure posés, usinage en atelier à Romorantin, aménagements sous escalier et verrières.",
       assets.stairs.hero1,
     ),
   component: Gallery,
@@ -48,14 +48,7 @@ const galleryItems: GalleryItem[] = [
     badge: "Nos projets achevés",
     desc: "Design contemporain avec éclairage intégré sous les marches.",
   },
-  {
-    id: 4,
-    src: assets.stairs.suspendu,
-    title: "Escalier suspendu sans contremarche",
-    category: "escalier",
-    badge: "Nos projets achevés",
-    desc: "Structure légère laissant passer la lumière naturelle.",
-  },
+
   {
     id: 5,
     src: assets.stairs.bois,
@@ -107,7 +100,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 11,
     src: assets.atelier.fabrication,
-    title: "Façonnage artisanal en atelier à Binas",
+    title: "Façonnage artisanal en atelier à Romorantin",
     category: "atelier",
     badge: "En atelier",
     desc: "Ajustement minutieux de l'enmarchement avant départ en chantier.",
@@ -223,7 +216,7 @@ function Gallery() {
             fontSize: "15px",
           }}
         >
-          Découvrez une sélection de nos escaliers dessinés, usinés dans notre atelier de Binas et
+          Découvrez une sélection de nos escaliers dessinés, usinés dans notre atelier de Romorantin et
           posés sans aucune sous-traitance dans le Centre-Val de Loire et en Île-de-France.
         </p>
 
