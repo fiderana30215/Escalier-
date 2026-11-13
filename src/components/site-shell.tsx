@@ -50,9 +50,12 @@ export function SiteHeader() {
         <a href="/#nos-escaliers">
           Nos escaliers
         </a>
-        <a href="/#zones">
+        <Link
+          to="/zones-intervention"
+          className={pathname.startsWith("/zones-intervention") ? "active" : ""}
+        >
           Zones d'intervention
-        </a>
+        </Link>
         <a href="/#devis-rdv" className="site-cta-small">
           Demander un devis
         </a>
