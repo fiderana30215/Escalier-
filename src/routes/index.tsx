@@ -11,6 +11,7 @@ import {
   Star,
 } from "lucide-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { postToBackend } from "@/lib/api";
 import { assets, pageHead } from "@/lib/site-assets";
 import { FinancingPopup } from "@/components/financing-popup";
 
@@ -171,6 +172,10 @@ function Index() {
   const [wantsFinancing, setWantsFinancing] = useState(false);
   const [devisSubmitted, setDevisSubmitted] = useState(false);
   const [rdvSubmitted, setRdvSubmitted] = useState(false);
+  const [quoteSending, setQuoteSending] = useState(false);
+  const [quoteError, setQuoteError] = useState<string | null>(null);
+  const [rdvSending, setRdvSending] = useState(false);
+  const [rdvError, setRdvError] = useState<string | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSliderPaused, setIsSliderPaused] = useState(false);
 
@@ -226,79 +231,56 @@ function Index() {
     }
   }
 
-  function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const formData = new FormData(e.currentTarget);
 
-    const type = formData.get("stairType") || selectedStairType;
-    const material = formData.get("material") || "";
-    const project = formData.get("projectNature") || "";
-    const delay = formData.get("delay") || "";
-    const dimensions = formData.get("dimensions") || "";
-    const fullName = formData.get("fullName") || "";
-    const phone = formData.get("phone") || "";
-    const email = formData.get("email") || "";
-    const city = formData.get("city") || "";
-    const financingChoice = formData.get("financingArkea")
-      ? "Oui (Financement avec notre partenaire ARKEA)"
-      : wantsFinancing
-        ? "Oui (Financement avec notre partenaire ARKEA)"
-        : "Non";
-
-    const mailSubject = `Demande de devis escalier sur mesure - ${fullName} (${city})`;
-    const mailBody = `DEMANDE DE DEVIS ESCALIER SUR MESURE\n\n` +
-      `Type d'escalier : ${type}\n` +
-      `Matériau souhaité : ${material}\n` +
-      `Nature du projet : ${project}\n` +
-      `Option Financement : ${financingChoice}\n` +
-      `Délai souhaité : ${delay}\n` +
-      `Dimensions ou remarques : ${dimensions}\n\n` +
-      `COORDONNÉES CLIENT :\n` +
-      `Nom et Prénom : ${fullName}\n` +
-      `Téléphone : ${phone}\n` +
-      `E-mail : ${email}\n` +
-      `Ville ou Code Postal : ${city}\n\n` +
-      `Fabricant : Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
-
-    window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
-      mailSubject,
-    )}&body=${encodeURIComponent(mailBody)}`;
-    setDevisSubmitted(true);
+    setQuoteSending(true);
+    setQuoteError(null);
+    try {
+      await postToBackend("/api/quotes", {
+        stairType: String(formData.get("stairType") || selectedStairType),
+        material: String(formData.get("material") || ""),
+        projectNature: String(formData.get("projectNature") || ""),
+        delay: String(formData.get("delay") || ""),
+        dimensions: String(formData.get("dimensions") || ""),
+        fullName: String(formData.get("fullName") || ""),
+        phone: String(formData.get("phone") || ""),
+        email: String(formData.get("email") || ""),
+        city: String(formData.get("city") || ""),
+        financing: Boolean(formData.get("financingArkea")) || wantsFinancing,
+      });
+      setDevisSubmitted(true);
+    } catch {
+      setQuoteError("Votre demande n'a pas pu être envoyée. Merci de réessayer ou de nous appeler au 02 54 82 44 89.");
+    } finally {
+      setQuoteSending(false);
+    }
   }
 
-  function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const formData = new FormData(e.currentTarget);
 
-    const sector = formData.get("sector") || "";
-    const slot = formData.get("slot") || "";
-    const date = formData.get("date") || "";
-    const fullName = formData.get("fullName") || "";
-    const phone = formData.get("phone") || "";
-    const email = formData.get("email") || "";
-    const address = formData.get("address") || "";
-    const notes = formData.get("notes") || "";
-
-    const mailSubject = `Demande de rendez-vous conseil - ${fullName} (${sector})`;
-    const mailBody = `DEMANDE DE RENDEZ-VOUS CONSEIL EN LIGNE\n\n` +
-      `Secteur d'intervention : ${sector}\n` +
-      `Date souhaitée : ${date}\n` +
-      `Créneau horaire : ${slot}\n` +
-      `Adresse complète : ${address}\n` +
-      `Remarques / Accès : ${notes}\n\n` +
-      `COORDONNÉES CLIENT :\n` +
-      `Nom et Prénom : ${fullName}\n` +
-      `Téléphone : ${phone}\n` +
-      `E-mail : ${email}\n\n` +
-      `Horaires atelier : Lundi au vendredi, 9h00-12h30 et 13h30-18h00\n` +
-      `Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
-
-    window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
-      mailSubject,
-    )}&body=${encodeURIComponent(mailBody)}`;
-    setRdvSubmitted(true);
+    setRdvSending(true);
+    setRdvError(null);
+    try {
+      await postToBackend("/api/appointments", {
+        sector: String(formData.get("sector") || ""),
+        slot: String(formData.get("slot") || ""),
+        date: String(formData.get("date") || ""),
+        fullName: String(formData.get("fullName") || ""),
+        phone: String(formData.get("phone") || ""),
+        email: String(formData.get("email") || ""),
+        address: String(formData.get("address") || ""),
+        notes: String(formData.get("notes") || ""),
+      });
+      setRdvSubmitted(true);
+    } catch {
+      setRdvError("Votre demande n'a pas pu être envoyée. Merci de réessayer ou de nous appeler au 02 54 82 44 89.");
+    } finally {
+      setRdvSending(false);
+    }
   }
 
   return (
@@ -973,13 +955,17 @@ function Index() {
                 </label>
 
                 <div className="form-submit-row">
-                  <button type="submit" className="site-cta-btn">
-                    Envoyer ma demande de devis <ArrowRight size={16} />
+                  <button type="submit" className="site-cta-btn" disabled={quoteSending}>
+                    {quoteSending ? "Envoi en cours..." : "Envoyer ma demande de devis"} <ArrowRight size={16} />
                   </button>
                   <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
                     Réponse personnalisée sous 48h ouvrées
                   </span>
                 </div>
+
+                {quoteError && (
+                  <div className="quote-success-box" role="alert">{quoteError}</div>
+                )}
 
                 {devisSubmitted && (
                   <div className="quote-success-box" role="status">
@@ -1091,13 +1077,17 @@ function Index() {
                 </label>
 
                 <div className="form-submit-row">
-                  <button type="submit" className="site-cta-btn">
-                    Confirmer ma demande de visite <ArrowRight size={16} />
+                  <button type="submit" className="site-cta-btn" disabled={rdvSending}>
+                    {rdvSending ? "Envoi en cours..." : "Confirmer ma demande de visite"} <ArrowRight size={16} />
                   </button>
                   <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
                     Créneaux : Lun au Ven, 9h-12h30 et 13h30-18h
                   </span>
                 </div>
+
+                {rdvError && (
+                  <div className="quote-success-box" role="alert">{rdvError}</div>
+                )}
 
                 {rdvSubmitted && (
                   <div className="quote-success-box" role="status">
