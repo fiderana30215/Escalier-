@@ -57,7 +57,7 @@ const stairTypePages: Record<string, StairTypePage> = {
       "Un dessin qui valorise les marches",
       "Des associations bois et métal sur mesure",
     ],
-    photoFolders: ["", "2quarttournant2.0"],
+    photoFolders: ["limon central"],
   },
   "double-quart-tournant": {
     name: "Escalier double quart tournant",
