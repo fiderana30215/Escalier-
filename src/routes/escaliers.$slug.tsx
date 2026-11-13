@@ -75,21 +75,21 @@ const stairTypePages: Record<string, StairTypePage> = {
     ],
     photoFolders: ["2quarttournant", "2quarttournant2.0"],
   },
-  bois: {
-    name: "Escalier en bois",
-    eyebrow: "Matière vivante · Fabrication artisanale",
+  "garde-corps-metal": {
+    name: "Escalier avec garde-corps métal",
+    eyebrow: "Détails métalliques · Finition sur mesure",
     intro:
-      "La chaleur du bois massif, travaillée dans des lignes classiques ou résolument actuelles.",
+      "Un garde-corps métallique apporte une ligne graphique et une protection élégante à votre escalier.",
     paragraphs: [
-      "Le bois apporte une présence chaleureuse et durable à votre intérieur. Son veinage, sa teinte et sa finition font de chaque marche une pièce unique, qu’il s’agisse d’un escalier traditionnel ou d’une composition plus contemporaine.",
-      "Nous vous accompagnons dans le choix de l’essence et de la finition en tenant compte de la lumière, du sol et de l’usage de la pièce. Les assemblages et les détails sont réalisés avec soin dans notre atelier, puis ajustés au chantier.",
+      "Barreaux fins, lignes droites ou dessin plus marqué : le métal permet de personnaliser le garde-corps et de donner du caractère à l’escalier. Associé à une main courante en bois, il crée un contraste chaleureux et contemporain.",
+      "La forme, la teinte et les fixations sont étudiées avec l’escalier et l’aménagement de la pièce. Nous veillons à obtenir un ensemble harmonieux, confortable à l’usage et adapté à votre intérieur.",
     ],
     benefits: [
-      "Essences et teintes choisies selon votre projet",
-      "Finition adaptée à l’usage quotidien",
-      "Possibilité d’associer bois, métal et verre",
+      "Barreaux et lignes personnalisés",
+      "Finitions métalliques au choix",
+      "Association possible avec une main courante en bois",
     ],
-    photoFolders: ["escalierBoisAvecGardeCorpEnVer", "2quarttournant"],
+    photoFolders: ["quartTournant", "2quarttournant", "escalierDroit"],
   },
   metal: {
     name: "Escalier métal",
@@ -106,11 +106,11 @@ const stairTypePages: Record<string, StairTypePage> = {
     ],
     photoFolders: ["debillardé", "2quarttournant2.0"],
   },
-  verre: {
-    name: "Escalier et garde-corps en verre",
+  "garde-corps-verre": {
+    name: "Escalier avec garde-corps verre",
     eyebrow: "Transparence · Lumière préservée",
     intro:
-      "Le verre sécurit ouvre les perspectives et laisse la lumière circuler entre les niveaux.",
+      "Le garde-corps en verre sécurit ouvre les perspectives et laisse la lumière circuler entre les niveaux.",
     paragraphs: [
       "Un garde-corps vitré apporte une sensation d’espace sans masquer l’escalier ni la pièce. Il accompagne une structure en bois ou en métal et permet de conserver une vue dégagée dans les intérieurs où la lumière compte.",
       "Nous étudions les dimensions, les fixations et les finitions avec attention pour associer transparence et sécurité. La main courante et le support sont choisis selon le style recherché et les contraintes de votre habitation.",

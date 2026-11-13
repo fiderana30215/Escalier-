@@ -284,17 +284,17 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 .tilo-section-header {display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:40px;}
 .tilo-section-header h2,.reviews-heading h2,.quote-header h2 {margin:0 0 14px;font-size:34px;color:var(--primary);}
 .tilo-section-header p.lede {max-width:540px;margin:0;color:var(--muted-foreground);font-family:Georgia,serif;font-size:15px;line-height:1.7;}
-.tilo-grid {display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-.tilo-card {position:relative;overflow:hidden;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 24px;border-radius:2px;box-shadow:0 8px 24px rgba(0,0,0,0.12);cursor:pointer;transition:box-shadow .35s ease,transform .35s ease;text-align:left;border:none;background:transparent;width:100%;}
+.tilo-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:420px;gap:18px;align-items:stretch;}
+.tilo-card {position:relative;overflow:hidden;height:100%;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;padding:30px 24px;border-radius:2px;box-shadow:0 8px 24px rgba(0,0,0,0.12);cursor:pointer;transition:box-shadow .35s ease,transform .35s ease;text-align:left;border:none;background:transparent;width:100%;}
 .tilo-card:hover {box-shadow:0 16px 40px rgba(0,0,0,0.24);transform:translateY(-4px);}
 .tilo-card-img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(0.2,0,0.2,1);}
 .tilo-card:hover .tilo-card-img {transform:scale(1.09);}
 .tilo-card-overlay {position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,20,25,0.1) 0%,rgba(15,20,25,0.45) 45%,rgba(12,16,20,0.94) 100%);transition:background .3s ease;}
 .tilo-card:hover .tilo-card-overlay {background:linear-gradient(180deg,rgba(15,20,25,0.05) 0%,rgba(15,20,25,0.38) 40%,rgba(10,14,18,0.96) 100%);}
-.tilo-card-content {position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;}
-.tilo-card-title {margin:0;font-family:"Roboto Slab",Georgia,serif;font-size:23px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.04em;text-shadow:0 2px 8px rgba(0,0,0,0.6);}
-.tilo-card-desc {margin:0 0 10px;font-family:Georgia,serif;font-size:13px;line-height:1.55;color:rgba(255,255,255,0.92);text-shadow:0 1px 4px rgba(0,0,0,0.7);}
-.tilo-card-btn {display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;font-family:"Open Sans",sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border:none;cursor:pointer;width:fit-content;transition:filter .2s ease,transform .2s ease;}
+.tilo-card-content {position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;width:100%;}
+.tilo-card-title {min-height:2.5em;display:flex;align-items:flex-end;margin:0;font-family:"Roboto Slab",Georgia,serif;font-size:23px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:.04em;text-shadow:0 2px 8px rgba(0,0,0,0.6);}
+.tilo-card-desc {min-height:4.65em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin:0 0 10px;font-family:Georgia,serif;font-size:13px;line-height:1.55;color:rgba(255,255,255,0.92);text-shadow:0 1px 4px rgba(0,0,0,0.7);}
+.tilo-card-btn {display:inline-flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:48px;padding:11px 16px;font-family:"Open Sans",sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border:none;cursor:pointer;transition:filter .2s ease,transform .2s ease;}
 .tilo-card:hover .tilo-card-btn {filter:brightness(1.1);transform:scale(1.02);}
 
 /* Button colors */
@@ -405,8 +405,7 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
   .complementary-grid {grid-template-columns:1fr;gap:20px;}
 }
 @media(max-width:650px){
-  .tilo-grid {grid-template-columns:1fr;gap:14px;}
-  .tilo-card {min-height:360px;}
+  .tilo-grid {grid-template-columns:1fr;grid-auto-rows:360px;gap:14px;}
   .form-grid-2 {grid-template-columns:1fr;}
   .quote-form-card {padding:24px 18px;}
   .tilo-hero-badge {display:none;}
