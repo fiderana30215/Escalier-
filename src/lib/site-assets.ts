@@ -54,6 +54,23 @@ import block4Escalier2 from "@/assets/photos/client/block4-escalier-2.jpg";
 import legacyHero from "@/assets/hero-home-banner.jpg";
 import legacyTradition from "@/assets/escalier-tradition-henault-et-cie.jpg";
 
+const typeEscalierImages = import.meta.glob("@/assets/typeEscalier/**/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+}) as Record<string, string>;
+
+export function getStairTypePhotos(folders: string[]) {
+  return Object.entries(typeEscalierImages)
+    .filter(([path]) => {
+      const relativePath = path.split("/typeEscalier/")[1] ?? "";
+      const folder = relativePath.includes("/") ? relativePath.split("/")[0] : "";
+      return folders.includes(folder);
+    })
+    .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, "fr"))
+    .map(([, image]) => image);
+}
+
 export const assets = {
   logo: logoColor,
   whiteLogo: logoWhite,

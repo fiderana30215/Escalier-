@@ -27,6 +27,7 @@ export const Route = createFileRoute("/")({
 
 interface StairTypeItem {
   id: string;
+  slug: string;
   name: string;
   badge: string;
   image: string;
@@ -38,6 +39,7 @@ interface StairTypeItem {
 const stairTypes: StairTypeItem[] = [
   {
     id: "droit",
+    slug: "droit",
     name: "Escalier droit",
     badge: "ESCALIER DROIT",
     image: assets.stairs.droit,
@@ -48,6 +50,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "quart-tournant",
+    slug: "quart-tournant",
     name: "Quart tournant",
     badge: "QUART TOURNANT",
     image: assets.stairs.quartTournant,
@@ -56,7 +59,8 @@ const stairTypes: StairTypeItem[] = [
     buttonClass: "btn-teal",
   },
   {
-    id: "helicoïdal",
+    id: "limon-central",
+    slug: "limon-central",
     name: "Escalier Limon Centrale",
     badge: "LIMON CENTRALE",
     image: assets.stairs.helicoidal,
@@ -66,6 +70,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "double-quart-tournant",
+    slug: "double-quart-tournant",
     name: "Double quart tournant",
     badge: "DOUBLE QUART TOURNANT",
     image: assets.stairs.deuxQuartTournant,
@@ -74,16 +79,18 @@ const stairTypes: StairTypeItem[] = [
     buttonClass: "btn-sage",
   },
   {
-    id: "bois",
-    name: "Escalier en bois",
-    badge: "ESCALIER BOIS",
+    id: "garde-corps-metal",
+    slug: "garde-corps-metal",
+    name: "Escalier avec garde-corps métal",
+    badge: "GARDE-CORPS MÉTAL",
     image: assets.stairs.bois,
-    description: "La noblesse du chêne, du hêtre ou de l'hévéa massif, façonnés avec passion.",
-    buttonLabel: "Escalier en bois",
+    description: "Une rampe et des balustres métalliques pour souligner le caractère de votre escalier.",
+    buttonLabel: "Garde-corps métal",
     buttonClass: "btn-coral",
   },
   {
     id: "metal",
+    slug: "metal",
     name: "Escalier métal",
     badge: "ESCALIER MÉTAL",
     image: assets.stairs.metal,
@@ -92,16 +99,18 @@ const stairTypes: StairTypeItem[] = [
     buttonClass: "btn-teal",
   },
   {
-    id: "verre",
-    name: "Escalier verre",
-    badge: "ESCALIER VERRE",
+    id: "garde-corps-verre",
+    slug: "garde-corps-verre",
+    name: "Escalier avec garde-corps verre",
+    badge: "GARDE-CORPS VERRE",
     image: assets.stairs.verre,
-    description: "Garde-corps en verre securit pour une transparence maximale et des pièces agrandies.",
-    buttonLabel: "Escalier verre",
+    description: "Un garde-corps vitré qui laisse circuler la lumière et préserve les perspectives.",
+    buttonLabel: "Garde-corps verre",
     buttonClass: "btn-wood",
   },
   {
     id: "renovation",
+    slug: "renovation",
     name: "Rénovation d'escalier",
     badge: "RÉNOVATION",
     image: assets.stairs.renovation,
@@ -593,16 +602,7 @@ function Index() {
 
         <div className="tilo-grid">
           {stairTypes.map((item) => (
-            <div
-              key={item.id}
-              className="tilo-card"
-              role="button"
-              tabIndex={0}
-              onClick={() => handleSelectType(item.name)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") handleSelectType(item.name);
-              }}
-            >
+            <Link key={item.id} to={`/escaliers/${item.slug}`} className="tilo-card">
               <img
                 src={item.image}
                 alt={`${item.name} sur mesure Hénault Escalier`}
@@ -613,18 +613,12 @@ function Index() {
               <div className="tilo-card-content">
                 <h3 className="tilo-card-title">{item.badge}</h3>
                 <p className="tilo-card-desc">{item.description}</p>
-                <button
-                  type="button"
-                  className={`tilo-card-btn ${item.buttonClass}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSelectType(item.name);
-                  }}
-                >
+                <span className={`tilo-card-btn ${item.buttonClass}`}>
                   {item.buttonLabel}
-                </button>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -805,9 +799,9 @@ function Index() {
                       <option value="Quart tournant">Escalier quart tournant</option>
                       <option value="Double quart tournant">Escalier double quart tournant</option>
                       <option value="Escalier Limon Centrale">Escalier Limon Centrale</option>
-                      <option value="Escalier en bois">Escalier en bois massif</option>
+                      <option value="Escalier avec garde-corps métal">Escalier avec garde-corps métal</option>
                       <option value="Escalier métal">Escalier métal et bois</option>
-                      <option value="Escalier verre">Escalier et garde-corps verre</option>
+                      <option value="Escalier avec garde-corps verre">Escalier avec garde-corps verre</option>
                       <option value="Rénovation d'escalier">Rénovation d'escalier existant</option>
                     </select>
                   </div>
