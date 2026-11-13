@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { assets, pageHead } from "@/lib/site-assets";
+import { interventionZones } from "@/lib/intervention-zones";
 import { FinancingPopup } from "@/components/financing-popup";
 
 export const Route = createFileRoute("/")({
@@ -141,19 +142,6 @@ const customerReviews = [
     quote:
       "La qualité de fabrication en atelier se voit immédiatement par rapport aux modèles industriels. Aucun grincement, finitions impeccables et pose assurée par leurs propres compagnons.",
   },
-];
-
-const interventionZones = [
-  { name: "Romorantin", dpt: "41 (Siège et atelier)" },
-  { name: "Blois", dpt: "41" },
-  { name: "Vendôme", dpt: "41" },
-  { name: "Orléans", dpt: "45" },
-  { name: "Beaugency", dpt: "45" },
-  { name: "Tours", dpt: "37" },
-  { name: "Chartres", dpt: "28" },
-  { name: "Châteaudun", dpt: "28" },
-  { name: "Dreux", dpt: "28" },
-  { name: "Versailles", dpt: "78" },
 ];
 
 const heroSlides = [
@@ -1193,12 +1181,17 @@ function Index() {
 
           <div className="zones-list">
             {interventionZones.map((z) => (
-              <span className="zone-pill" key={z.name}>
+              <Link
+                className="zone-pill"
+                key={z.slug}
+                to="/zones-intervention/$slug"
+                params={{ slug: z.slug }}
+              >
                 <MapPin size={13} style={{ color: "var(--accent)" }} />
                 <span>
-                  <strong>{z.name}</strong> ({z.dpt})
+                  <strong>{z.name}</strong> ({z.department})
                 </span>
-              </span>
+              </Link>
             ))}
           </div>
         </div>

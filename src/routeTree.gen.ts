@@ -15,6 +15,8 @@ import { Route as NosCreationsRouteImport } from './routes/nos-creations'
 import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
 import { Route as ZonesInterventionRouteImport } from './routes/zones-intervention'
 import { Route as EscaliersSlugRouteImport } from './routes/escaliers.$slug'
+import { Route as SimulationSlugRouteImport } from './routes/simulation.$slug'
+import { Route as ZonesInterventionSlugRouteImport } from './routes/zones-intervention.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,22 +48,36 @@ const EscaliersSlugRoute = EscaliersSlugRouteImport.update({
   path: '/escaliers/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SimulationSlugRoute = SimulationSlugRouteImport.update({
+  id: '/simulation/$slug',
+  path: '/simulation/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZonesInterventionSlugRoute = ZonesInterventionSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ZonesInterventionRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
-  '/zones-intervention': typeof ZonesInterventionRoute
+  '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
+  '/simulation/$slug': typeof SimulationSlugRoute
+  '/zones-intervention/$slug': typeof ZonesInterventionSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
-  '/zones-intervention': typeof ZonesInterventionRoute
+  '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
+  '/simulation/$slug': typeof SimulationSlugRoute
+  '/zones-intervention/$slug': typeof ZonesInterventionSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,8 +85,10 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
-  '/zones-intervention': typeof ZonesInterventionRoute
+  '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
+  '/simulation/$slug': typeof SimulationSlugRoute
+  '/zones-intervention/$slug': typeof ZonesInterventionSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +99,8 @@ export interface FileRouteTypes {
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
+    | '/simulation/$slug'
+    | '/zones-intervention/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +109,8 @@ export interface FileRouteTypes {
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
+    | '/simulation/$slug'
+    | '/zones-intervention/$slug'
   id:
     | '__root__'
     | '/'
@@ -97,6 +119,8 @@ export interface FileRouteTypes {
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
+    | '/simulation/$slug'
+    | '/zones-intervention/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,8 +128,9 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   NosCreationsRoute: typeof NosCreationsRoute
   QuiSommesNousRoute: typeof QuiSommesNousRoute
-  ZonesInterventionRoute: typeof ZonesInterventionRoute
+  ZonesInterventionRoute: typeof ZonesInterventionRouteWithChildren
   EscaliersSlugRoute: typeof EscaliersSlugRoute
+  SimulationSlugRoute: typeof SimulationSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,16 +177,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EscaliersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/simulation/$slug': {
+      id: '/simulation/$slug'
+      path: '/simulation/$slug'
+      fullPath: '/simulation/$slug'
+      preLoaderRoute: typeof SimulationSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zones-intervention/$slug': {
+      id: '/zones-intervention/$slug'
+      path: '/$slug'
+      fullPath: '/zones-intervention/$slug'
+      preLoaderRoute: typeof ZonesInterventionSlugRouteImport
+      parentRoute: typeof ZonesInterventionRoute
+    }
   }
 }
+
+interface ZonesInterventionRouteChildren {
+  ZonesInterventionSlugRoute: typeof ZonesInterventionSlugRoute
+}
+
+const ZonesInterventionRouteChildren: ZonesInterventionRouteChildren = {
+  ZonesInterventionSlugRoute: ZonesInterventionSlugRoute,
+}
+
+const ZonesInterventionRouteWithChildren =
+  ZonesInterventionRoute._addFileChildren(ZonesInterventionRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   NosCreationsRoute: NosCreationsRoute,
   QuiSommesNousRoute: QuiSommesNousRoute,
-  ZonesInterventionRoute: ZonesInterventionRoute,
+  ZonesInterventionRoute: ZonesInterventionRouteWithChildren,
   EscaliersSlugRoute: EscaliersSlugRoute,
+  SimulationSlugRoute: SimulationSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

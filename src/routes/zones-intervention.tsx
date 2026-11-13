@@ -3,7 +3,6 @@ import {
   ArrowRight,
   Check,
   ChevronRight,
-  ClipboardCheck,
   Hammer,
   MapPin,
   MapPinned,
@@ -13,19 +12,7 @@ import {
   Truck,
 } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
-
-const interventionZones = [
-  { name: "Romorantin", department: "41", note: "Atelier" },
-  { name: "Blois", department: "41" },
-  { name: "Vendôme", department: "41" },
-  { name: "Orléans", department: "45" },
-  { name: "Beaugency", department: "45" },
-  { name: "Tours", department: "37" },
-  { name: "Chartres", department: "28" },
-  { name: "Châteaudun", department: "28" },
-  { name: "Dreux", department: "28" },
-  { name: "Versailles", department: "78" },
-];
+import { interventionZones } from "@/lib/intervention-zones";
 
 const serviceSteps = [
   {
@@ -201,7 +188,7 @@ function ZonesIntervention() {
         <div className="intervention-coverage-panel">
           <div className="coverage-panel-heading">
             <span>
-              <MapPin size={16} aria-hidden="true" /> Notre atelier
+              <MapPin size={16} aria-hidden="true" /> Zone d’intervention
             </span>
             <strong>Romorantin-Lanthenay</strong>
           </div>
@@ -221,13 +208,18 @@ function ZonesIntervention() {
           <p className="coverage-caption">Repère de proximité — schéma indicatif</p>
         </div>
         <ul className="intervention-city-list" aria-label="Villes desservies">
-          {interventionZones.map(({ name, department, note }) => (
-            <li key={name}>
+          {interventionZones.map(({ name, department, note, slug }) => (
+            <li key={slug}>
               <MapPin size={15} aria-hidden="true" />
-              <span>
-                <strong>{name}</strong>
-                {note ? ` · ${note}` : ` · ${department}`}
-              </span>
+              <div className="intervention-city-links">
+                <Link to="/zones-intervention/$slug" params={{ slug }}>
+                  <strong>{name}</strong>
+                  {note ? ` · ${note}` : ` · ${department}`}
+                </Link>
+                <Link className="intervention-city-simulate" to="/simulation/$slug" params={{ slug }}>
+                  Simuler
+                </Link>
+              </div>
             </li>
           ))}
         </ul>

@@ -22,4 +22,42 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).toBe("/zones-intervention");
   });
+
+  it.each([
+    "romorantin",
+    "blois",
+    "vendome",
+    "orleans",
+    "beaugency",
+    "tours",
+    "chartres",
+    "chateaudun",
+    "dreux",
+    "versailles",
+  ])("matches the dedicated intervention page for %s", (slug) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    const matches = router.matchRoutes(`/zones-intervention/${slug}`);
+
+    expect(matches.at(-1)?.routeId).toBe("/zones-intervention/$slug");
+  });
+
+  it.each([
+    "romorantin",
+    "blois",
+    "vendome",
+    "orleans",
+    "beaugency",
+    "tours",
+    "chartres",
+    "chateaudun",
+    "dreux",
+    "versailles",
+  ])("matches the dedicated simulation page for %s", (slug) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    const matches = router.matchRoutes(`/simulation/${slug}`);
+
+    expect(matches.at(-1)?.routeId).toBe("/simulation/$slug");
+  });
 });
