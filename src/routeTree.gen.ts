@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as NosCreationsRouteImport } from './routes/nos-creations'
 import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
+import { Route as EscaliersSlugRouteImport } from './routes/escaliers.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const QuiSommesNousRoute = QuiSommesNousRouteImport.update({
   path: '/qui-sommes-nous',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EscaliersSlugRoute = EscaliersSlugRouteImport.update({
+  id: '/escaliers/$slug',
+  path: '/escaliers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
+  '/escaliers/$slug': typeof EscaliersSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
+  '/escaliers/$slug': typeof EscaliersSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,30 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
+  '/escaliers/$slug': typeof EscaliersSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/nos-creations' | '/qui-sommes-nous'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/nos-creations'
+    | '/qui-sommes-nous'
+    | '/escaliers/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/nos-creations' | '/qui-sommes-nous'
-  id: '__root__' | '/' | '/contact' | '/nos-creations' | '/qui-sommes-nous'
+  to:
+    | '/'
+    | '/contact'
+    | '/nos-creations'
+    | '/qui-sommes-nous'
+    | '/escaliers/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/nos-creations'
+    | '/qui-sommes-nous'
+    | '/escaliers/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +92,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   NosCreationsRoute: typeof NosCreationsRoute
   QuiSommesNousRoute: typeof QuiSommesNousRoute
+  EscaliersSlugRoute: typeof EscaliersSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuiSommesNousRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/escaliers/$slug': {
+      id: '/escaliers/$slug'
+      path: '/escaliers/$slug'
+      fullPath: '/escaliers/$slug'
+      preLoaderRoute: typeof EscaliersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   NosCreationsRoute: NosCreationsRoute,
   QuiSommesNousRoute: QuiSommesNousRoute,
+  EscaliersSlugRoute: EscaliersSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

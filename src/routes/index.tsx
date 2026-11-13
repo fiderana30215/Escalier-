@@ -26,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 interface StairTypeItem {
   id: string;
+  slug: string;
   name: string;
   badge: string;
   image: string;
@@ -37,6 +38,7 @@ interface StairTypeItem {
 const stairTypes: StairTypeItem[] = [
   {
     id: "droit",
+    slug: "droit",
     name: "Escalier droit",
     badge: "ESCALIER DROIT",
     image: assets.stairs.droit,
@@ -47,6 +49,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "quart-tournant",
+    slug: "quart-tournant",
     name: "Quart tournant",
     badge: "QUART TOURNANT",
     image: assets.stairs.quartTournant,
@@ -55,7 +58,8 @@ const stairTypes: StairTypeItem[] = [
     buttonClass: "btn-teal",
   },
   {
-    id: "helicoïdal",
+    id: "limon-central",
+    slug: "limon-central",
     name: "Escalier Limon Centrale",
     badge: "LIMON CENTRALE",
     image: assets.stairs.helicoidal,
@@ -65,6 +69,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "double-quart-tournant",
+    slug: "double-quart-tournant",
     name: "Double quart tournant",
     badge: "DOUBLE QUART TOURNANT",
     image: assets.stairs.deuxQuartTournant,
@@ -74,6 +79,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "bois",
+    slug: "bois",
     name: "Escalier en bois",
     badge: "ESCALIER BOIS",
     image: assets.stairs.bois,
@@ -83,6 +89,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "metal",
+    slug: "metal",
     name: "Escalier métal",
     badge: "ESCALIER MÉTAL",
     image: assets.stairs.metal,
@@ -92,6 +99,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "verre",
+    slug: "verre",
     name: "Escalier verre",
     badge: "ESCALIER VERRE",
     image: assets.stairs.verre,
@@ -101,6 +109,7 @@ const stairTypes: StairTypeItem[] = [
   },
   {
     id: "renovation",
+    slug: "renovation",
     name: "Rénovation d'escalier",
     badge: "RÉNOVATION",
     image: assets.stairs.renovation,
@@ -611,16 +620,7 @@ function Index() {
 
         <div className="tilo-grid">
           {stairTypes.map((item) => (
-            <div
-              key={item.id}
-              className="tilo-card"
-              role="button"
-              tabIndex={0}
-              onClick={() => handleSelectType(item.name)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") handleSelectType(item.name);
-              }}
-            >
+            <Link key={item.id} to={`/escaliers/${item.slug}`} className="tilo-card">
               <img
                 src={item.image}
                 alt={`${item.name} sur mesure Hénault Escalier`}
@@ -631,18 +631,12 @@ function Index() {
               <div className="tilo-card-content">
                 <h3 className="tilo-card-title">{item.badge}</h3>
                 <p className="tilo-card-desc">{item.description}</p>
-                <button
-                  type="button"
-                  className={`tilo-card-btn ${item.buttonClass}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleSelectType(item.name);
-                  }}
-                >
+                <span className={`tilo-card-btn ${item.buttonClass}`}>
                   {item.buttonLabel}
-                </button>
+                  <ArrowRight size={14} aria-hidden="true" />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
