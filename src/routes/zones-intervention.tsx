@@ -80,7 +80,7 @@ function ZonesIntervention() {
         <figure className="intervention-hero-photo">
           <img src={assets.hero} alt="Escalier sur mesure fabriqué par Hénault Escalier" />
           <figcaption>
-            <MapPin size={16} aria-hidden="true" /> Au départ de Romorantin (41)
+            <MapPin size={16} aria-hidden="true" /> Chantier de Romorantin (41)
           </figcaption>
         </figure>
       </section>
@@ -199,16 +199,12 @@ function ZonesIntervention() {
           {interventionZones.map(({ name, department, note, slug }) => (
             <li key={slug}>
               <MapPin size={15} aria-hidden="true" />
-              <Link
-                className="intervention-city-links"
-                to="/zones-intervention/$slug"
-                params={{ slug }}
-              >
+              <div className="intervention-city-links">
                 <span className="intervention-city-main">
                   <strong>{name}</strong>
                   {note ? ` · ${note}` : ` · ${department}`}
                 </span>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>

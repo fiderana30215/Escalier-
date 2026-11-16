@@ -410,7 +410,7 @@ function Index() {
           </div>
 
           <div className="tilo-hero-badge">
-            <strong>Atelier à Romorantin (41)</strong>
+            <strong>Chantier à Romorantin (41)</strong>
             Depuis 1931 - 100% sur mesure
           </div>
         </div>
@@ -457,8 +457,8 @@ function Index() {
             </div>
             <div className="story-row-media">
               <img
-                src={assets.client.block1}
-                alt="Escalier bois avec contremarche sur mesure conçu par Hénault Escalier"
+                src="https://cdn.builder.io/api/v1/image/assets%2F74c1fb9f8a23400ab85b65d12d18d382%2F9945c6bbf4284827a8464493a522f89b?format=webp&width=800&height=1200"
+                alt="Escalier à palier en bois courbe sur mesure conçu par Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -572,7 +572,7 @@ function Index() {
         <div className="tilo-section-header">
           <div>
             <p className="eyebrow">Catalogue & Savoir-faire</p>
-            <h2 id="stair-types-heading">Nos 8 types d'escaliers sur mesure</h2>
+            <h2 id="stair-types-heading">Nos 7 types d'escaliers sur mesure</h2>
             <p className="lede">
               Inspirés du style architectural contemporain : chaque modèle est façonné sur mesure
               dans nos ateliers de Romorantin. Cliquez sur un modèle pour configurer votre devis.
