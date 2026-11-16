@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronRight, ClipboardList, Ruler } from "lucide-react";
 import type { InterventionZone } from "@/lib/intervention-zones";
 
+
 const quoteEmail = "secretariat.henaultescalier@gmail.com";
 
 export function ZoneSimulationPage({ zone }: { zone: InterventionZone }) {

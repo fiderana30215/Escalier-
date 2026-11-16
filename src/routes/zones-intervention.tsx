@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { interventionZones } from "@/lib/intervention-zones";
+import { CoverageMap } from "@/components/coverage-map";
 
 const serviceSteps = [
   {
@@ -192,34 +193,22 @@ function ZonesIntervention() {
             </span>
             <strong>Romorantin-Lanthenay</strong>
           </div>
-          <div className="coverage-radar" aria-hidden="true">
-            <span className="coverage-ring coverage-ring-one" />
-            <span className="coverage-ring coverage-ring-two" />
-            <span className="coverage-ring coverage-ring-three" />
-            <span className="coverage-hub">
-              <MapPin size={20} />
-            </span>
-            <span className="coverage-dot coverage-dot-one" />
-            <span className="coverage-dot coverage-dot-two" />
-            <span className="coverage-dot coverage-dot-three" />
-            <span className="coverage-dot coverage-dot-four" />
-            <span className="coverage-dot coverage-dot-five" />
-          </div>
-          <p className="coverage-caption">Repère de proximité — schéma indicatif</p>
+          <CoverageMap />
         </div>
         <ul className="intervention-city-list" aria-label="Villes desservies">
           {interventionZones.map(({ name, department, note, slug }) => (
             <li key={slug}>
               <MapPin size={15} aria-hidden="true" />
-              <div className="intervention-city-links">
-                <Link to="/zones-intervention/$slug" params={{ slug }}>
+              <Link
+                className="intervention-city-links"
+                to="/zones-intervention/$slug"
+                params={{ slug }}
+              >
+                <span className="intervention-city-main">
                   <strong>{name}</strong>
                   {note ? ` · ${note}` : ` · ${department}`}
-                </Link>
-                <Link className="intervention-city-simulate" to="/simulation/$slug" params={{ slug }}>
-                  Simuler
-                </Link>
-              </div>
+                </span>
+              </Link>
             </li>
           ))}
         </ul>

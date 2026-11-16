@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { getStairTypePhotos, pageHead } from "@/lib/site-assets";
+import { atelierZone } from "@/lib/intervention-zones";
+import { LocationMap } from "@/components/location-map";
 
 interface StairTypePage {
   name: string;
@@ -231,6 +233,8 @@ function StairTypeDetail() {
           ))}
         </div>
       </section>
+
+      <LocationMap lat={atelierZone.lat} lng={atelierZone.lng} label="notre atelier de Romorantin" />
 
       <section className="stair-type-contact">
         <div>
