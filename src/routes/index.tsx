@@ -372,7 +372,7 @@ function Index() {
 
           <div className="hero-proof">
             <span>
-              <Check size={16} /> Fabrication 100% atelier à Binais (41)
+              <Check size={16} /> Fabrication 100% atelier à Binas (41)
             </span>
             <span>
               <Check size={16} /> Pose par nos propres salariés
