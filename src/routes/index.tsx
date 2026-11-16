@@ -71,16 +71,6 @@ const stairTypes: StairTypeItem[] = [
     buttonClass: "btn-wood",
   },
   {
-    id: "metal",
-    slug: "metal",
-    name: "Escalier métal",
-    badge: "ESCALIER MÉTAL",
-    image: assets.stairs.metal,
-    description: "Limon acier contemporain et marches bois pour un contraste architectural fort.",
-    buttonLabel: "Escalier métal",
-    buttonClass: "btn-teal",
-  },
-  {
     id: "garde-corps-metal",
     slug: "garde-corps-metal",
     name: "Escalier avec garde-corps métal",
