@@ -14,6 +14,8 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { assets, pageHead } from "@/lib/site-assets";
 import { interventionZones } from "@/lib/intervention-zones";
 import { FinancingPopup } from "@/components/financing-popup";
+import { postToBackend } from "@/lib/backend-api";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -223,45 +225,30 @@ function Index() {
     }
   }
 
-  function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const formData = new FormData(e.currentTarget);
 
-    const type = formData.get("stairType") || selectedStairType;
-    const material = formData.get("material") || "";
-    const project = formData.get("projectNature") || "";
-    const delay = formData.get("delay") || "";
-    const dimensions = formData.get("dimensions") || "";
-    const fullName = formData.get("fullName") || "";
-    const phone = formData.get("phone") || "";
-    const email = formData.get("email") || "";
-    const city = formData.get("city") || "";
-    const financingChoice = formData.get("financingArkea")
-      ? "Oui (Financement avec notre partenaire ARKEA)"
-      : wantsFinancing
-        ? "Oui (Financement avec notre partenaire ARKEA)"
-        : "Non";
+    const payload = {
+      stairType: String(formData.get("stairType") || selectedStairType),
+      material: String(formData.get("material") || ""),
+      projectNature: String(formData.get("projectNature") || ""),
+      delay: String(formData.get("delay") || ""),
+      dimensions: String(formData.get("dimensions") || ""),
+      fullName: String(formData.get("fullName") || ""),
+      phone: String(formData.get("phone") || ""),
+      email: String(formData.get("email") || ""),
+      city: String(formData.get("city") || ""),
+      financing: wantsFinancing,
+    };
 
-    const mailSubject = `Demande de devis escalier sur mesure - ${fullName} (${city})`;
-    const mailBody = `DEMANDE DE DEVIS ESCALIER SUR MESURE\n\n` +
-      `Type d'escalier : ${type}\n` +
-      `Matériau souhaité : ${material}\n` +
-      `Nature du projet : ${project}\n` +
-      `Option Financement : ${financingChoice}\n` +
-      `Délai souhaité : ${delay}\n` +
-      `Dimensions ou remarques : ${dimensions}\n\n` +
-      `COORDONNÉES CLIENT :\n` +
-      `Nom et Prénom : ${fullName}\n` +
-      `Téléphone : ${phone}\n` +
-      `E-mail : ${email}\n` +
-      `Ville ou Code Postal : ${city}\n\n` +
-      `Fabricant : Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
-
-    window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
-      mailSubject,
-    )}&body=${encodeURIComponent(mailBody)}`;
-    setDevisSubmitted(true);
+    try {
+      await postToBackend("/api/quotes", payload);
+      setDevisSubmitted(true);
+      toast.success("Votre demande de devis a bien été envoyée.");
+    } catch {
+      toast.error("L'envoi de votre demande a échoué. Merci de réessayer.");
+    }
   }
 
   function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
