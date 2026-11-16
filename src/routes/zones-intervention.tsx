@@ -80,7 +80,7 @@ function ZonesIntervention() {
         <figure className="intervention-hero-photo">
           <img src={assets.hero} alt="Escalier sur mesure fabriqué par Hénault Escalier" />
           <figcaption>
-            <MapPin size={16} aria-hidden="true" /> Au départ de Romorantin (41)
+            <MapPin size={16} aria-hidden="true" /> Chantier de Romorantin (41)
           </figcaption>
         </figure>
       </section>
