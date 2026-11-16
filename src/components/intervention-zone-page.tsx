@@ -1,10 +1,16 @@
 import { useRouter } from "@tanstack/react-router";
 import { ArrowLeft, MapPin } from "lucide-react";
+import { useEffect, useRef } from "react";
 import type { InterventionZone } from "@/lib/intervention-zones";
 import { LocationMap } from "@/components/location-map";
 
 export function InterventionZonePage({ zone }: { zone: InterventionZone }) {
   const router = useRouter();
+  const mapFrameRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mapFrameRef.current?.scrollIntoView({ block: "start" });
+  }, [zone.slug]);
 
   function goBack() {
     if (window.history.length > 1) {
@@ -24,7 +30,9 @@ export function InterventionZonePage({ zone }: { zone: InterventionZone }) {
           <MapPin size={24} aria-hidden="true" /> Escaliers sur mesure à {zone.name}
         </h1>
       </div>
-      <LocationMap lat={zone.lat} lng={zone.lng} label={zone.name} />
+      <div ref={mapFrameRef} className="intervention-map-frame">
+        <LocationMap lat={zone.lat} lng={zone.lng} label={zone.name} />
+      </div>
     </main>
   );
 }

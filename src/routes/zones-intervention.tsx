@@ -199,16 +199,12 @@ function ZonesIntervention() {
           {interventionZones.map(({ name, department, note, slug }) => (
             <li key={slug}>
               <MapPin size={15} aria-hidden="true" />
-              <Link
-                className="intervention-city-links"
-                to="/zones-intervention/$slug"
-                params={{ slug }}
-              >
+              <div className="intervention-city-links">
                 <span className="intervention-city-main">
                   <strong>{name}</strong>
                   {note ? ` · ${note}` : ` · ${department}`}
                 </span>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>
