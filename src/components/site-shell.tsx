@@ -54,7 +54,7 @@ export function SiteHeader() {
           to="/amenagements"
           className={pathname.startsWith("/amenagements") ? "active" : ""}
         >
-          Aménagements & verrières
+          Aménagements
         </Link>
         <Link
           to="/zones-intervention"
