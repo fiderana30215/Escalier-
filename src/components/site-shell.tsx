@@ -50,6 +50,9 @@ export function SiteHeader() {
         <a href="/#nos-escaliers">
           Nos escaliers
         </a>
+        <a href="/#amenagements">
+          Aménagements & verrières
+        </a>
         <Link
           to="/zones-intervention"
           className={pathname.startsWith("/zones-intervention") ? "active" : ""}
@@ -91,7 +94,7 @@ export function SiteFooter() {
           <div>
             <strong>Hénault Escalier</strong>
             <br />
-            9 bis rue du Bout de la ville - 41200 Romorantin
+            9 rue du Bout de la ville - 41240 Binas
             <br />
             Tél. : <a href="tel:+33254824489">02 54 82 44 89</a>
             <br />

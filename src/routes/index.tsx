@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
       "Escalier sur mesure en Loir-et-Cher | Hénault Escalier fabricant depuis 1931",
-      "Fabricant d'escaliers sur mesure à Romorantin (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
+      "Fabricant d'escaliers sur mesure à Binas (Loir-et-Cher). Conception en atelier et pose sans sous-traitance à Blois, Orléans, Tours, Chartres, Dreux et Versailles.",
       assets.hero,
     ),
   component: Index,
@@ -42,12 +42,12 @@ const stairTypes: StairTypeItem[] = [
   {
     id: "droit",
     slug: "droit",
-    name: "Escalier droit",
-    badge: "ESCALIER DROIT",
-    image: assets.stairs.droit,
+    name: "Escalier encloisonné",
+    badge: "ESCALIER ENCLOISONNÉ",
+    image: assets.stairCards.droit,
     description:
       "Une ligne pure et intemporelle pour habiller les volumes linéaires avec élégance.",
-    buttonLabel: "Escalier droit",
+    buttonLabel: "Escalier encloisonné",
     buttonClass: "btn-coral",
   },
   {
@@ -55,7 +55,7 @@ const stairTypes: StairTypeItem[] = [
     slug: "quart-tournant",
     name: "Quart tournant",
     badge: "QUART TOURNANT",
-    image: assets.stairs.quartTournant,
+    image: assets.stairCards.quartTournant,
     description: "Le confort d'un changement d'angle optimisant les mètres carrés habitables.",
     buttonLabel: "Quart tournant",
     buttonClass: "btn-teal",
@@ -75,7 +75,7 @@ const stairTypes: StairTypeItem[] = [
     slug: "garde-corps-metal",
     name: "Escalier avec garde-corps métal",
     badge: "GARDE-CORPS MÉTAL",
-    image: assets.stairs.bois,
+    image: assets.stairCards.gardeCorpsMetal,
     description: "Une rampe et des balustres métalliques pour souligner le caractère de votre escalier.",
     buttonLabel: "Garde-corps métal",
     buttonClass: "btn-coral",
@@ -83,31 +83,31 @@ const stairTypes: StairTypeItem[] = [
   {
     id: "double-quart-tournant",
     slug: "double-quart-tournant",
-    name: "Double quart tournant",
-    badge: "DOUBLE QUART TOURNANT",
+    name: "Deux quarts tournant",
+    badge: "DEUX QUARTS TOURNANT",
     image: assets.stairs.deuxQuartTournant,
     description: "Deux changements de direction pour un escalier compact et élégant.",
-    buttonLabel: "Double quart tournant",
+    buttonLabel: "Deux quarts tournant",
     buttonClass: "btn-sage",
   },
   {
     id: "garde-corps-verre",
     slug: "garde-corps-verre",
-    name: "Escalier avec garde-corps verre",
-    badge: "GARDE-CORPS VERRE",
+    name: "Escalier avec garde-corps vitré",
+    badge: "GARDE-CORPS VITRÉ",
     image: assets.stairs.verre,
     description: "Un garde-corps vitré qui laisse circuler la lumière et préserve les perspectives.",
-    buttonLabel: "Garde-corps verre",
+    buttonLabel: "Garde-corps vitré",
     buttonClass: "btn-wood",
   },
   {
     id: "renovation",
     slug: "renovation",
-    name: "Rénovation d'escalier",
-    badge: "RÉNOVATION",
+    name: "Modernisation d'escalier",
+    badge: "MODERNISATION",
     image: assets.stairs.renovation,
     description: "Habillage ou remplacement soigné de votre ancien escalier sans dégrader vos murs.",
-    buttonLabel: "Rénovation escalier",
+    buttonLabel: "Modernisation escalier",
     buttonClass: "btn-sage",
   },
 ];
@@ -156,10 +156,10 @@ function Index() {
   const quoteSectionRef = useRef<HTMLElement>(null);
 
   const [activeTab, setActiveTab] = useState<"devis" | "rdv">("devis");
-  const [selectedStairType, setSelectedStairType] = useState<string>("Escalier droit");
+  const [selectedStairType, setSelectedStairType] = useState<string>("Escalier encloisonné");
   const [wantsFinancing, setWantsFinancing] = useState(false);
-  const [devisSubmitted, setDevisSubmitted] = useState(false);
   const [rdvSubmitted, setRdvSubmitted] = useState(false);
+  const devisFormRef = useRef<HTMLFormElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSliderPaused, setIsSliderPaused] = useState(false);
 
@@ -215,48 +215,67 @@ function Index() {
     }
   }
 
-  async function handleQuoteSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleProjectStepSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    const payload = {
-      stairType: String(formData.get("stairType") || selectedStairType),
-      material: String(formData.get("material") || ""),
-      projectNature: String(formData.get("projectNature") || ""),
-      delay: String(formData.get("delay") || ""),
-      dimensions: String(formData.get("dimensions") || ""),
-      fullName: String(formData.get("fullName") || ""),
-      phone: String(formData.get("phone") || ""),
-      email: String(formData.get("email") || ""),
-      city: String(formData.get("city") || ""),
-      financing: wantsFinancing,
-    };
-
-    try {
-      await postToBackend("/api/quotes", payload);
-      setDevisSubmitted(true);
-      toast.success("Votre demande de devis a bien été envoyée.");
-    } catch {
-      toast.error("L'envoi de votre demande a échoué. Merci de réessayer.");
+    setActiveTab("rdv");
+    if (quoteSectionRef.current) {
+      quoteSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
-  function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleRdvSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    const projectForm = devisFormRef.current;
+    if (!projectForm?.reportValidity()) {
+      setActiveTab("devis");
+      return;
+    }
+    const project = new FormData(projectForm);
+    const formData = new FormData(e.currentTarget);
 
-    const sector = formData.get("sector") || "";
-    const slot = formData.get("slot") || "";
-    const date = formData.get("date") || "";
-    const fullName = formData.get("fullName") || "";
-    const phone = formData.get("phone") || "";
-    const email = formData.get("email") || "";
-    const address = formData.get("address") || "";
-    const notes = formData.get("notes") || "";
+    const stairType = String(project.get("stairType") || selectedStairType);
+    const material = String(project.get("material") || "");
+    const projectNature = String(project.get("projectNature") || "");
+    const delay = String(project.get("delay") || "");
+    const dimensions = String(project.get("dimensions") || "");
+    const city = String(project.get("city") || "");
+    const sector = String(formData.get("sector") || "");
+    const slot = String(formData.get("slot") || "");
+    const date = String(formData.get("date") || "");
+    const fullName = String(formData.get("fullName") || "");
+    const phone = String(formData.get("phone") || "");
+    const email = String(formData.get("email") || "");
+    const address = String(formData.get("address") || "");
+    const notes = String(formData.get("notes") || "");
 
-    const mailSubject = `Demande de rendez-vous conseil - ${fullName} (${sector})`;
-    const mailBody = `DEMANDE DE RENDEZ-VOUS CONSEIL EN LIGNE\n\n` +
+    try {
+      await postToBackend("/api/quotes", {
+        stairType,
+        material,
+        projectNature,
+        delay,
+        dimensions,
+        fullName,
+        phone,
+        email,
+        city,
+        financing: wantsFinancing,
+      });
+    } catch {
+      toast.error("L'envoi de votre demande a échoué. Merci de réessayer.");
+      return;
+    }
+
+    const mailSubject = `Demande de devis et rendez-vous - ${fullName} (${sector})`;
+    const mailBody = `DEMANDE DE DEVIS ET RENDEZ-VOUS EN LIGNE\n\n` +
+      `PROJET :\n` +
+      `Type d'escalier : ${stairType}\n` +
+      `Matériau : ${material}\n` +
+      `Nature du chantier : ${projectNature}\n` +
+      `Délai : ${delay}\n` +
+      `Dimensions / descriptif : ${dimensions}\n` +
+      `Financement ARKEA souhaité : ${wantsFinancing ? "Oui" : "Non"}\n\n` +
+      `RENDEZ-VOUS :\n` +
       `Secteur d'intervention : ${sector}\n` +
       `Date souhaitée : ${date}\n` +
       `Créneau horaire : ${slot}\n` +
@@ -267,7 +286,7 @@ function Index() {
       `Téléphone : ${phone}\n` +
       `E-mail : ${email}\n\n` +
       `Horaires atelier : Lundi au vendredi, 9h00-12h30 et 13h30-18h00\n` +
-      `Hénault Escalier - 9 bis rue du Bout de la ville, 41200 Romorantin`;
+      `Hénault Escalier - 9 rue du Bout de la ville, 41240 Binas`;
 
     window.location.href = `mailto:secretariat.henaultescalier@gmail.com?subject=${encodeURIComponent(
       mailSubject,
@@ -294,15 +313,15 @@ function Index() {
             "@type": "HomeAndConstructionBusiness",
             name: "Hénault Escalier",
             description:
-              "Fabricant d'escaliers sur mesure en bois, métal et verre à Romorantin depuis 1931. Conception en atelier et pose sans sous-traitance.",
+              "Fabricant d'escaliers sur mesure en bois, métal et verre à Binas depuis 1931. Conception en atelier et pose sans sous-traitance.",
             url: "https://escalier-henault.fr",
             telephone: "+33254824489",
             email: "secretariat.henaultescalier@gmail.com",
             address: {
               "@type": "PostalAddress",
-              streetAddress: "9 bis rue du Bout de la ville",
-              addressLocality: "Romorantin",
-              postalCode: "41200",
+              streetAddress: "9 rue du Bout de la ville",
+              addressLocality: "Binas",
+              postalCode: "41240",
               addressCountry: "FR",
             },
             openingHoursSpecification: [
@@ -350,14 +369,14 @@ function Index() {
           </h1>
           <p className="hero-lede">
             Atelier menuiserie traditionnel et tradition familiale : nous concevons et fabriquons
-            dans nos ateliers de Romorantin des escaliers sur mesure en bois, métal ou verre, dans le
+            dans nos ateliers de Binas des escaliers sur mesure en bois, métal ou verre, dans le
             Loir-et-Cher, la région Centre-Val de Loire et en Île-de-France.
           </p>
 
           <div className="cta-row">
             <button
               type="button"
-              onClick={() => handleSelectType("Escalier droit")}
+              onClick={() => handleSelectType("Escalier encloisonné")}
               className="site-cta-btn"
             >
               Demander un devis gratuit <ArrowRight size={16} />
@@ -442,7 +461,7 @@ function Index() {
               <p className="story-desc">
                 Escalier en U avec palier, balancé ou en L : l'escalier à palier relie vos niveaux
                 avec élégance et s'adapte à votre volume. Chaque escalier est dessiné sur mesure et
-                fabriqué en bois dans nos ateliers de Romorantin, puis posé chez vous à Blois, Orléans,
+                fabriqué en bois dans nos ateliers de Binas, puis posé chez vous à Blois, Orléans,
                 Tours, Chartres, Dreux ou Versailles.
               </p>
               <div>
@@ -471,7 +490,7 @@ function Index() {
             <div className="story-row-media">
               <img
                 src={assets.client.block2}
-                alt="Fabrication artisanale d'escalier avec contremarche en atelier à Romorantin"
+                alt="Fabrication artisanale d'escalier avec contremarche en atelier à Binas"
                 className="crop-top-ceiling"
                 loading="lazy"
               />
@@ -483,7 +502,7 @@ function Index() {
               <h3>Fabricant d'escaliers sur mesure depuis 1931</h3>
               <p className="story-kicker">À vos côtés depuis 1931.</p>
               <p className="story-desc">
-                Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Romorantin,
+                Depuis 1931, les générations se succèdent dans les ateliers Hénault Escalier, à Binas,
                 dans le Loir-et-Cher. Même exigence, même amour du bois, de la tradition à
                 l'innovation. Le sur mesure est notre spécialité, et notre savoir-faire de menuiserie
                 traditionnelle nous permet de réaliser tous types d'escaliers.
@@ -504,7 +523,7 @@ function Index() {
               <div className="story-meta-tag">
                 <span className="story-tag-label">03 - Changements d'angle</span>
               </div>
-              <h3>Escalier double quart tournant en bois, fabricant à Romorantin</h3>
+              <h3>Escalier deux quarts tournant en bois, fabricant à Binas</h3>
               <p className="story-kicker">Deux angles, un seul escalier.</p>
               <p className="story-desc">
                 Deux changements de direction qui optimisent l'espace et animent la circulation.
@@ -514,17 +533,17 @@ function Index() {
               <div>
                 <button
                   type="button"
-                  onClick={() => handleSelectType("Double quart tournant")}
+                  onClick={() => handleSelectType("Deux quarts tournant")}
                   className="text-link"
                 >
-                  Découvrir nos escaliers double quart tournant <ArrowRight size={15} />
+                  Découvrir nos escaliers deux quarts tournant <ArrowRight size={15} />
                 </button>
               </div>
             </div>
             <div className="story-row-media">
               <img
                 src={assets.stairs.deuxQuartTournant}
-                alt="Escalier double quart tournant Hénault Escalier"
+                alt="Escalier deux quarts tournant Hénault Escalier"
                 loading="lazy"
               />
             </div>
@@ -575,7 +594,7 @@ function Index() {
             <h2 id="stair-types-heading">Nos 7 types d'escaliers sur mesure</h2>
             <p className="lede">
               Inspirés du style architectural contemporain : chaque modèle est façonné sur mesure
-              dans nos ateliers de Romorantin. Cliquez sur un modèle pour configurer votre devis.
+              dans nos ateliers de Binas. Cliquez sur un modèle pour configurer votre devis.
             </p>
           </div>
           <Link className="text-link" to="/nos-creations">
@@ -607,7 +626,7 @@ function Index() {
       </section>
 
       {/* Savoir-faire complémentaire : Mobilier sous escalier & Verrières */}
-      <section className="home-complementary scroll-reveal" aria-labelledby="complementary-heading">
+      <section id="amenagements" className="home-complementary scroll-reveal" aria-labelledby="complementary-heading">
         <div className="section-intro">
           <p className="eyebrow">Agencements & Verrières d'atelier</p>
           <h2 id="complementary-heading">Aménagements sous escalier et verrières d'atelier</h2>
@@ -755,19 +774,22 @@ function Index() {
                 className={`quote-tab-btn ${activeTab === "devis" ? "is-active" : ""}`}
                 onClick={() => setActiveTab("devis")}
               >
-                1. Demander un devis détaillé
+                1. Votre projet
               </button>
               <button
                 type="button"
                 className={`quote-tab-btn ${activeTab === "rdv" ? "is-active" : ""}`}
                 onClick={() => setActiveTab("rdv")}
               >
-                2. Prendre rendez-vous
+                2. Coordonnées et rendez-vous
               </button>
             </nav>
 
-            {activeTab === "devis" ? (
-              <form onSubmit={handleQuoteSubmit}>
+              <form
+                ref={devisFormRef}
+                onSubmit={handleProjectStepSubmit}
+                style={activeTab === "devis" ? undefined : { display: "none" }}
+              >
                 <div className="form-grid-2">
                   <div className="form-field">
                     <label htmlFor="stairType">Type d'escalier souhaité *</label>
@@ -778,13 +800,13 @@ function Index() {
                       onChange={(e) => setSelectedStairType(e.target.value)}
                       required
                     >
-                      <option value="Escalier droit">Escalier droit</option>
+                      <option value="Escalier encloisonné">Escalier encloisonné</option>
                       <option value="Quart tournant">Escalier quart tournant</option>
-                      <option value="Double quart tournant">Escalier double quart tournant</option>
+                      <option value="Deux quarts tournant">Escalier deux quarts tournant</option>
                       <option value="Escalier Limon Centrale">Escalier Limon Centrale</option>
                       <option value="Escalier avec garde-corps métal">Escalier avec garde-corps métal</option>
                       <option value="Escalier métal">Escalier métal et bois</option>
-                      <option value="Escalier avec garde-corps verre">Escalier avec garde-corps verre</option>
+                      <option value="Escalier avec garde-corps vitré">Escalier avec garde-corps vitré</option>
                       <option value="Rénovation d'escalier">Rénovation d'escalier existant</option>
                     </select>
                   </div>
@@ -842,52 +864,15 @@ function Index() {
                   />
                 </div>
 
-                <div className="form-grid-2">
-                  <div className="form-field">
-                    <label htmlFor="fullName">Nom et Prénom *</label>
-                    <input
-                      id="fullName"
-                      name="fullName"
-                      type="text"
-                      placeholder="Jean Dupont"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <label htmlFor="phone">Numéro de téléphone *</label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="06 12 34 56 78"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="form-grid-2">
-                  <div className="form-field">
-                    <label htmlFor="email">Adresse e-mail *</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="jean.dupont@email.fr"
-                      required
-                    />
-                  </div>
-
-                  <div className="form-field">
-                    <label htmlFor="city">Commune ou Code postal *</label>
-                    <input
-                      id="city"
-                      name="city"
-                      type="text"
-                      placeholder="Ex : 41000 Blois ou 45000 Orléans"
-                      required
-                    />
-                  </div>
+                <div className="form-field">
+                  <label htmlFor="city">Commune ou Code postal *</label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    placeholder="Ex : 41000 Blois ou 45000 Orléans"
+                    required
+                  />
                 </div>
 
                 <label
@@ -915,42 +900,20 @@ function Index() {
                   </span>
                 </label>
 
-                <label className="form-consent">
-                  <input type="checkbox" required />
-                  <span>
-                    J'accepte que Hénault Escalier utilise mes coordonnées pour me recontacter
-                    conformément à la{" "}
-                    <a
-                      href="https://escalier-henault.fr/politique-de-confidentialite/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      politique de confidentialité
-                    </a>
-                    . Vos données ne sont jamais cédées à des tiers.
-                  </span>
-                </label>
-
                 <div className="form-submit-row">
                   <button type="submit" className="site-cta-btn">
-                    Envoyer ma demande de devis <ArrowRight size={16} />
+                    Suivant : coordonnées et rendez-vous <ArrowRight size={16} />
                   </button>
                   <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
-                    Réponse personnalisée sous 48h ouvrées
+                    Étude personnalisée sous 48h ouvrées
                   </span>
                 </div>
-
-                {devisSubmitted && (
-                  <div className="quote-success-box" role="status">
-                    <strong>Merci pour votre demande !</strong>
-                    <br />
-                    Votre message a été transmis directement à notre atelier de Romorantin. Un menuisier
-                    chiffreur examinera votre dossier et vous contactera dans les plus brefs délais.
-                  </div>
-                )}
               </form>
-            ) : (
-              <form onSubmit={handleRdvSubmit}>
+
+              <form
+                onSubmit={handleRdvSubmit}
+                style={activeTab === "rdv" ? undefined : { display: "none" }}
+              >
                 <div className="form-grid-2">
                   <div className="form-field">
                     <label htmlFor="sector">Ville / Secteur d'intervention *</label>
@@ -1049,6 +1012,22 @@ function Index() {
                   </span>
                 </label>
 
+                <label className="form-consent">
+                  <input type="checkbox" required />
+                  <span>
+                    J'accepte que Hénault Escalier utilise mes coordonnées pour me recontacter
+                    conformément à la{" "}
+                    <a
+                      href="https://escalier-henault.fr/politique-de-confidentialite/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      politique de confidentialité
+                    </a>
+                    . Vos données ne sont jamais cédées à des tiers.
+                  </span>
+                </label>
+
                 <div className="form-submit-row">
                   <button type="submit" className="site-cta-btn">
                     Confirmer ma demande de visite <ArrowRight size={16} />
@@ -1067,7 +1046,6 @@ function Index() {
                   </div>
                 )}
               </form>
-            )}
           </div>
 
           {/* Sidebar Coordonnées & Réassurance */}
@@ -1096,9 +1074,9 @@ function Index() {
                   <div>
                     <strong>Atelier et bureau :</strong>
                     <br />
-                    9 bis rue du Bout de la ville
+                    9 rue du Bout de la ville
                     <br />
-                    41200 Romorantin (Loir-et-Cher)
+                    41240 Binas (Loir-et-Cher)
                   </div>
                 </li>
                 <li>
@@ -1119,7 +1097,7 @@ function Index() {
                   <ShieldCheck size={18} />
                   <span>
                     <strong>Fabrication 100% atelier :</strong> Aucun escalier standard ou importé,
-                    tout est usiné et assemblé à Romorantin.
+                    tout est usiné et assemblé à Binas.
                   </span>
                 </li>
                 <li>

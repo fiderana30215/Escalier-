@@ -8,7 +8,7 @@ export const Route = createFileRoute("/nos-creations")({
   head: () =>
     pageHead(
       "Nos Créations - Galerie de réalisations Hénault Escalier",
-      "Découvrez plus de 90 ans de savoir-faire en images : escaliers sur mesure posés, usinage en atelier à Romorantin, aménagements sous escalier et verrières.",
+      "Découvrez plus de 90 ans de savoir-faire en images : escaliers sur mesure posés, usinage en atelier à Binas, aménagements sous escalier et verrières.",
       assets.stairs.hero1,
     ),
   component: Gallery,
@@ -27,7 +27,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 1,
     src: assets.stairs.hero1,
-    title: "Escalier contemporain double quart tournant",
+    title: "Escalier contemporain deux quarts tournant",
     category: "escalier",
     badge: "Nos projets achevés",
     desc: "Chêne massif de pays, limon central et rampe acier thermolaqué noir.",
@@ -51,10 +51,42 @@ const galleryItems: GalleryItem[] = [
   {
     id: 11,
     src: assets.atelier.fabrication,
-    title: "Façonnage artisanal en atelier à Romorantin",
+    title: "Façonnage artisanal en atelier à Binas",
     category: "atelier",
     badge: "En atelier",
     desc: "Ajustement minutieux de l'enmarchement avant départ en chantier.",
+  },
+  {
+    id: 19,
+    src: assets.atelier.fabricationPhotos[0],
+    title: "Escalier courbe à rampe bois et balustres métal",
+    category: "atelier",
+    badge: "En atelier",
+    desc: "Limon et main courante cintrés, balustres métal montés en atelier.",
+  },
+  {
+    id: 20,
+    src: assets.atelier.fabricationPhotos[1],
+    title: "Escalier en chêne cintré en cours de montage",
+    category: "atelier",
+    badge: "En atelier",
+    desc: "Marches et contremarches chêne assemblées avant livraison.",
+  },
+  {
+    id: 21,
+    src: assets.atelier.fabricationPhotos[2],
+    title: "Escalier hélicoïdal bois en atelier",
+    category: "atelier",
+    badge: "En atelier",
+    desc: "Ajustement de la courbe et de la rampe sous la verrière de l'atelier.",
+  },
+  {
+    id: 22,
+    src: assets.atelier.fabricationPhotos[3],
+    title: "Contrôle de la rampe et des balustres en atelier",
+    category: "atelier",
+    badge: "En atelier",
+    desc: "Vérification des balustres métal avant pose sur chantier.",
   },
   {
     id: 15,
@@ -111,7 +143,7 @@ function Gallery() {
             fontSize: "15px",
           }}
         >
-          Découvrez une sélection de nos escaliers dessinés, usinés dans notre atelier de Romorantin et
+          Découvrez une sélection de nos escaliers dessinés, usinés dans notre atelier de Binas et
           posés sans aucune sous-traitance dans le Centre-Val de Loire et en Île-de-France.
         </p>
 

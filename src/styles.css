@@ -383,7 +383,8 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 .intervention-hero-copy .eyebrow,.intervention-section-heading .eyebrow,.intervention-story-copy .eyebrow,.intervention-highlight .eyebrow,.intervention-coverage-copy .eyebrow,.intervention-final-cta .eyebrow {color:#b5834e;}
 .intervention-hero h1 {max-width:590px;margin:0 0 20px;color:var(--primary);font-size:clamp(38px,4.4vw,58px);line-height:1.13;}
 .intervention-lede {max-width:540px;margin:0;color:var(--muted-foreground);font-family:Georgia,serif;font-size:16px;line-height:1.85;}
-.intervention-actions {display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 24px;}
+.intervention-actions {display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:26px 0 24px;}
+.intervention-actions .hero-tel-btn {height:44px;min-height:0;box-sizing:border-box;}
 .intervention-actions .site-cta-btn,.intervention-final-cta .site-cta-btn,.intervention-highlight .site-cta-btn {flex:none;}
 .intervention-proof {display:flex;flex-wrap:wrap;gap:10px 24px;padding-top:18px;border-top:1px solid var(--border);color:var(--primary);font-family:Georgia,serif;font-size:12px;}
 .intervention-proof span {display:flex;align-items:center;gap:7px;}

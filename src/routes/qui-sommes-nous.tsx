@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/qui-sommes-nous")({
   head: () =>
     pageHead(
-      "Qui sommes-nous ? - Hénault Escalier fabricant depuis 1931 à Romorantin",
-      "Découvrez l'histoire de Hénault Escalier, fabricant artisanal d'escaliers sur mesure à Romorantin (Loir-et-Cher) depuis 1931. Atelier sur place et pose sans sous-traitance.",
+      "Qui sommes-nous ? - Hénault Escalier fabricant depuis 1931 à Binas",
+      "Découvrez l'histoire de Hénault Escalier, fabricant artisanal d'escaliers sur mesure à Binas (Loir-et-Cher) depuis 1931. Atelier sur place et pose sans sous-traitance.",
       assets.atelier.fabrication,
     ),
   component: About,
@@ -27,7 +27,7 @@ function About() {
               <p>
                 Depuis 1931, les générations se succèdent dans les ateliers de l'entreprise{" "}
                 <strong>Hénault Escalier</strong> et perpétuent l'art noble de travailler le bois{" "}
-                <strong>à Romorantin, dans le Loir-et-Cher.</strong>
+                <strong>à Binas, dans le Loir-et-Cher.</strong>
               </p>
               <p>
                 De la tradition artisanale aux techniques contemporaines d'usinage, le sur mesure
@@ -45,7 +45,7 @@ function About() {
           </div>
           <img
             src={assets.atelier.fabrication}
-            alt="Artisan menuisier au travail dans l'atelier Hénault Escalier à Romorantin"
+            alt="Artisan menuisier au travail dans l'atelier Hénault Escalier à Binas"
           />
         </div>
       </section>
@@ -55,7 +55,7 @@ function About() {
         <div className="about-inner">
           <img
             src={assets.atelier.chene}
-            alt="Sélection de chêne brut massif dans notre parc à bois à Romorantin"
+            alt="Sélection de chêne brut massif dans notre parc à bois à Binas"
             loading="lazy"
           />
           <div className="about-copy">
@@ -64,7 +64,7 @@ function About() {
             <span className="rule" />
             <div className="copy-text">
               <p>
-                Dans notre atelier de Romorantin, le travail est réalisé selon les méthodes de la menuiserie
+                Dans notre atelier de Binas, le travail est réalisé selon les méthodes de la menuiserie
                 traditionnelle, avec le tour de main éprouvé de compagnons expérimentés. Nous travaillons
                 principalement le chêne français, le hêtre et l'hévéa, ainsi que le métal thermolaqué et
                 le verre securit.
@@ -102,7 +102,7 @@ function About() {
             <Hammer size={28} style={{ color: "var(--primary)", marginBottom: "16px" }} />
             <h3 style={{ fontSize: "18px", margin: "0 0 10px" }}>100% Atelier local</h3>
             <p style={{ fontFamily: "Georgia, serif", fontSize: "13px", color: "var(--muted-foreground)", margin: 0 }}>
-              De la découpe des grumes à la finition finale, toute la fabrication est réalisée sur place à Romorantin.
+              De la découpe des grumes à la finition finale, toute la fabrication est réalisée sur place à Binas.
             </p>
           </div>
 
@@ -136,7 +136,7 @@ function About() {
         <div style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto 40px" }}>
           <h2 style={{ fontSize: "32px", margin: 0 }}>Notre équipe</h2>
           <p style={{ marginTop: "16px", lineHeight: 1.7 }}>
-            Des artisans passionnés, formés à la menuiserie traditionnelle, qui fabriquent et posent chaque escalier à Romorantin.
+            Des artisans passionnés, formés à la menuiserie traditionnelle, qui fabriquent et posent chaque escalier à Binas.
           </p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", justifyItems: "center", maxWidth: "1040px", margin: "0 auto", gap: "40px 20px" }}>
