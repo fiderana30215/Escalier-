@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Instagram, Facebook, ChevronUp } from "lucide-react";
+import { Menu, X, Instagram, Facebook, ChevronUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { assets, facebookUrl, instagramUrl } from "@/lib/site-assets";
 export function SiteHeader() {
@@ -50,9 +50,12 @@ export function SiteHeader() {
         <a href="/#nos-escaliers">
           Nos escaliers
         </a>
-        <a href="/#amenagements">
+        <Link
+          to="/amenagements"
+          className={pathname.startsWith("/amenagements") ? "active" : ""}
+        >
           Aménagements & verrières
-        </a>
+        </Link>
         <Link
           to="/zones-intervention"
           className={pathname.startsWith("/zones-intervention") ? "active" : ""}
@@ -65,12 +68,7 @@ export function SiteHeader() {
         <a href="/#devis-rdv" className="site-cta-outline">
           Prendre rendez-vous
         </a>
-        <Link
-          to="/contact"
-          className={pathname.startsWith("/contact") ? "active" : ""}
-        >
-          Contact
-        </Link>
+
       </nav>
     </header>
   );
@@ -85,6 +83,9 @@ export function SiteFooter() {
         <a href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Instagram">
           <Instagram size={24} />
         </a>
+        <Link to="/contact" aria-label="Contact" className="contact-float">
+          <Mail size={22} />
+        </Link>
       </aside>
       <footer className="site-footer">
         <div className="footer-inner">
