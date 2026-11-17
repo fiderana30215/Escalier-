@@ -24,7 +24,7 @@ const serviceSteps = [
   {
     icon: Hammer,
     title: "Une fabrication dans notre atelier",
-    text: "Votre projet est fabriqué sur mesure à Romorantin, avec le soin d’un savoir-faire transmis depuis 1931.",
+    text: "Votre projet est fabriqué sur mesure à Binas, avec le soin d’un savoir-faire transmis depuis 1931.",
   },
   {
     icon: Truck,
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/zones-intervention")({
   head: () =>
     pageHead(
       "Zones d’intervention | Hénault Escalier",
-      "Hénault Escalier conçoit, fabrique et pose vos escaliers sur mesure depuis Romorantin, à Blois, Orléans, Tours, Chartres et dans les villes voisines.",
+      "Hénault Escalier conçoit, fabrique et pose vos escaliers sur mesure depuis Binas, à Blois, Orléans, Tours, Chartres et dans les villes voisines.",
       assets.hero,
     ),
   component: ZonesIntervention,
@@ -57,7 +57,7 @@ function ZonesIntervention() {
           <p className="eyebrow">Proximité · Fabrication locale · Pose maîtrisée</p>
           <h1 id="intervention-title">Votre escalier sur mesure, près de chez vous</h1>
           <p className="intervention-lede">
-            Depuis notre atelier de Romorantin, nous accompagnons vos projets d’escalier dans le
+            Depuis notre atelier de Binas, nous accompagnons vos projets d’escalier dans le
             Loir-et-Cher, le Loiret, l’Indre-et-Loire, l’Eure-et-Loir et jusqu’aux Yvelines.
           </p>
           <div className="intervention-actions">
@@ -70,7 +70,7 @@ function ZonesIntervention() {
           </div>
           <div className="intervention-proof" aria-label="Les engagements Hénault Escalier">
             <span>
-              <Check size={16} aria-hidden="true" /> Atelier à Romorantin
+              <Check size={16} aria-hidden="true" /> Atelier à Binas
             </span>
             <span>
               <Check size={16} aria-hidden="true" /> Pose sans sous-traitance
@@ -159,7 +159,7 @@ function ZonesIntervention() {
             <p className="eyebrow">Le même niveau d’exigence, partout</p>
             <h2 id="highlight-heading">Une équipe locale, un suivi de votre projet de A à Z</h2>
             <p>
-              Notre atelier est basé à Romorantin et nos propres compagnons réalisent la pose. Vous
+              Notre atelier est basé à Binas et nos propres compagnons réalisent la pose. Vous
               gardez le même interlocuteur tout au long de votre projet.
             </p>
           </div>

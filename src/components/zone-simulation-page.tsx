@@ -28,7 +28,7 @@ export function ZoneSimulationPage({ zone }: { zone: InterventionZone }) {
       `E-mail : ${formData.get("email")}`,
       `Commune / code postal : ${formData.get("city")}`,
       "",
-      "Hénault Escalier — 9 bis rue du Bout de la ville, 41200 Romorantin",
+      "Hénault Escalier — 9 rue du Bout de la ville, 41240 Binas",
     ].join("\n");
     const subject = `Simulation de devis escalier à ${zone.name} - ${formData.get("fullName")}`;
 
@@ -90,10 +90,10 @@ export function ZoneSimulationPage({ zone }: { zone: InterventionZone }) {
             <div className="simulation-form-grid">
               <label className="simulation-field">
                 <span>Type d’escalier souhaité *</span>
-                <select name="stairType" defaultValue="Escalier droit" required>
-                  <option>Escalier droit</option>
+                <select name="stairType" defaultValue="Escalier encloisonné" required>
+                  <option>Escalier encloisonné</option>
                   <option>Escalier quart tournant</option>
-                  <option>Escalier double quart tournant</option>
+                  <option>Escalier deux quarts tournant</option>
                   <option>Escalier à limon central</option>
                   <option>Escalier hélicoïdal</option>
                   <option>Rénovation d’un escalier existant</option>

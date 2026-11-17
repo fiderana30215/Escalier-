@@ -7,7 +7,7 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import { assets, pageHead } from '@/lib/site-assets';
 import { postToBackend } from '@/lib/backend-api';
 import { toast } from 'sonner';
-export const Route=createFileRoute('/contact')({head:()=>pageHead('Contact - Hénault Escalier','Contactez Hénault Escalier à Romorantin pour votre projet d’escalier sur mesure en région Centre et Île-de-France.'),component:Contact});
+export const Route=createFileRoute('/contact')({head:()=>pageHead('Contact - Hénault Escalier','Contactez Hénault Escalier à Binas pour votre projet d’escalier sur mesure en région Centre et Île-de-France.'),component:Contact});
 function Contact(){
  const [prepared,setPrepared]=useState(false);
  async function submit(event:FormEvent<HTMLFormElement>){

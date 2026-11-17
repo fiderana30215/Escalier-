@@ -116,6 +116,17 @@ export const assets = {
     fabrication: atelierFabrication,
     assemblage: atelierAssemblage,
     marche: atelierMarche,
+    fabricationPhotos: [
+      "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F0325c9b1faf84649885bb075ab4a039e?format=webp&width=800&height=1200",
+      "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F76cc81958d3844ecbf3acaac914bacbc?format=webp&width=800&height=1200",
+      "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2Fb14dcf58fc874974bc86e244f5eacf4c?format=webp&width=800&height=1200",
+      "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F22a11d7abc0040e39080db295bdc7231?format=webp&width=800&height=1200",
+    ],
+  },
+  stairCards: {
+    droit: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F16ab1cf11bbe4aef9835a233f8ff459d?format=webp&width=800&height=1200",
+    quartTournant: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2Facb7e17201164a0c953d988e66c135cb?format=webp&width=800&height=1200",
+    gardeCorpsMetal: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2Fba1bd8c512e1442b9f79e4ce88cff209?format=webp&width=800&height=1200",
   },
   team: [equipe1, equipe2, equipe3],
   complementary: {

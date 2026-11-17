@@ -15,7 +15,7 @@ interface StairTypePage {
 
 const stairTypePages: Record<string, StairTypePage> = {
   droit: {
-    name: "Escalier droit",
+    name: "Escalier encloisonné",
     eyebrow: "Ligne pure · Confort au quotidien",
     intro: "Un tracé simple et intemporel, pensé pour s’intégrer naturellement à votre intérieur.",
     paragraphs: [
@@ -62,7 +62,7 @@ const stairTypePages: Record<string, StairTypePage> = {
     photoFolders: ["limon central"],
   },
   "double-quart-tournant": {
-    name: "Escalier double quart tournant",
+    name: "Escalier deux quarts tournant",
     eyebrow: "Deux changements de direction · Confort",
     intro:
       "Deux virages organisent la montée et s’adaptent aux espaces qui demandent un parcours compact.",
@@ -109,10 +109,10 @@ const stairTypePages: Record<string, StairTypePage> = {
     photoFolders: ["debillardé", "2quarttournant2.0"],
   },
   "garde-corps-verre": {
-    name: "Escalier avec garde-corps verre",
+    name: "Escalier avec garde-corps vitré",
     eyebrow: "Transparence · Lumière préservée",
     intro:
-      "Le garde-corps en verre sécurit ouvre les perspectives et laisse la lumière circuler entre les niveaux.",
+      "Le garde-corps vitré en verre sécurit ouvre les perspectives et laisse la lumière circuler entre les niveaux.",
     paragraphs: [
       "Un garde-corps vitré apporte une sensation d’espace sans masquer l’escalier ni la pièce. Il accompagne une structure en bois ou en métal et permet de conserver une vue dégagée dans les intérieurs où la lumière compte.",
       "Nous étudions les dimensions, les fixations et les finitions avec attention pour associer transparence et sécurité. La main courante et le support sont choisis selon le style recherché et les contraintes de votre habitation.",
@@ -125,7 +125,7 @@ const stairTypePages: Record<string, StairTypePage> = {
     photoFolders: ["escalierBoisAvecGardeCorpEnVer"],
   },
   renovation: {
-    name: "Rénovation d’escalier",
+    name: "Modernisation d’escalier",
     eyebrow: "Seconde vie · Respect de l’existant",
     intro:
       "Modernisez votre escalier et ses finitions en tenant compte de la structure déjà en place.",
@@ -151,7 +151,7 @@ export const Route = createFileRoute("/escaliers/$slug")({
     return pageHead(
       `${page?.name ?? "Escalier sur mesure"} | Hénault Escalier`,
       page?.intro ??
-        "Découvrez nos escaliers sur mesure fabriqués dans notre atelier à Romorantin.",
+        "Découvrez nos escaliers sur mesure fabriqués dans notre atelier à Binas.",
       getStairTypePhotos(page?.photoFolders ?? [""])[0],
     );
   },
@@ -232,9 +232,12 @@ function StairTypeDetail() {
             </figure>
           ))}
         </div>
+        <a className="text-link" href="/#nos-escaliers">
+          Voir tous nos types d’escaliers <ArrowRight size={15} />
+        </a>
       </section>
 
-      <LocationMap lat={atelierZone.lat} lng={atelierZone.lng} label="notre atelier de Romorantin" />
+      <LocationMap lat={atelierZone.lat} lng={atelierZone.lng} label="notre atelier de Binas" />
 
       <section className="stair-type-contact">
         <div>
