@@ -626,7 +626,7 @@ function Index() {
       </section>
 
       {/* Savoir-faire complémentaire : Mobilier sous escalier & Verrières */}
-      <section id="amenagements" className="home-complementary scroll-reveal" aria-labelledby="complementary-heading">
+      <section className="home-complementary scroll-reveal" aria-labelledby="complementary-heading">
         <div className="section-intro">
           <p className="eyebrow">Agencements & Verrières d'atelier</p>
           <h2 id="complementary-heading">Aménagements sous escalier et verrières d'atelier</h2>

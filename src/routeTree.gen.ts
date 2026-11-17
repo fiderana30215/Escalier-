@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AmenagementsRouteImport } from './routes/amenagements'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as NosCreationsRouteImport } from './routes/nos-creations'
 import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
@@ -21,6 +22,11 @@ import { Route as ZonesInterventionSlugRouteImport } from './routes/zones-interv
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AmenagementsRoute = AmenagementsRouteImport.update({
+  id: '/amenagements',
+  path: '/amenagements',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -61,6 +67,7 @@ const ZonesInterventionSlugRoute = ZonesInterventionSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/amenagements'
     | '/contact'
     | '/nos-creations'
     | '/qui-sommes-nous'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/amenagements'
     | '/contact'
     | '/nos-creations'
     | '/qui-sommes-nous'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/amenagements'
     | '/contact'
     | '/nos-creations'
     | '/qui-sommes-nous'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AmenagementsRoute: typeof AmenagementsRoute
   ContactRoute: typeof ContactRoute
   NosCreationsRoute: typeof NosCreationsRoute
   QuiSommesNousRoute: typeof QuiSommesNousRoute
@@ -140,6 +153,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/amenagements': {
+      id: '/amenagements'
+      path: '/amenagements'
+      fullPath: '/amenagements'
+      preLoaderRoute: typeof AmenagementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -207,6 +227,7 @@ const ZonesInterventionRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AmenagementsRoute: AmenagementsRoute,
   ContactRoute: ContactRoute,
   NosCreationsRoute: NosCreationsRoute,
   QuiSommesNousRoute: QuiSommesNousRoute,

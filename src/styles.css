@@ -117,6 +117,13 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 .footer-inner {max-width:1040px;margin:auto;min-height:200px;display:grid;grid-template-columns:1fr 1.15fr .8fr;gap:50px;align-items:center;text-align:center;font-family:Georgia,serif;font-size:13px;line-height:1.5;padding:35px 24px;}
 .footer-inner .brand {width:225px;} .footer-inner a {color:inherit;} .footer-social {display:flex;gap:8px;justify-content:center;margin-bottom:10px;} .footer-social a {background:var(--foreground);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;}
 .social-float {position:fixed;right:10px;top:50%;z-index:10;display:grid;gap:6px;} .social-float a {width:46px;height:46px;border-radius:50%;background:var(--accent);color:var(--primary-foreground);display:grid;place-items:center;}
+.social-float a.contact-float {background:#1e6fd9;animation:contact-float-pulse 1.8s ease-out infinite;}
+@keyframes contact-float-pulse {
+  0% {box-shadow:0 0 0 0 rgba(30,111,217,.55);}
+  70% {box-shadow:0 0 0 14px rgba(30,111,217,0);}
+  100% {box-shadow:0 0 0 0 rgba(30,111,217,0);}
+}
+@media(prefers-reduced-motion:reduce){.social-float a.contact-float{animation:none;}}
 .home-row {display:grid;grid-template-columns:1fr 1fr;} .home-image {width:100%;height:100%;object-fit:cover;}
 .home-intro {height:620px;} .home-intro .home-copy {display:flex;align-items:center;justify-content:center;text-align:center;padding:55px;}
 .intro-inner {max-width:490px;} .intro-inner h1 {margin:0 0 26px;} .intro-inner p {font-family:Georgia,serif;font-size:16px;line-height:1.6;color:var(--muted-foreground);}
