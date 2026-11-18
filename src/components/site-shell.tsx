@@ -47,9 +47,12 @@ export function SiteHeader() {
         >
           Nos réalisations
         </Link>
-        <a href="/#nos-escaliers">
+        <Link
+          to="/nos-escaliers"
+          className={pathname.startsWith("/nos-escaliers") || pathname.startsWith("/escaliers") ? "active" : ""}
+        >
           Nos escaliers
-        </a>
+        </Link>
         <Link
           to="/amenagements"
           className={pathname.startsWith("/amenagements") ? "active" : ""}
