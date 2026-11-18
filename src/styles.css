@@ -233,12 +233,12 @@ h1,h2 {font-size:32px;} p {margin:0 0 18px;} a {text-decoration:none;} img {disp
 .tilo-hero-content {display:flex;flex-direction:column;justify-content:center;padding:55px 7% 55px 9%;background:var(--secondary);z-index:2;}
 .eyebrow {margin:0 0 14px;color:var(--accent);font-family:"Open Sans",Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;line-height:1.4;text-transform:uppercase;}
 .tilo-hero-title {margin:0 0 20px;font-size:clamp(32px,3.5vw,52px);line-height:1.15;font-weight:700;color:var(--primary);}
-.highlight-band {display:inline-block;background:var(--accent);color:var(--primary);padding:0 10px;margin:2px 0;box-decoration-break:clone;-webkit-box-decoration-break:clone;font-weight:700;}
+
 .tilo-hero .hero-lede {max-width:490px;margin:0 0 26px;color:var(--muted-foreground);font-family:Georgia,serif;font-size:15px;line-height:1.75;}
 .tilo-hero .cta-row {display:flex;flex-wrap:wrap;justify-content:flex-start;gap:12px;margin:0 0 26px;}
 .site-cta-btn {display:inline-flex;align-items:center;gap:10px;background:var(--primary);color:var(--primary-foreground);font-family:Georgia,serif;font-weight:700;font-size:13px;padding:0 22px;min-height:44px;border:none;cursor:pointer;transition:background .2s ease;text-decoration:none;}
 .site-cta-btn:hover {background:color-mix(in oklch,var(--primary) 85%,black);color:var(--primary-foreground);}
-.hero-tel-btn {display:inline-flex;align-items:center;gap:8px;border:1px solid var(--primary);color:var(--primary);padding:0 20px;min-height:44px;font-family:Georgia,serif;font-size:13px;font-weight:700;background:transparent;transition:background .2s ease;text-decoration:none;}
+.hero-tel-btn {display:inline-flex;align-items:center;gap:8px;border:1px solid var(--primary);color:var(--primary);padding:0 20px;min-height:44px;font-family:Georgia,serif;font-size:13px;font-weight:700;font-variant-numeric:lining-nums;background:transparent;transition:background .2s ease;text-decoration:none;}
 .hero-tel-btn:hover {background:var(--primary);color:var(--primary-foreground);}
 .hero-proof {display:flex;flex-wrap:wrap;gap:16px;color:var(--primary);font-family:Georgia,serif;font-size:12px;border-top:1px solid var(--border);padding-top:20px;}
 .hero-proof span {display:flex;align-items:center;gap:7px;}

@@ -365,7 +365,7 @@ function Index() {
         <div className="tilo-hero-content">
           <p className="eyebrow">Fabricant d'escaliers sur mesure depuis 1931</p>
           <h1 className="tilo-hero-title">
-            Votre escalier <span className="highlight-band">donne le ton</span> à toute votre maison.
+            Votre escalier donne le ton à toute votre maison.
           </h1>
           <p className="hero-lede">
             Atelier menuiserie traditionnel et tradition familiale : nous concevons et fabriquons

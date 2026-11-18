@@ -124,7 +124,7 @@ export const assets = {
     ],
   },
   stairCards: {
-    droit: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F16ab1cf11bbe4aef9835a233f8ff459d?format=webp&width=800&height=1200",
+    droit: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2F99635e7831bf4e05849c8efcab25b6ad?format=webp&width=800&height=1200",
     quartTournant: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2Facb7e17201164a0c953d988e66c135cb?format=webp&width=800&height=1200",
     gardeCorpsMetal: "https://cdn.builder.io/api/v1/image/assets%2Ff7b1a2299aed471aac89d3d912c3a107%2Fba1bd8c512e1442b9f79e4ce88cff209?format=webp&width=800&height=1200",
   },
