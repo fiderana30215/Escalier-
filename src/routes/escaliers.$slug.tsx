@@ -168,7 +168,7 @@ function StairTypeDetail() {
       <nav className="stair-breadcrumb" aria-label="Fil d’Ariane">
         <Link to="/">Accueil</Link>
         <ChevronRight size={15} aria-hidden="true" />
-        <a href="/#nos-escaliers">Nos escaliers</a>
+        <Link to="/nos-escaliers">Nos escaliers</Link>
         <ChevronRight size={15} aria-hidden="true" />
         <span aria-current="page">{page.name}</span>
       </nav>
@@ -232,9 +232,9 @@ function StairTypeDetail() {
             </figure>
           ))}
         </div>
-        <a className="text-link" href="/#nos-escaliers">
+        <Link className="text-link" to="/nos-escaliers">
           Voir tous nos types d’escaliers <ArrowRight size={15} />
-        </a>
+        </Link>
       </section>
 
       <LocationMap lat={atelierZone.lat} lng={atelierZone.lng} label="notre atelier de Binas" />

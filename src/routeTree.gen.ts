@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AmenagementsRouteImport } from './routes/amenagements'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as NosCreationsRouteImport } from './routes/nos-creations'
+import { Route as NosEscaliersRouteImport } from './routes/nos-escaliers'
 import { Route as QuiSommesNousRouteImport } from './routes/qui-sommes-nous'
 import { Route as ZonesInterventionRouteImport } from './routes/zones-intervention'
 import { Route as EscaliersSlugRouteImport } from './routes/escaliers.$slug'
@@ -37,6 +38,11 @@ const ContactRoute = ContactRouteImport.update({
 const NosCreationsRoute = NosCreationsRouteImport.update({
   id: '/nos-creations',
   path: '/nos-creations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosEscaliersRoute = NosEscaliersRouteImport.update({
+  id: '/nos-escaliers',
+  path: '/nos-escaliers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuiSommesNousRoute = QuiSommesNousRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
+  '/nos-escaliers': typeof NosEscaliersRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
+  '/nos-escaliers': typeof NosEscaliersRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/amenagements': typeof AmenagementsRoute
   '/contact': typeof ContactRoute
   '/nos-creations': typeof NosCreationsRoute
+  '/nos-escaliers': typeof NosEscaliersRoute
   '/qui-sommes-nous': typeof QuiSommesNousRoute
   '/zones-intervention': typeof ZonesInterventionRouteWithChildren
   '/escaliers/$slug': typeof EscaliersSlugRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/amenagements'
     | '/contact'
     | '/nos-creations'
+    | '/nos-escaliers'
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/amenagements'
     | '/contact'
     | '/nos-creations'
+    | '/nos-escaliers'
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/amenagements'
     | '/contact'
     | '/nos-creations'
+    | '/nos-escaliers'
     | '/qui-sommes-nous'
     | '/zones-intervention'
     | '/escaliers/$slug'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AmenagementsRoute: typeof AmenagementsRoute
   ContactRoute: typeof ContactRoute
   NosCreationsRoute: typeof NosCreationsRoute
+  NosEscaliersRoute: typeof NosEscaliersRoute
   QuiSommesNousRoute: typeof QuiSommesNousRoute
   ZonesInterventionRoute: typeof ZonesInterventionRouteWithChildren
   EscaliersSlugRoute: typeof EscaliersSlugRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/nos-creations'
       fullPath: '/nos-creations'
       preLoaderRoute: typeof NosCreationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nos-escaliers': {
+      id: '/nos-escaliers'
+      path: '/nos-escaliers'
+      fullPath: '/nos-escaliers'
+      preLoaderRoute: typeof NosEscaliersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/qui-sommes-nous': {
@@ -230,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   AmenagementsRoute: AmenagementsRoute,
   ContactRoute: ContactRoute,
   NosCreationsRoute: NosCreationsRoute,
+  NosEscaliersRoute: NosEscaliersRoute,
   QuiSommesNousRoute: QuiSommesNousRoute,
   ZonesInterventionRoute: ZonesInterventionRouteWithChildren,
   EscaliersSlugRoute: EscaliersSlugRoute,
